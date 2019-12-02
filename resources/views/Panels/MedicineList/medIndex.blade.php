@@ -15,7 +15,7 @@
        <div class="CardDiv">
   
         <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-4 schposi2">
                <input type="submit" name="latest" class="btn btn-sm btn-primary" value="Latest" />
                <input type="submit" name="oldest" class="btn btn-sm btn-primary" value="Oldest" />
              <input type="submit" name="A-Z" class="btn btn-sm btn-primary" value="A-Z" />
@@ -23,7 +23,7 @@
             </div>
       
         
-              <div class="col-sm-4" style="margin-left: 0.5em;">
+              <div class="schposi">
                  <input type="text" name="search"/>
                  <input type="submit" class="btn btn-sm btn-primary" value="Search"/>
               </div>
