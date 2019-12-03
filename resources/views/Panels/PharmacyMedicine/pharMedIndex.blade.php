@@ -23,24 +23,24 @@
                 <tbody>
                   
                
-                 
+                 @foreach($medicine as $medicines)
                   <tr class="text-center highlight">
-                    <td>Cetirizine</td>
-                    <td>A115A1558</td>
-                    <td>&#8369; 20</td>
-                    <td>50</td>
+                    <td>{{$medicines->name}}</td>
+                    <td>{{$medicines->productCode}}</td>
+                    <td>&#8369; {{$medicines->price}}</td>
+                    <td>{{$medicines->pharmacymedicines->sum('quantity')}}</td>
                     <td class="cnterAlgn"><div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                         </button>
                         <div class="dropdown-menu">
-                            <a type="submit" class="dropdown-item" href="/invenAdd"> <i class="fa fa-edit"></i> Add Quantity</a>
-                            <a type="submit"class="dropdown-item" href="/viewHistory" > <i class="fa fa-trash-alt"></i> View History</a>
+                            <a type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicines->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</a>
+                            <a type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicines->id)}}'">  <i class="fa fa-trash-alt"></i> View History</a>
                         </div>
                     </td>
                   </div>
                 </tr>
-              
+                @endforeach
                
                 </tbody>
               </table>   

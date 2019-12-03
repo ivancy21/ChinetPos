@@ -11,8 +11,11 @@
                         <div class="flex HeaderBody">
                                 <div class="file-field">
                                         <div class="z-depth-1-half mb-1">
-                                                <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
-                                              </td>
+                                            @if ($medicine->medicinePhoto != null)
+                                            <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
+                                            @else
+                                            <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                            @endif 
                                         </div>
                                 </div>  
                          </div>
@@ -30,37 +33,37 @@
                                                         
                                                         <tr class="fnt">
                                                             <td class>Medicine Name</td>
-                                                            <td>Cetirizine</td>
+                                                            <td>{{$medicine->name}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
                                                             <td width="130px">Medicine Code</td>
-                                                            <td>A115A1558</td>
+                                                            <td>{{$medicine->productCode}}</td>
                                                         </tr>
                                                     
                                                         <tr class="fnt">
                                                             <td>Generic Name</td>
-                                                            <td>Cetiri</td>
+                                                            <td>{{$medicine->genericName}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
                                                             <td>Company Name</td>
-                                                            <td>ivanSolution</td>
+                                                            <td>{{$medicine->companyName}}</td>
                                                         </tr>
                                                             
                                                         <tr class="fnt">
                                                             <td>Category</td>
-                                                            <td>Allergy</td>
+                                                            <td>{{$medicine->category}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
                                                             <td>Selling Price</td>
-                                                            <td>20</td>
+                                                            <td>{{$medicine->price}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
                                                             <td>Side Effect</td>
-                                                            <td>none</td>
+                                                            <td>{{$medicine->sideEffect}}</td>
                                                         </tr>
 
                                                     </tbody>
@@ -74,8 +77,8 @@
                         <div class="DivTemplate">
                             <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                             <div class="hr mb-2"></div> 
-                            <a type="submit" class="btn btn-info btn-sm" href="/medEdit">EDIT</a>
-                            <input class="btn btn-outline-info waves-effect float-right btn-sm" type="button"  value="BACK">           
+                            <a type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</a>
+                            <input class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'" value="BACK">           
                         </div>
                     </div>    
                 </div>

@@ -1,7 +1,11 @@
 @extends('Layouts.master')
 @section('content')
 
+@include('Layouts.cropImageModal')
 
+      <form class="form-horizontal" method="POST" action="{{route('pharmacyMedicine.store')}}">
+            @csrf
+           <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
            
 
 <div class="container">
@@ -16,12 +20,14 @@
                                 <div class="file-field">
                                   <div class="z-depth-1-half mb-1">
                                     {{-- Photo Insertion --}}
-                                       
-                                        <img src="{{ asset('images/medicineicon.png') }}" size="200px" class="img-fluid img-sizes img-shadow" alt="">
-                                       
+                                    @if ($medicine->medicinePhoto != null)
+                                    <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
+                                    @else
+                                    <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                    @endif 
                                   </div>      
-                                <p style="margin-top:5px; color:black;" class="text-center"><b> Cetirizine</b></p>
-                                <p style="margin-top:-17px; color:black;" class="text-center">A115A1558</p>
+                                <p style="margin-top:5px; color:black;" class="text-center"><b> {{$medicine->name}}</b>({{$medicine->genericName}})</p>
+                                <p style="margin-top:-17px; color:black;" class="text-center">{{$medicine->companyName}}</p>
                                                                             
                                 </div>
                         </form>
@@ -40,8 +46,8 @@
                                                 <label  class="fnt">Medicine Quantity</label>
                                         </div>
                                         <div class="col-sm-9">              
-                                                <input type="hidden" id="medicineId" class="form-control"  name="medicineId">
-                                                <input type="number" list="quantity" name="quantity" required>
+                                                <input type="hidden" id="medicineId" class="form-control" value="{{$medicine->id}}" name="medicineId">
+                                                <input type="number" list="quantity" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -49,8 +55,7 @@
                                         <label  class="fnt">Purchased Price </label> 
                                 </div>
                                         <div class="col-sm-9">
-                                                     
-                                                <input type="text" id="purchasedPrice"  pattern="^\d*(\.\d{0,2})?$"class="form-control" name="purchasedPrice" required>
+                                                <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="purchasedPrice" required>
                                         </div>
                                     </div>
 
@@ -134,14 +139,14 @@
                       <div class="DivTemplate">
                           <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                           <div class="hr mb-2"></div> 
-                          <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
-                          <input class="btn btn-outline-info waves-effect float-right btn-sm" type="button"  value="BACK">    
+                          <button type="submit" class="btn btn-primary">SAVE</button>
+                          <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location = '{{ route('pharmacyMedicine.index') }}'" value="BACK">    
                       </div>
 
                     </div>
 
 
-        
+                </form>
                     </div>              
 
 
@@ -150,8 +155,8 @@
 </div>
 
 <script>
-    //getting days on day dropdownlist function
-function getDay(month, day, year){
+ //getting days on day dropdownlist function
+    function getDay(month, day, year){
     month = document.getElementById(month);
     day = document.getElementById(day);
     year = document.getElementById(year);
@@ -193,7 +198,18 @@ function getDay(month, day, year){
 }
 
 
+$(document).on('keydown', 'input[pattern]', function(e){
+            var input = $(this);
+            var oldVal = input.val();
+            var regex = new RegExp(input.attr('pattern'), 'g');
+          
+            setTimeout(function(){
+              var newVal = input.val();
+              if(!regex.test(newVal)){
+                input.val(oldVal); 
+              }
+            }, 0);
+          });
 </script>
-
 
 @endsection

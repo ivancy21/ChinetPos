@@ -13,14 +13,15 @@
                    <div class="flex HeaderBody"> 
                            <form class="md-form">
                                    <div class="file-field">
-                                     <div class="z-depth-1-half mb-1">
-                                       {{-- Photo Insertion --}}
-                                         
-                                           <img src="{{ asset('images/chinet.png') }}" size="200px" class="img-fluid img-sizes img-shadow" alt="">
-                                         
-                                     </div>      
-                                     <p style="margin-top:5px; color:black;" class="text-center"><b>Cetirizine</b></p>
-                                     <p style="margin-top:-17px; color:black;" class="text-center">A115A1558</p>                
+                                        <div class="z-depth-1-half mb-1">
+                                                @if ($medicine->medicinePhoto != null)
+                                                <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
+                                                @else
+                                                <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                                @endif 
+                                            </div>
+                                     <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{$medicine->name}}</b>({{$medicine->genericName}})</b></p>
+                                     <p style="margin-top:-17px; color:black;" class="text-center">{{$medicine->companyName}}</p>                
                                    </div>
                            </form>
                        </div>
@@ -31,7 +32,8 @@
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                             <span class="HeaderBannerText">History</span>
                     </div>
-                    <a  style="float:right; color:#00a1db;"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-2x mt-1 mr-2 "></i></a>                                            
+                   
+                    <a  onclick="window.location='{{route('pharmacyMedicine.show',$medicine->id)}}'" style="float:right; color:#00a1db;"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-2x mt-1 mr-2 "></i></a>                                            
         
                     <div class="flex HeaderBody"> 
                             <div class="table-responsive">
@@ -48,13 +50,15 @@
                     
                                             <tbody>
                                      
-                                                <tr class="text-center highlight">                                 
-                                                        <td class="cnterAlgn">&#8369; 20</td>
-                                                        <td class="cnterAlgn">dec 31 1998</td>
-                                                        <td class="cnterAlgn">dec 31 1998</td>
-                                                        <td class="cnterAlgn">dec 31 1998</td>
-                                                        <td class="cnterAlgn">500</td>
-                                                </tr>
+                                                    @foreach($pharmacyMedicine as $pharmacyMedicines)
+                                                    <tr class="text-center highlight">                                 
+                                                            <td class="cnterAlgn">&#8369;{{$pharmacyMedicines->purchasedPrice}}</td>
+                                                            <td class="cnterAlgn">{{$pharmacyMedicines->manufacturedMonth}}-{{$pharmacyMedicines->manufacturedDay}}-{{$pharmacyMedicines->manufacturedYear}}</td>
+                                                            <td class="cnterAlgn">{{$pharmacyMedicines->expirationMonth}}-{{$pharmacyMedicines->expirationDay}}-{{$pharmacyMedicines->expirationYear}}</td>
+                                                            <td class="cnterAlgn">{{$pharmacyMedicines->receivedMonth}}-{{$pharmacyMedicines->receivedDay}}-{{$pharmacyMedicines->receivedYear}}</td>
+                                                            <td class="cnterAlgn">{{$pharmacyMedicines->quantity}}</td>
+                                                    </tr>
+                                                    @endforeach
                                               
                                      
                                             </tbody>
@@ -70,7 +74,7 @@
                 <div class="DivTemplate">
                         <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                         <div class="hr mb-2"></div> 
-                        <input class="btn btn-outline-info waves-effect float-right" type="button" value="BACK">    
+                        <input class="btn btn-outline-info waves-effect float-right" type="button"  onclick="window.location='{{route('pharmacyMedicine.index')}}'" value="BACK">    
                     </div>
                 </div>
             </div>

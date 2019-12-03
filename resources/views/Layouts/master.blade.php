@@ -20,8 +20,10 @@
  <!-- CSS File -->
  <link href="{{ asset('css/master.css') }}" rel="stylesheet" />  
  <link href="{{ asset('css/tableSorter.css') }}" rel="stylesheet" />
+ <link href="{{ asset('css/croppie.css') }}" rel="stylesheet" />
  <!-- JS File -->
  <script defer src="{{ asset('js/tableSorter.js') }}"></script>
+ <script defer src="{{ asset('js/croppie.js') }}"></script>
  <!-- Jquery Steps -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-steps/1.1.0/jquery.steps.js"></script>
 
@@ -49,12 +51,12 @@
                                         </a>
                                       </li>
                                       <li>
-                                        <a href="/medlist">
+                                        <a  href="{{route('medicine.index')}}">
                                            <i class="fa fa-capsules" aria-hidden="true"></i> Medicine List
                                         </a>
                                       </li>
                                        <li>
-                                      <a href="/invenIndex">
+                                        <a href="{{route('pharmacyMedicine.index')}}">
                                            <i class="fa fa-capsules" aria-hidden="true"></i> Pharmacy Inventory
                                         </a>
                                       </li>

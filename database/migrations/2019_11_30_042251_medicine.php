@@ -22,6 +22,7 @@ class Medicine extends Migration
             $table->string('companyName');
             $table->string('category')->nullable();
             $table->string('sideEffects')->nullable();
+            $table->string('medicinePhoto')->nullable();
             $table->timestamps();
         });
     }
