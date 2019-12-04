@@ -1,5 +1,5 @@
-@extends('Layouts.master')
-@section('content')
+@extends('Layouts.sidebar')
+@section('contents')
 
 <div class="container">
 
@@ -16,7 +16,7 @@
   
         <div class="row">
           <div class="col-sm-4 schposi2">
-              <div class="row">
+              <div class="row ml-1">
             <form action="{{route('medicine.index')}}" method="GET" >
               <input type="submit" name="latest" class="btn btn-sm btn-primary ml-1" value="Latest" />
           </form>
@@ -50,7 +50,7 @@
             @if ($medicine->medicinePhoto != null)
             <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" height="50px" width="90px" alt="" class="img-shadow card-img">
             @else
-            <img src="{{ asset('images/chinet.png') }}" height="50px" width="90px" alt="" class="img-shadow card-img">
+            <img src="{{ asset('images/medicineicon.png') }}" height="50px" width="90px" alt="" class="img-shadow card-img">
             @endif
           </div>
          <div class="container">
@@ -58,7 +58,7 @@
            <center>
            <h6 style="color:black;" class="fnt mt-2"><b> {{$medicine->name}}</b></h6>
                     <h6 style="color:black;" class="fnt"> {{$medicine->companyName}}</h6>
-                    <a type="button" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.show', $medicine->id)}}'">Select</a>
+                    <button type="button" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.show', $medicine->id)}}'">Select</button>
            </center>  
           </div>
           </div>

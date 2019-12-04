@@ -1,6 +1,7 @@
-@extends('Layouts.master')
+@extends('Layouts.sidebar')
 <div class="bg_2"></div>
-@section('content')
+@section('contents')
+
 
 
 

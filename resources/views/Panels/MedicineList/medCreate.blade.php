@@ -1,6 +1,6 @@
-@extends('Layouts.master')
+@extends('Layouts.sidebar')
+@section('contents')
 @include('Layouts.cropImageModal')
-@section('content')
 
   
 <form class="form-horizontal" method="POST" action="{{route('medicine.store')}}">
@@ -16,7 +16,7 @@
                                     <form class="md-form">
                                             <div class="file-field">
                                             <div class="z-depth-1-half mb-4">
-                                                <img src="{{ asset('images/chinet.png') }}" size="250px" id="Photo"  alt="" class="img-fluid img-sizes img-shadow"
+                                                <img src="{{ asset('images/medicineicon.png') }}"  id="Photo"  alt="" class="img-fluid img-sizes img-shadow"
                                                 alt="example placeholder">
                                             </div>
                                             <div class="d-flex justify-content-center">

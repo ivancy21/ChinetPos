@@ -1,5 +1,5 @@
-@extends('Layouts.master')
-@section('content')
+@extends('Layouts.sidebar')
+@section('contents')
 
 @include('Layouts.cropImageModal')
 
@@ -23,7 +23,7 @@
                                     @if ($medicine->medicinePhoto != null)
                                     <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
                                     @else
-                                    <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                    <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                     @endif 
                                   </div>      
                                 <p style="margin-top:5px; color:black;" class="text-center"><b> {{$medicine->name}}</b>({{$medicine->genericName}})</p>
@@ -139,8 +139,8 @@
                       <div class="DivTemplate">
                           <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                           <div class="hr mb-2"></div> 
-                          <button type="submit" class="btn btn-primary">SAVE</button>
-                          <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location = '{{ route('pharmacyMedicine.index') }}'" value="BACK">    
+                          <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
+                          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location = '{{ route('pharmacyMedicine.index') }}'">BACK</button>    
                       </div>
 
                     </div>

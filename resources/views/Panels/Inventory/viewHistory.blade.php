@@ -1,5 +1,5 @@
-@extends('Layouts.master')
-@section('content')
+@extends('Layouts.sidebar')
+@section('contents')
 
 
       
@@ -17,7 +17,7 @@
                                                 @if ($medicine->medicinePhoto != null)
                                                 <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
                                                 @else
-                                                <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                                <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                                 @endif 
                                             </div>
                                      <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{$medicine->name}}</b>({{$medicine->genericName}})</b></p>
@@ -40,10 +40,10 @@
                                     <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
                                         <thead  class="thead-bg table-bordered">
                                             <tr class="text-center">
+                                                    <th class="th-sm tblheadfont1"> Received Date </th>
                                                     <th class="th-sm tblheadfont1">Purchased Price </th>
                                                     <th class="th-sm tblheadfont1">Manufactured Date </th>
                                                     <th class="th-sm tblheadfont1">Expiration Date </th>
-                                                    <th class="th-sm tblheadfont1"> Received Date </th>
                                                     <th class="th-sm tblheadfont1" >Quantity </th>
                                             </tr>
                                         </thead>
@@ -52,10 +52,10 @@
                                      
                                                     @foreach($pharmacyMedicine as $pharmacyMedicines)
                                                     <tr class="text-center highlight">                                 
+                                                            <td class="cnterAlgn">{{$pharmacyMedicines->receivedMonth}}-{{$pharmacyMedicines->receivedDay}}-{{$pharmacyMedicines->receivedYear}}</td>
                                                             <td class="cnterAlgn">&#8369;{{$pharmacyMedicines->purchasedPrice}}</td>
                                                             <td class="cnterAlgn">{{$pharmacyMedicines->manufacturedMonth}}-{{$pharmacyMedicines->manufacturedDay}}-{{$pharmacyMedicines->manufacturedYear}}</td>
                                                             <td class="cnterAlgn">{{$pharmacyMedicines->expirationMonth}}-{{$pharmacyMedicines->expirationDay}}-{{$pharmacyMedicines->expirationYear}}</td>
-                                                            <td class="cnterAlgn">{{$pharmacyMedicines->receivedMonth}}-{{$pharmacyMedicines->receivedDay}}-{{$pharmacyMedicines->receivedYear}}</td>
                                                             <td class="cnterAlgn">{{$pharmacyMedicines->quantity}}</td>
                                                     </tr>
                                                     @endforeach

@@ -1,6 +1,7 @@
-@extends('Layouts.master')
+@extends('Layouts.sidebar')
+@section('contents')
 @include('Layouts.cropImageModal')
-@section('content')
+
 
 <form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}">
     @csrf
@@ -16,9 +17,9 @@
                                         <div class="file-field">
                                             <div class="z-depth-1-half mb-4">
                                                     @if ($medicine->medicinePhoto != null)
-                                                    <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
+                                                    <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  id="Photo" class="img-fluid img-sizes img-shadow" alt="">
                                                     @else
-                                                    <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                                    <img src="{{ asset('images/medicineicon.png') }}" size="250px" id="Photo" class="img-fluid img-sizes img-shadow" alt="" >
                                                     @endif 
                                             </div>
                                             <div class="d-flex justify-content-center">
@@ -50,7 +51,7 @@
                                 
                                         <div class="col">
                                             <label  class="fnt">Medicine Name</label>
-                                            <input type="text" id="name" class="form-control" name="name"  value="{{$medicine->medicineName}}" required>
+                                            <input type="text" id="name" class="form-control" name="name"  value="{{$medicine->name}}" required>
                                         </div>
                                     </div>
                                     <div class="row  mb-2">
@@ -87,7 +88,7 @@
                                     <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                     <div class="hr mb-2"></div> 
                                     <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
-                                    <input class="btn btn-outline-info waves-effect float-right" type="submit" onclick="window.location='{{route('medicine.index')}}'" value="BACK">    
+                                    <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>    
                                 </div>
 
                     </div>

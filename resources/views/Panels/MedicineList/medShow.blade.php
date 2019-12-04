@@ -1,5 +1,5 @@
-@extends('Layouts.master')
-@section('content')
+@extends('Layouts.sidebar')
+@section('contents')
 
 
         <div class="container">         
@@ -14,7 +14,7 @@
                                             @if ($medicine->medicinePhoto != null)
                                             <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
                                             @else
-                                            <img src="{{ asset('images/chinet.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                            <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                             @endif 
                                         </div>
                                 </div>  
@@ -63,7 +63,7 @@
                                                         
                                                         <tr class="fnt">
                                                             <td>Side Effect</td>
-                                                            <td>{{$medicine->sideEffect}}</td>
+                                                            <td>{{$medicine->sideEffects}}</td>
                                                         </tr>
 
                                                     </tbody>
@@ -77,8 +77,8 @@
                         <div class="DivTemplate">
                             <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                             <div class="hr mb-2"></div> 
-                            <a type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</a>
-                            <input class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'" value="BACK">           
+                            <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</button>
+                            <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
                         </div>
                     </div>    
                 </div>

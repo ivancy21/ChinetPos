@@ -20,3 +20,6 @@ Route::resource('inventory','InventoryController');
 Route::resource('medicine','MedicineController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 
+Route::get('/posIndex', function () {
+    return view('Panels.Pos.posIndex');
+});

@@ -1,5 +1,5 @@
-@extends('Layouts.master')
-@section('content')
+@extends('Layouts.sidebar')
+@section('contents')
 
       <div class="container">
             <div class="d-flex flex-column">
@@ -34,11 +34,10 @@
                         Action
                         </button>
                         <div class="dropdown-menu">
-                            <a type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicines->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</a>
-                            <a type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicines->id)}}'">  <i class="fa fa-trash-alt"></i> View History</a>
+                            <button type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicines->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</button>
+                            <button type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicines->id)}}'">  <i class="fa fa-trash-alt"></i> View History</button>
                         </div>
                     </td>
-                  </div>
                 </tr>
                 @endforeach
                
@@ -46,7 +45,8 @@
               </table>   
           </div>
         </div>
-    
+      </div>
+    </div>
 
 <script>
  
@@ -59,5 +59,5 @@
 
 
 
-</div>
+
 @endsection
