@@ -19,29 +19,25 @@ class MedicineController extends Controller
         //
         
         
-        $medicines=Medicine::paginate(21);
+        $medicines=Medicine::paginate(24);
         if($request->has('search')){
             $query = $request->get('search');
             $medicines = Medicine::where("name", 'LIKE', '%'.$query.'%')->orWhere("genericName", 'LIKE', '%'.$query.'%')->orWhere("companyName", 'LIKE', '%'.$query.'%')
-                    ->paginate(21);
-        }
-
+                    ->paginate(24);
+        }             
         if($request->has('latest')){
-            $medicines=Medicine::orderBy('created_at','desc')->paginate(21);
-            return view('Panels.MedicineList.medIndex',compact("medicines"));
+            $medicines=Medicine::orderBy('created_at','desc')->paginate(24);
         
         }
         if($request->has('oldest')){
-            $medicines=Medicine::orderBy('created_at','asc')->paginate(21);
-            return view('Panels.MedicineList.medIndex',compact("medicines"));
+            $medicines=Medicine::orderBy('created_at','asc')->paginate(24);
         }
         if($request->has('A-Z')){
-            $medicines=Medicine::orderBy('name','asc')->paginate(21);
-            return view('Panels.MedicineList.medIndex',compact("medicines"));
+            $medicines=Medicine::orderBy('name','asc')->paginate(24);
         
         }
         if($request->has('Z-A')){
-            $medicines=Medicine::orderBy('name','desc')->paginate(21);
+            $medicines=Medicine::orderBy('name','desc')->paginate(24);
                  
             return view('Panels.MedicineList.medIndex',compact("medicines"));
         

@@ -15,21 +15,21 @@
            <div class="container mt-4 mb-4">
            <div class="row">
 
-                    <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                    <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
                
-                    <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                    <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
               
-                    <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                    <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
              
             </div>
 
             <div class="row mt-4">
                    
-                        <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                        <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
                   
-                        <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                        <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
                     
-                        <button class="btn btn-info ml-5" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
+                        <button class="btn btn-info ml-5 zoom" style="width:310px; height:200px;"><i class="fa fa-home"></i></button>
                  
                 </div>
       

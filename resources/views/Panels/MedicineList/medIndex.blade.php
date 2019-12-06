@@ -9,7 +9,7 @@
               
         </div>
         <div class="flex HeaderBody2">
-                <a  style="float:right; color:#059DC0; margin-right:4px;" onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg "></i></a>                                           
+                <a  style="float:right; color:#059DC0; margin-right:4px;" onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
         </div>       
          
        <div class="CardDiv">
@@ -43,9 +43,9 @@
          </div>
 
 
-
+     <div style="width:100%;height:100%;">
   @foreach($medicines as $medicine)
-      <div class="cards">
+      <div class="cards zoom">
           <div class="image">
             @if ($medicine->medicinePhoto != null)
             <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" height="50px" width="90px" alt="" class="img-shadow card-img">
@@ -65,8 +65,13 @@
         </div>
           <!--cards -->
           @endforeach
-          {!! $medicines->appends(\Request::except('page'))->render() !!}
-            
+      </div>
+          <div class="float-right">
+              {!! $medicines->appends(\Request::except('page'))->render() !!}
+            </div>
+          
+
+         
   </div>
       </div>
     </div>

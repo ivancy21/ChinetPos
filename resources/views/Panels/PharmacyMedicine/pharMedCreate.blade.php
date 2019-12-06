@@ -1,7 +1,8 @@
 @extends('Layouts.sidebar')
+@include('Layouts.cropImageModal')
 @section('contents')
 
-@include('Layouts.cropImageModal')
+
 
       <form class="form-horizontal" method="POST" action="{{route('pharmacyMedicine.store')}}">
             @csrf

@@ -1,6 +1,7 @@
 @extends('Layouts.sidebar')
-@section('contents')
 @include('Layouts.cropImageModal')
+@section('contents')
+
 
 
 <form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}">

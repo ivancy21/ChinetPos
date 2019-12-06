@@ -37,7 +37,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <button type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicine->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</button>
-                            <button type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicine->id)}}'">  <i class="fa fa-trash-alt"></i> View History</button>
+                            <button type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicine->id)}}'">  <i class="fa fa-eye"></i> View History</button>
                         </div>
                     </td>
                 </tr>
