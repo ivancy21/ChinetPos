@@ -16,9 +16,9 @@ class PharmacyMedicineController extends Controller
     public function index()
     {
         //
-        $pharmacyMedicine=PharmacyMedicine::latest()->get();
-        $medicine=Medicine::latest()->get();
-        return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicine","pharmacyMedicine"));
+       
+        $medicines=Medicine::latest()->get();
+        return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicines"));
     }
 
     
@@ -30,8 +30,6 @@ class PharmacyMedicineController extends Controller
     public function create(Medicine $medicine)
     {
         //
-     
-
     }
 
     /**
@@ -44,7 +42,7 @@ class PharmacyMedicineController extends Controller
     {
         //
         $pharmacyMedicine=PharmacyMedicine::create($request->all());
-        return redirect()->route('inventory.index')->with('success','Pharmacy Medicine has been added');
+        return redirect()->route('pharmacyMedicine.index')->with('success','Pharmacy Medicine has been added');
     }
 
     /**
@@ -63,7 +61,7 @@ class PharmacyMedicineController extends Controller
         
     }
 
-    /**
+    /** 
      * Show the form for editing the specified resource.
      *
      * @param  \App\PharmacyMedicine  $PharmacyMedicine

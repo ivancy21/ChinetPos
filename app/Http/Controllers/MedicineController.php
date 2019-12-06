@@ -23,18 +23,21 @@ class MedicineController extends Controller
         if($request->has('search')){
             $query = $request->get('search');
             $medicines = Medicine::where("name", 'LIKE', '%'.$query.'%')->orWhere("genericName", 'LIKE', '%'.$query.'%')->orWhere("companyName", 'LIKE', '%'.$query.'%')
-                    ->paginate(21)  ;
-                   
-        }             
+                    ->paginate(21);
+        }
+
         if($request->has('latest')){
             $medicines=Medicine::orderBy('created_at','desc')->paginate(21);
+            return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
         if($request->has('oldest')){
             $medicines=Medicine::orderBy('created_at','asc')->paginate(21);
+            return view('Panels.MedicineList.medIndex',compact("medicines"));
         }
         if($request->has('A-Z')){
             $medicines=Medicine::orderBy('name','asc')->paginate(21);
+            return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
         if($request->has('Z-A')){
@@ -43,10 +46,9 @@ class MedicineController extends Controller
             return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
+            return view('Panels.MedicineList.medIndex',compact("medicines"))->with('success','no data');
+     
         
-        else {
-            return view('Panels.MedicineList.medIndex',compact("medicines"));
-        }
  
     }
     

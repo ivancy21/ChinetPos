@@ -13,7 +13,7 @@ class PharmacyMedicine extends Model
     ];
     public function medicine()
     {
-        return $this->belongsTo(Medicine::class,'medicineId');
+        return $this->belongsTo(Medicine::class, 'medicineId');
     }
 
     public function pos()

@@ -9,7 +9,6 @@
                    <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                            <span class="HeaderBannerText">Picture</span>
                    </div>
-   
                    <div class="flex HeaderBody"> 
                            <form class="md-form">
                                    <div class="file-field">
@@ -32,9 +31,7 @@
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                             <span class="HeaderBannerText">History</span>
                     </div>
-                   
                     <a  onclick="window.location='{{route('pharmacyMedicine.show',$medicine->id)}}'" style="float:right; color:#00a1db;"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-2x mt-1 mr-2 "></i></a>                                            
-        
                     <div class="flex HeaderBody"> 
                             <div class="table-responsive">
                                     <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
@@ -47,30 +44,20 @@
                                                     <th class="th-sm tblheadfont1" >Quantity </th>
                                             </tr>
                                         </thead>
-                    
                                             <tbody>
-                                     
-                                                    @foreach($pharmacyMedicine as $pharmacyMedicines)
-                                                    <tr class="text-center highlight">                                 
-                                                            <td class="cnterAlgn">{{$pharmacyMedicines->receivedMonth}}-{{$pharmacyMedicines->receivedDay}}-{{$pharmacyMedicines->receivedYear}}</td>
-                                                            <td class="cnterAlgn">&#8369;{{$pharmacyMedicines->purchasedPrice}}</td>
-                                                            <td class="cnterAlgn">{{$pharmacyMedicines->manufacturedMonth}}-{{$pharmacyMedicines->manufacturedDay}}-{{$pharmacyMedicines->manufacturedYear}}</td>
-                                                            <td class="cnterAlgn">{{$pharmacyMedicines->expirationMonth}}-{{$pharmacyMedicines->expirationDay}}-{{$pharmacyMedicines->expirationYear}}</td>
-                                                            <td class="cnterAlgn">{{$pharmacyMedicines->quantity}}</td>
-                                                    </tr>
-                                                    @endforeach
-                                              
-                                     
+                                                @foreach($pharmacyMedicines as $pharmacyMedicine)
+                                                <tr class="text-center highlight">                                 
+                                                        <td class="cnterAlgn">{{$pharmacyMedicine->receivedMonth}}-{{$pharmacyMedicine->receivedDay}}-{{$pharmacyMedicine->receivedYear}}</td>
+                                                        <td class="cnterAlgn">&#8369;{{ number_format($pharmacyMedicine->medicine->price,2)}}</td>
+                                                        <td class="cnterAlgn">{{$pharmacyMedicine->manufacturedMonth}}-{{$pharmacyMedicine->manufacturedDay}}-{{$pharmacyMedicine->manufacturedYear}}</td>
+                                                        <td class="cnterAlgn">{{$pharmacyMedicine->expirationMonth}}-{{$pharmacyMedicine->expirationDay}}-{{$pharmacyMedicine->expirationYear}}</td>
+                                                        <td class="cnterAlgn">{{$pharmacyMedicine->quantity}}</td>
+                                                </tr>
+                                                @endforeach
                                             </tbody>
-                                            
                                         </table>
                                     </div>
-
-
                     </div>
-
-
-
                 <div class="DivTemplate">
                         <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                         <div class="hr mb-2"></div> 

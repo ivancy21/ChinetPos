@@ -58,7 +58,7 @@
                                                         
                                                         <tr class="fnt">
                                                             <td>Selling Price</td>
-                                                            <td>{{$medicine->price}}</td>
+                                                            <td>&#8369;{{ number_format($medicine->price,2)}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">

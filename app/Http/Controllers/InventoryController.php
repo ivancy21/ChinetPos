@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Medicine;
+use Illuminate\Http\Request;
 use App\PharmacyMedicine;
 class InventoryController extends Controller
 {
@@ -16,9 +15,8 @@ class InventoryController extends Controller
     {
         //
          //
-         $pharmacyMedicine=PharmacyMedicine::latest()->get();
-         $medicine=Medicine::latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicine")); 
+         $pharmacyMedicines=PharmacyMedicine::latest()->get();
+         return view('Panels.Inventory.viewAllHistory',compact("pharmacyMedicines")); 
     }
 
     /**
@@ -48,12 +46,13 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($PharmacyMedicine)
+    public function show($id)
     {
          //
-         $pharmacyMedicine=PharmacyMedicine::where('MedicineId','=',$PharmacyMedicine)->latest()->get();
-         $medicine=Medicine::where('id','=',$PharmacyMedicine)->latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicine"));
+         
+         $pharmacyMedicines=PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
+         $medicine=Medicine::where('id','=',$id)->latest()->first();
+         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicines"));
         
     }
 

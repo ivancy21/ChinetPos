@@ -59,7 +59,7 @@
                         <span></span>
                         <span></span>
                 </button>
-
+              @include('Layouts.flash-message')
             @yield('contents')
 
         </div> 

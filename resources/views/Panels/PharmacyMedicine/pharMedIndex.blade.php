@@ -6,8 +6,10 @@
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                     <span class="HeaderBannerText">Medicines Inventory</span>
                     </div>
-
-       <div class="flex HeaderBody"> 
+        
+       <div class="flex HeaderBody">
+          <input class="btn btn-outline-info waves-effect float-right" type="button"  onclick="window.location='{{route('inventory.index')}}'" value="History">                                            
+         
             <div class="table-responsive">
                   
               <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
@@ -23,24 +25,23 @@
                 <tbody>
                   
                
-                 @foreach($medicine as $medicines)
+                 @foreach($medicines as $medicine)
                   <tr class="text-center highlight">
-                    <td>{{$medicines->name}}</td>
-                    <td>{{$medicines->productCode}}</td>
-                    <td>&#8369; {{$medicines->price}}</td>
-                    <td>{{$medicines->pharmacymedicines->sum('quantity')}}</td>
+                    <td>{{$medicine->name}}</td>
+                    <td>{{$medicine->productCode}}</td>
+                    <td>&#8369; {{ number_format($medicine->price,2) }}</td>
+                    <td>{{$medicine->pharmacymedicines->sum('quantity')}}</td>
                     <td class="cnterAlgn"><div class="btn-group">
                         <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Action
                         </button>
                         <div class="dropdown-menu">
-                            <button type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicines->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</button>
-                            <button type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicines->id)}}'">  <i class="fa fa-trash-alt"></i> View History</button>
+                            <button type="submit" class="dropdown-item" onclick="window.location='{{route('pharmacyMedicine.show', $medicine->id)}}'"> <i class="fa fa-edit"></i> Add Quantity</button>
+                            <button type="submit"class="dropdown-item" onclick="window.location='{{route('inventory.show', $medicine->id)}}'">  <i class="fa fa-trash-alt"></i> View History</button>
                         </div>
                     </td>
                 </tr>
                 @endforeach
-               
                 </tbody>
               </table>   
           </div>
@@ -49,11 +50,9 @@
     </div>
 
 <script>
- 
  $(document).ready( function () {
     $('#TblSorter1').DataTable();
  });
-
 </script>
 
 
