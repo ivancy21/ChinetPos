@@ -32,7 +32,7 @@
                             </a>
                           </li>
                           <li>
-                            <a href="/posIndex">
+                            <a href="{{route('pos.index')}}">
                                 <i class="fa fa-align-justify" aria-hidden="true"></i> Pos
                             </a>
                         </li>

@@ -24,41 +24,15 @@
           </tr>
         </thead>
         <tbody>       
-       
+            @foreach($medicines as $medicine)
           <tr class="text-center highlight">
-          <td id="name0">Cetirizine</td>
-            <td>A115A1558</td>
-            <td id="price0">&#8369; 20</td>
-            <td>50</td>
+           <td id="name{{$medicine->count}}">{{$medicine->name}}</td>
+            <td>{{$medicine->productCode}}</td>
+          <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->price,2)}}</td>
+            <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
-        </tr>
-        <tr class="text-center highlight">
-            <td id="name1">Biogesic</td>
-            <td>A115A1558</td>
-            <td id="price1">&#8369; 30</td>
-            <td>50</td>
-            <td><button class="btn btn-sm btn-info">Select</button></td>
-           
-        </tr>
-        <tr class="text-center highlight">
-            <td id="name2">Neozep</td>
-            <td>A115A1558</td>
-            <td id="price2">&#8369; 100</td>
-            <td >50</td>
-            <td><button class="btn btn-sm btn-info">Select</button></td>
-           
-        </tr>
-        <tr class="text-center highlight">
-            <td id="name3">Medicol</td>
-            <td>A115A1558</td>
-            <td id="price3">&#8369; 150</td>
-            <td>50</td>
-            <td><button class="btn btn-sm btn-info">Select</button></td>
-           
-        </tr>
-
-      
-       
+            @endforeach
+          </tr>
         </tbody>
       </table> 
     </div>  
@@ -99,7 +73,7 @@
       </table>  
       
       <div class="hr mb-2"></div> 
-      <p class="split-para"><b>Total:</b> <span>&#8369; 2000000</span></p>
+      <p class="split-para"><b>Total:</b> <span>&#8369;</span></p>
     
     </div> 
   </div>
