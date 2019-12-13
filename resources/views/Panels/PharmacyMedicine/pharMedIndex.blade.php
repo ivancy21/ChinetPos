@@ -5,10 +5,11 @@
             <div class="d-flex flex-column">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                     <span class="HeaderBannerText">Medicines Inventory</span>
+                    <button class="btn zoom float-right btn-sm" type="button"  onclick="window.location='{{route('inventory.index')}}'" > <i class="fas fa-history"></i> History</button>                                         
+                   
                     </div>
         
        <div class="flex HeaderBody">
-          <input class="btn btn-outline-info waves-effect float-right" type="button"  onclick="window.location='{{route('inventory.index')}}'" value="History">                                            
          
             <div class="table-responsive">
                   
