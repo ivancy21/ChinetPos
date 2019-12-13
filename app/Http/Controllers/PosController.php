@@ -70,7 +70,11 @@ class PosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $pharmcyMedicine = DB::table('PharmacyMedicine')
+        // ->whereColumn([
+        //     ['quantity', '=', 'quantity'],
+        //     ['updated_at', '>', 'created_at']
+        // ])->get();
     }
 
     /**

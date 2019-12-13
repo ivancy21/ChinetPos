@@ -9,6 +9,7 @@
               
         </div>
         <div class="flex HeaderBody2">
+            <a class="ml-3" href="{{route('inventory.index')}}" >History</a>                                            
                 <a  style="float:right; color:#059DC0; margin-right:4px;" onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
         </div>       
          
@@ -56,10 +57,28 @@
          <div class="container">
            <div class="table-responsive">
            <center>
-           <h6 style="color:black;" class="fnt mt-2"><b> {{$medicine->name}}</b></h6>
-                    <h6 style="color:black;" class="fnt"> {{$medicine->companyName}}</h6>
+           <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->name))}}</b></h6>
+                    <h6 style="color:black;" class="fnt"> {{$medicine->genericName}}</h6>
+                    @if($medicine->pharmacyMedicines->sum('quantity')>0)
+                    @if($medicine->medicine_status==1)
+                    <h6 style="color:green;" class="fnt">Stocks: {{$medicine->pharmacyMedicines->sum('quantity')}} ( Active )</h6>
+                    @elseif($medicine->medicine_status==0)
+                    <h6 style="color:red;" class="fnt">Stocks: {{$medicine->pharmacyMedicines->sum('quantity')}} ( Inactive )</h6>
+                    @endif
+                    @endif
+
+
+                    @if($medicine->pharmacyMedicines->sum('quantity')<=0)
+                    @if($medicine->medicine_status==1)
+                    <h6 style="color:red;" class="fnt">Stocks: {{$medicine->pharmacyMedicines->sum('quantity')}} ( Active )</h6>
+                    @elseif($medicine->medicine_status==0)
+                    <h6 style="color:red;" class="fnt">Stocks: {{$medicine->pharmacyMedicines->sum('quantity')}} ( Inactive )</h6>
+                    @endif
+                    @endif
                     <button type="button" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.show', $medicine->id)}}'">Select</button>
-           </center>  
+            </center>
+                    
+                        
           </div>
           </div>
         </div>

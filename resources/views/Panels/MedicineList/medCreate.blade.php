@@ -31,7 +31,7 @@
                                             </div>
                                             </div>
                                             </div>
-                                    </form>
+                                   
                                 </div>
                         </div>
                 
@@ -43,12 +43,22 @@
                                         <div class="row mb-2">
                                             <div class="col">
                                                 <label  class="fnt">Medicine Code</label>
-                                                <input type="text" id="productCode" class="form-control" name="productCode" required>
+                                                <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"  name="productCode" tabindex="14">
+                                                @if ($errors->has('productCode'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>The Product Code is already Existed!</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                     
                                             <div class="col">
                                                 <label  class="fnt">Medicine Name</label>
-                                                <input type="text" id="name" class="form-control" name="name" required>
+                                                <input type="text" required class="form-control input{{ $errors->has('name') ? ' is-invalid' : '' }}"  name="name" tabindex="14">
+                                                @if ($errors->has('name'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>The Medicine Name is already Existed!</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -63,21 +73,14 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col">
+                                            <div class="col-sm-6">
                                                     <label  class="fnt">Generic Name</label>
-                                                    <input type="text" id="genericName" class="form-control" name="genericName" >
+                                                    <input type="text" id="genericName" class="form-control" name="genericName" required >
                                             </div>
-                                    
-                                        <div class="col">
-                                                <label  class="fnt">Company Name</label>
-                                                <input type="text" id="companyName" class="form-control" name="companyName" >
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                                <label  class="fnt">Side Effect</label>       
-                                                <input type="text" id="effects" class="form-control" name="sideEffects" >
-                                            </div> 
+                                            <div class="col-sm-6">
+                                                    <label  class="fnt">Side Effect</label>       
+                                                    <input type="text" id="sideEffects" class="form-control" name="sideEffects" required>
+                                                </div> 
                                         </div>
                                 </div>
                              

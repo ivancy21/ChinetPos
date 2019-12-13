@@ -18,6 +18,6 @@ class PharmacyMedicine extends Model
 
     public function pos()
     {
-        return $this->belongsTo(Pos::class,'pharmacyMedicineId');
+        return $this->hasMany(Pos::class,'pharmacyMedicineId');
     }
 }

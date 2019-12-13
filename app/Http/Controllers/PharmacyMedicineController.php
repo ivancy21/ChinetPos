@@ -42,7 +42,7 @@ class PharmacyMedicineController extends Controller
     {
         //
         $pharmacyMedicine=PharmacyMedicine::create($request->all());
-        return redirect()->route('pharmacyMedicine.index')->with('success','Pharmacy Medicine has been added');
+        return redirect()->route('inventory.index')->with('success','Stock has been added');
     }
 
     /**

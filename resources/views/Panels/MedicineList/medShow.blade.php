@@ -33,7 +33,7 @@
                                                         
                                                         <tr class="fnt">
                                                             <td class>Medicine Name</td>
-                                                            <td>{{$medicine->name}}</td>
+                                                            <td>{{ucfirst(trans($medicine->name))}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
@@ -44,11 +44,6 @@
                                                         <tr class="fnt">
                                                             <td>Generic Name</td>
                                                             <td>{{$medicine->genericName}}</td>
-                                                        </tr>
-                                                        
-                                                        <tr class="fnt">
-                                                            <td>Company Name</td>
-                                                            <td>{{$medicine->companyName}}</td>
                                                         </tr>
                                                             
                                                         <tr class="fnt">
@@ -66,19 +61,28 @@
                                                             <td>{{$medicine->sideEffects}}</td>
                                                         </tr>
 
+                                                        <tr class="fnt">
+                                                                <td>Quantity</td>
+                                                                <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
+                                                        </tr>
+                                                        <tr class="fnt">
+                                                            <td>Status</td>
+                                                            @if($medicine->medicine_status == 1)
+                                                            <td>Active</td>
+                                                            @elseif($medicine->medicine_status == 0)
+                                                            <td>Inactive</td>
+                                                            @endif
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                              
-                           
-                            
-
                         <div class="DivTemplate">
                             <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                             <div class="hr mb-2"></div> 
                             <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</button>
                             <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
+                            <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i>Stock Management</button>
                         </div>
                     </div>    
                 </div>

@@ -26,11 +26,11 @@
                                <i class="fa fa-capsules" aria-hidden="true"></i> Medicine List
                             </a>
                           </li>
-                           <li>
+                           {{-- <li>
                             <a href="{{route('pharmacyMedicine.index')}}">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Pharmacy Inventory
                             </a>
-                          </li>
+                          </li> --}}
                           <li>
                             <a href="{{route('pos.index')}}">
                                 <i class="fa fa-align-justify" aria-hidden="true"></i> Pos

@@ -1,6 +1,5 @@
 @extends('Layouts.master')
 @section('content')
-
 <div style="padding:2%;">
        <div class="row">
          <div class="col-sm-8">
@@ -24,14 +23,18 @@
           </tr>
         </thead>
         <tbody>       
+            
             @foreach($medicines as $medicine)
+            @if($medicine->medicine_status==1)
           <tr class="text-center highlight">
            <td id="name{{$medicine->count}}">{{$medicine->name}}</td>
             <td>{{$medicine->productCode}}</td>
           <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->price,2)}}</td>
             <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
+            @endif
             @endforeach
+            
           </tr>
         </tbody>
       </table> 

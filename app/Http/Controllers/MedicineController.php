@@ -6,9 +6,16 @@ use App\Medicine;
 use Illuminate\Http\Request;
 use App\PharmacyMedicine;
 use Intervention\Image\ImageManagerStatic as Image;
+use Illuminate\Support\Facades\Redirect;
+use DB;
+use Session;
+
+
 
 class MedicineController extends Controller
 {
+     
+    
     /**
      * Display a listing of the resource.
      *
@@ -71,9 +78,14 @@ class MedicineController extends Controller
     public function store(Request $request)
     {
         //
-       
-        $medicine = Medicine::create($request->except('medicinePhoto','medicinePic'));
+        $request->validate([
+            'productCode' => 'required|string|max:20|unique:medicine',
+            'name' => 'required|string|max:20|unique:medicine',
+            
+        ],
+        );
 
+        $medicine=Medicine::create($request->except('medicinePic','medicinePhoto'));
          if ($request->hasFile('medicinePic')){
             $this->validate($request, [
                 'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -81,9 +93,9 @@ class MedicineController extends Controller
         //     $filename = time().'.'.$request->medicinePic->getClientOriginalExtension();
         //     $resizedImage = Image::make($request->file('medicinePic')->getRealPath());
         //     $resizedImage->resize(100, 100);
-        //     $user->medicinePic = $filename;
-        //     $resizedImage->save(public_path().'/images/userPhotos/' .  $filename);
-        //     $user->save(); 
+        //     $medicine->medicinePic = $filename;
+        //     $resizedImage->save(public_path().'/images/medicinePhotos/' .  $filename);
+        //     $medicine->save(); 
         //     $alert = $filename;
         } 
        
@@ -101,7 +113,6 @@ class MedicineController extends Controller
 
         return redirect()->route('medicine.show',$medicine->id)->with('success','Successfully Added');
     }
-
     /**
      * Display the specified resource.
      *
@@ -122,9 +133,10 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $Medicine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicine $medicine)
+    public function edit($id)
     {
         //
+        $medicine = Medicine::find($id);
         return view('Panels.MedicineList.medEdit',compact("medicine"));
     
     }
@@ -136,9 +148,17 @@ class MedicineController extends Controller
      * @param  \App\Medicine  $Medicine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicine $medicine)
+    public function update(Request $request, $id)
     {
         //
+            $request->validate([
+                
+                'productCode' => 'required|unique:medicine,productCode,'.$id,
+                'name' => 'required|unique:medicine,name,'.$id,
+            ],
+            );
+    
+        $medicine = Medicine::find($id);
         $medicine->update($request->except('medicinePic','medicinePhoto'));
         if ($request->hasFile('medicinePic')){
             $this->validate($request, [
@@ -147,9 +167,9 @@ class MedicineController extends Controller
         //     $filename = time().'.'.$request->medicinePic->getClientOriginalExtension();
         //     $resizedImage = Image::make($request->file('medicinePic')->getRealPath());
         //     $resizedImage->resize(100, 100);
-        //     $user->medicinePic = $filename;
-        //     $resizedImage->save(public_path().'/images/userPhotos/' .  $filename);
-        //     $user->save(); 
+        //     $medicine->medicinePic = $filename;
+        //     $resizedImage->save(public_path().'/images/medicinePhotos/' .  $filename);
+        //     $medicine->save(); 
         //     $alert = $filename;
         } 
        
@@ -164,7 +184,7 @@ class MedicineController extends Controller
             $medicine->medicinePhoto = $name;
             $medicine->save();
         }               
-        return redirect()->route('medicine.show',$medicine->id)->with('success','Medicine has been EDITED');
+        return redirect()->route('medicine.show',$medicine->id)->with('success','Medicine has been Updated');
        
     }
 
@@ -180,4 +200,5 @@ class MedicineController extends Controller
         $medicine->delete();
         return redirect()->route('medicine.index');
     }
+    
 }
