@@ -16,7 +16,8 @@ class PharmacyMedicine extends Migration
         Schema::create('PharmacyMedicine', function (Blueprint $table) {
             $table->increments('id');
             $table->Unsignedinteger('medicineId');
-            $table->integer('purchasedPrice')->nullable();
+            $table->string('companyName');
+            $table->float('purchasedPrice')->nullable();
             $table->string('receivedMonth');
             $table->string('receivedDay');
             $table->string('receivedYear');

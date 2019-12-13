@@ -14,6 +14,7 @@
                   <tr class="text-center">
                    <th class="th-sm tblheadfont1">Medicine Name</th>
                     <th class="th-sm tblheadfont1">Code</th>
+                    <th class="th-sm tblheadfont1">Company Name</th>
                     <th class="th-sm tblheadfont1">Purchased Price</th>
                     <th class="th-sm tblheadfont1">Received Date</th>
                     <th class="th-sm tblheadfont1">Manufactured Date</th>
@@ -28,11 +29,12 @@
                  <tr class="text-center highlight">
                     <td>{{$pharmacyMedicine->medicine->name}}</td>
                     <td>{{$pharmacyMedicine->medicine->productCode}}</td>
+                    <td>{{$pharmacyMedicine->companyName}}</td>
                     <td>&#8369;{{ number_format($pharmacyMedicine->purchasedPrice,2)}}</td>
                     <td>{{$pharmacyMedicine->manufacturedMonth}}-{{$pharmacyMedicine->manufacturedDay}}-{{$pharmacyMedicine->manufacturedYear}}<td>
                     {{$pharmacyMedicine->expirationMonth}}-{{$pharmacyMedicine->expirationDay}}-{{$pharmacyMedicine->expirationYear}}</td>
                     <td>{{$pharmacyMedicine->receivedMonth}}-{{$pharmacyMedicine->receivedDay}}-{{$pharmacyMedicine->receivedYear}}</td>
-                    <td>{{$pharmacyMedicine->sum('quantity')}}</td>
+                    <td>{{$pharmacyMedicine->quantity}}</td>
                  </tr>
                 @endforeach
                 
@@ -42,7 +44,7 @@
               <div class="DivTemplate">
                   <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                   <div class="hr mb-2"></div> 
-                  <input class="btn btn-outline-info waves-effect float-right" type="button"  onclick="window.location='{{route('pharmacyMedicine.index')}}'" value="BACK">    
+                  <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
               </div>   
           </div>
         </div>

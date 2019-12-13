@@ -4,7 +4,7 @@
 
 
 
-<form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}">
+<form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
         <div class="container">
@@ -47,12 +47,22 @@
                                     <div class="row  mb-2">
                                         <div class="col">
                                             <label  class="fnt">Medicine Code</label>
-                                        <input type="text" id="productCode" class="form-control" name="productCode"  value="{{$medicine->productCode}}" required>
+                                            <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"value="{{$medicine->productCode}}" name="productCode" tabindex="14">
+                                            @if ($errors->has('productCode'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>The Product Code is already Existed!</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                 
                                         <div class="col">
                                             <label  class="fnt">Medicine Name</label>
-                                            <input type="text" id="name" class="form-control" name="name"  value="{{$medicine->name}}" required>
+                                            <input type="text" required class="form-control input{{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{$medicine->name}}" name="name" tabindex="14">
+                                            @if ($errors->has('name'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>The Medicine Name is already Existed!</strong>
+                                            </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row  mb-2">
@@ -71,25 +81,33 @@
                                                 <label  class="fnt">Generic Name</label>
                                                 <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
                                         </div>
-                                
-                                    <div class="col">
-                                            <label  class="fnt">Company Name</label>
-                                            <input type="text" id="companyName" class="form-control" name="companyName"  value="{{$medicine->companyName}}"  >
+                                        <div class="col-sm-6">
+                                                <label  class="fnt">Side Effect</label>       
+                                                <input type="text" id="effects" class="form-control" name="sideEffects"  value="{{$medicine->sideEffects}}"  >
                                         </div>
                                     </div>
-                                    <div class="row  mb-2">
-                                    <div class="col-sm-6">
-                                            <label  class="fnt">Side Effect</label>       
-                                            <input type="text" id="effects" class="form-control" name="sideEffects"  value="{{$medicine->sideEffects}}"  >
+                                    <center>
+                                    <div class="form-row">
+                                        <div class="form-group col-sm-12">
+                                            <label class="input-label">STATUS</label><br>
+                                            <div class="form-check form-check-inline ml-4">
+                                                <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1' @if ($medicine->medicine_status == 1) checked @endif>
+                                                <label class="form-check-label" for="emptyStatusActive">Active</label>
+                                            </div>
+                                            <div class="form-check form-check-inline ml-4">
+                                                <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0' @if ($medicine->medicine_status == 0) checked @endif>
+                                                <label class="form-check-label" for="statusInactive">Inactive</label> 
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
+                                    </center>
                             </div>
                         
                                 <div class="DivTemplate">
                                     <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                     <div class="hr mb-2"></div> 
                                     <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
-                                    <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>    
+                                    <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location='{{route('medicine.show',$medicine->id)}}'">BACK</button>    
                                 </div>
 
                     </div>

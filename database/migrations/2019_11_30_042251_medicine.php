@@ -15,14 +15,14 @@ class Medicine extends Migration
     {
         Schema::create('Medicine', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('productCode');
-            $table->float('price')->nullable();
             $table->string('name');
-            $table->string('genericName');
-            $table->string('companyName');
+            $table->string('genericName');  
             $table->string('category')->nullable();
             $table->string('sideEffects')->nullable();
+            $table->string('productCode')->unique();
+            $table->float('price')->nullable();
             $table->string('medicinePhoto')->nullable();
+            $table->tinyInteger('medicine_status')->default(1);
             $table->timestamps();
         });
     }
