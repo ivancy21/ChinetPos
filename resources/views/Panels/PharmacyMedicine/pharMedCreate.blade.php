@@ -46,7 +46,7 @@
                                         <div class="col-sm-3">
                                                 <label  class="fnt">Quantity</label>
                                         </div>
-                                        <div class="col-sm-4">              
+                                        <div class="col-sm-1">              
                                                 <input type="hidden" id="medicineId" class="form-control" value="{{$medicine->id}}" name="medicineId">
                                                 <input type="number" list="quantity" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
                                         </div>
@@ -57,7 +57,7 @@
                                                 <label  class="fnt">Supplier </label> 
                                         </div>
                                                 <div class="col-sm-5">
-                                                        <input type='text'   class="form-control" name="companyName" required>
+                                                        <input type='text'   class="form-control" name="supplier" required>
                                                 </div>
                                             </div>
                                 

@@ -43,7 +43,7 @@
                                                     
                                                         <tr class="fnt">
                                                             <td>Generic Name</td>
-                                                            <td>{{$medicine->genericName}}</td>
+                                                            <td>{{ucfirst(trans($medicine->genericName))}}</td>
                                                         </tr>
                                                             
                                                         <tr class="fnt">
@@ -63,7 +63,7 @@
 
                                                         <tr class="fnt">
                                                                 <td>Quantity</td>
-                                                                <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
+                                                        <td>{{$medicine->pharmacyMedicines->sum('quantity')}} {{$medicine->type}}</td>
                                                         </tr>
                                                         <tr class="fnt">
                                                             <td>Status</td>

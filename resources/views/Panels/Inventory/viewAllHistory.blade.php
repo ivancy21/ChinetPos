@@ -14,7 +14,7 @@
                   <tr class="text-center">
                    <th class="th-sm tblheadfont1">Medicine Name</th>
                     <th class="th-sm tblheadfont1">Code</th>
-                    <th class="th-sm tblheadfont1">Company Name</th>
+                    <th class="th-sm tblheadfont1">Supplier </th>
                     <th class="th-sm tblheadfont1">Purchased Price</th>
                     <th class="th-sm tblheadfont1">Received Date</th>
                     <th class="th-sm tblheadfont1">Manufactured Date</th>
@@ -29,7 +29,7 @@
                  <tr class="text-center highlight">
                     <td>{{$pharmacyMedicine->medicine->name}}</td>
                     <td>{{$pharmacyMedicine->medicine->productCode}}</td>
-                    <td>{{$pharmacyMedicine->companyName}}</td>
+                    <td>{{$pharmacyMedicine->supplier}}</td>
                     <td>&#8369;{{ number_format($pharmacyMedicine->purchasedPrice,2)}}</td>
                     <td>{{$pharmacyMedicine->manufacturedMonth}}-{{$pharmacyMedicine->manufacturedDay}}-{{$pharmacyMedicine->manufacturedYear}}<td>
                     {{$pharmacyMedicine->expirationMonth}}-{{$pharmacyMedicine->expirationDay}}-{{$pharmacyMedicine->expirationYear}}</td>

@@ -16,6 +16,7 @@ class Medicine extends Migration
         Schema::create('Medicine', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('type');  
             $table->string('genericName');  
             $table->string('category')->nullable();
             $table->string('sideEffects')->nullable();

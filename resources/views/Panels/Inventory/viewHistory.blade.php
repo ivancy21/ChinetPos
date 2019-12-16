@@ -36,7 +36,7 @@
                                     <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
                                         <thead  class="thead-bg table-bordered">
                                             <tr class="text-center">
-                                                    <th class="th-sm tblheadfont1"> Company Name </th>
+                                                    <th class="th-sm tblheadfont1"> Supplier </th>
                                                     <th class="th-sm tblheadfont1"> Received Date </th>
                                                     <th class="th-sm tblheadfont1">Purchased Price </th>
                                                     <th class="th-sm tblheadfont1">Manufactured Date </th>
@@ -47,7 +47,7 @@
                                             <tbody>
                                                 @foreach($pharmacyMedicines as $pharmacyMedicine)
                                                 <tr class="text-center highlight">                                 
-                                                        <td class="cnterAlgn">{{$pharmacyMedicine->companyName}}</td>
+                                                        <td class="cnterAlgn">{{$pharmacyMedicine->supplier}}</td>
                                                         <td class="cnterAlgn">{{$pharmacyMedicine->receivedMonth}}-{{$pharmacyMedicine->receivedDay}}-{{$pharmacyMedicine->receivedYear}}</td>
                                                         <td class="cnterAlgn">&#8369;{{ number_format($pharmacyMedicine->medicine->price,2)}}</td>
                                                         <td class="cnterAlgn">{{$pharmacyMedicine->manufacturedMonth}}-{{$pharmacyMedicine->manufacturedDay}}-{{$pharmacyMedicine->manufacturedYear}}</td>

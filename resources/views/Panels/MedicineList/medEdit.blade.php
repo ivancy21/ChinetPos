@@ -70,12 +70,19 @@
                                                 <label  class="fnt">Category</label>
                                                 <input type="text" id="category" class="form-control"  value="{{$medicine->category}}" name="category"  >
                                         </div>
-                                
                                         <div class="col">
-                                                <label  class="fnt">Selling Price</label>
-                                                <input type="text" id="sellingPrice" class="form-control" name="price" pattern="^\d*(\.\d{0,2})?$"  title="Number only"value="{{$medicine->price}}"  required >
+                                                <label  class="fnt">Medicine Type</label>
+                                        <select type="text" id="type" class="form-control" name="type" >
+                                                        <option>{{$medicine->type}}</option>
+                                                        <option>Tablets</option>
+                                                        <option>Bottles</option>
+                                                        <option>Drops</option>
+                                                        <option>Inhalers</option>
+                                                        <option>Injections</option>
+                                                        <option>Capsules</option>
+                                                </select>
                                         </div>
-                                    </div>
+                                        </div>
                                     <div class="row  mb-2">
                                         <div class="col">
                                                 <label  class="fnt">Generic Name</label>
@@ -83,9 +90,26 @@
                                         </div>
                                         <div class="col-sm-6">
                                                 <label  class="fnt">Side Effect</label>       
-                                                <input type="text" id="effects" class="form-control" name="sideEffects"  value="{{$medicine->sideEffects}}"  >
-                                        </div>
-                                    </div>
+                                                <select type="text" id="sideEffects" class="form-control" name="sideEffects">
+                                                        <option>Constipation</option>
+                                                        <option>Skin Rashes</option>
+                                                        <option>Diarrhea</option>
+                                                        <option>Dizziness</option>
+                                                        <option>Dry mouth</option>
+                                                        <option>Headache</option>
+                                                        <option>Insomnia</option>
+                                                        <option>Nausea</option>
+                                                        
+                                                </select>
+                                        </div> 
+                                   </div>
+                                    <div class="row mb-2">
+                                            <div class="col-sm-6">
+                                                    <label  class="fnt">Selling Price</label>
+                                                    <input type="text" id="sellingPrice" class="form-control" name="price"   pattern="^\d*(\.\d{0,2})?$"  value="{{$medicine->price}}" title="Number only">
+                                                </div>
+                                            </div>
+                                    
                                     <center>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12">

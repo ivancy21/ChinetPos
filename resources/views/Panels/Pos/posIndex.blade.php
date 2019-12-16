@@ -25,12 +25,16 @@
         </thead>
         <tbody>       
             @foreach($medicines as $medicine)
+            @if($medicine->medicine_status==1)
+            @if($medicine->pharmacyMedicines->sum('quantity')>0)
           <tr class="text-center highlight">
            <td id="name{{$medicine->count}}">{{$medicine->name}}</td>
             <td>{{$medicine->productCode}}</td>
           <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->price,2)}}</td>
             <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
+            @endif
+            @endif
             @endforeach
           </tr>
         </tbody>
