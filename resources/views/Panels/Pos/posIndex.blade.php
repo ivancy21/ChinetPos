@@ -119,7 +119,6 @@ $(document).ready( function () {
        btnselect();
 });
 
-var nameArray = [];
 var count = -1;
 // when button select or click
     function btnselect(){
@@ -131,12 +130,9 @@ var count = -1;
                   count+=1;
                       var name = $(this).closest('.highlight').find('td[id^=name]').html();
                       var price = $(this).closest('.highlight').find('td[id^=price]').html();
-                      if(nameArray.indexOf(name) === -1){
-                        nameArray.push(name);
-                      }
-                
+                      
            $(this).closest('tr').hide();
-           // $(this).closest('tr').find($( ".btn-info" )).attr('disabled', 'disabled');
+
             clone(table2,name,price,count);
             Total();
               });
@@ -153,20 +149,6 @@ var count = -1;
          Quantity();
     }
 
-// able button
-
-    function buttonAble(){
-     
-     // alert(name);
-    //  $('.nameClass').each(function(){
-    //   alert(  $(this).closest('tr').find($( "#nameID" )).html());
-    //  });
-
-      //  $('.sorting_1').each(function(){
-      //  alert(  $(this).closest('tr').find($( "#name" )).html());
-      //  });
-    } 
-
 // delete the data on table 2
     function removetable(){
      
@@ -177,17 +159,17 @@ var count = -1;
         deleteList.each(function(){
           $(this).click(function(){
             var Name1 = $(this).closest('tr').find('.nameClass').html();
-            var index = $(this).attr('id').replace ( /[^\d.]/g, '' );
-                  if(Name1 == nameArray[index]){  
+          
                         $('.sorting_1').each(function(){
                             var Name2 = $(this).html();
                             if(Name1 == Name2){
                               $(this).closest('tr').show();
                             }
                       });
-                  }
+               
             $(this).closest('tr').remove();
             Total();
+           
           }); 
         });
     }

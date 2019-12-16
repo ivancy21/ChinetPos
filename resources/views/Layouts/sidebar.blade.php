@@ -26,6 +26,11 @@
                                <i class="fa fa-capsules" aria-hidden="true"></i> Medicine List
                             </a>
                           </li>
+                          <li>
+                            <a  href="{{route('inventory.index')}}">
+                               <i class="fa fa-capsules" aria-hidden="true"></i> Stocks History
+                            </a>
+                          </li>
                            {{-- <li>
                             <a href="{{route('pharmacyMedicine.index')}}">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Pharmacy Inventory

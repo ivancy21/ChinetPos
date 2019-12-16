@@ -6,8 +6,7 @@
              <span class="HeaderBannerText">Medicines</span>
               
         </div>
-        <div class="flex HeaderBody2">
-            <a class="ml-3" href="{{route('inventory.index')}}" >History</a>                                            
+        <div class="flex HeaderBody2">                                        
                 <a  style="float:right; color:#059DC0; margin-right:4px;" onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
         </div>       
          
