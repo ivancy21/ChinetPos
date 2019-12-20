@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Panels.home');
-});
-
 Route::resource('pos','PosController');
 Route::resource('inventory','InventoryController');
 Route::resource('medicine','MedicineController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 Route::resource('pos','PosController');
-
+Route::resource('home','HomeController');

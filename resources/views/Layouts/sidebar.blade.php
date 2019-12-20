@@ -16,18 +16,18 @@
 
             <ul class="sidebar-navigation list-unstyled components">
                     <li class="header">Navigation</li>
-                    <li>
-                            <a href="/">
+                    <li >
+                            <a href="{{route('home.index')}}" class="@if (Session::get("inventoryTab") == 'home') active @endif">
                               <i class="fa fa-home" aria-hidden="true"></i> Homepage
                             </a>
-                          </li>
-                          <li>
-                            <a  href="{{route('medicine.index')}}">
+                     </li >
+                          <li >
+                            <a  href="{{route('medicine.index')}}" class="@if (Session::get("inventoryTab") == 'medicineList') active @endif">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Medicine List
                             </a>
                           </li>
                           <li>
-                            <a  href="{{route('inventory.index')}}">
+                            <a  href="{{route('inventory.index')}}" class="@if (Session::get("inventoryTab") == 'stockHistory') active @endif">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Stocks History
                             </a>
                           </li>
@@ -76,12 +76,16 @@
 
 
 <script type="text/javascript">
-$(document).ready(function () {
-$('#sidebarCollapse').on('click', function () {
-$('#sidebar').toggleClass('active');
-$(this).toggleClass('active');
-});
-});
+
+  $(document).ready(function () {
+    $('#sidebarCollapse').on('click', function () {
+    $('#sidebar').toggleClass('active');
+    $(this).toggleClass('active');
+    });
+  });
+
+ 
+
 </script>
 
 @endsection

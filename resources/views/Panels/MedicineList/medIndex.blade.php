@@ -4,10 +4,9 @@
     <div class="d-flex flex-column mb-4">
         <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
              <span class="HeaderBannerText">Medicines</span>
-              
         </div>
         <div class="flex HeaderBody2">                                        
-                <a  style="float:right; color:#059DC0; margin-right:4px;" onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+                <a  style="float:right; color:#059DC0; margin-right:4px; cursor: pointer;"  onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
         </div>       
          
        <div class="CardDiv">
@@ -26,7 +25,7 @@
 
     {{-- Active --}}
         <form action="{{route('medicine.index')}}" method="GET">
-          <input type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >
+          <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Active</button>
           <form action="{{route('medicine.index')}}" method="GET">
            <div class="dropdown-menu">
             <input type="submit" class="dropdown-item" name="activeAll" class="btn btn-sm btn-primary ml-1" value="All" />
@@ -53,7 +52,7 @@
 
     {{-- InActive --}}
       <form action="{{route('medicine.index')}}" method="GET">
-        <input type="submit" name="inactive" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Inactive" >
+        <button type="submit" name="inactive" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Inactive</button>
         <form action="{{route('medicine.index')}}" method="GET">
         <div class="dropdown-menu">
           <input type="submit" class="dropdown-item" name="inactiveAll" class="btn btn-sm btn-primary ml-1" value="All" />
@@ -128,7 +127,7 @@
                     @endif
                     @endif
           </center>
-                    <h6 style="color:rgba(5,157,192,1);margin-top:50px" class="fnt"><b><b>&#8369;{{ number_format($medicine->price,2)}}</b></b></h6>
+                    <h6 style="color:rgba(5,157,192,1);margin-top:35px" class="fnt"><b><b>&#8369;{{ number_format($medicine->price,2)}}</b></b></h6>
             
                         
           </div>

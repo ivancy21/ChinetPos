@@ -41,13 +41,13 @@
                
                 </tbody>
               </table>
-              <div class="DivTemplate">
-                  <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
-                  <div class="hr mb-2"></div> 
-                  <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
-              </div>   
           </div>
         </div>
+        <div class="DivTemplate">
+          <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
+          <div class="hr mb-2"></div> 
+          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
+      </div>   
       </div>
     </div>
 

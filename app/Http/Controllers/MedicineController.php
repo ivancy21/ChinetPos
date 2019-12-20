@@ -24,6 +24,7 @@ class MedicineController extends Controller
     public function index(Request $request   )
     {
         //
+        Session::put('inventoryTab', 'medicineList');
         $pharmacyMedicine=PharmacyMedicine::latest()->get();
         $medicines=Medicine::paginate(24);
         if($request->has('search')){
@@ -101,7 +102,7 @@ class MedicineController extends Controller
         }
         
         
-        
+          
             return view('Panels.MedicineList.medIndex',compact("medicines","pharmacyMedicine"))->with('success','no data');
      
         

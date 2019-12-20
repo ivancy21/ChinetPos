@@ -19,7 +19,7 @@
                                                 <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                                 @endif 
                                             </div>
-                                     <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->name))}}</b>({{$medicine->genericName}})</b></p>
+                                     <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->name))}}</b> ({{$medicine->genericName}})</b></p>
                                      <p style="margin-top:-17px; color:black;" class="text-center">{{$medicine->companyName}}</p>                
                                    </div>
                            </form>
@@ -30,6 +30,8 @@
     <div class="col-sm-8">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                             <span class="HeaderBannerText">History</span>
+                            <a  style="float:right;" onclick="window.location='{{route('pharmacyMedicine.show', $medicine->id)}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+     
                     </div>
                     <div class="flex HeaderBody"> 
                             <div class="table-responsive">
@@ -62,7 +64,6 @@
                 <div class="DivTemplate">
                         <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                         <div class="hr mb-2"></div> 
-                        <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('pharmacyMedicine.show', $medicine->id)}}'"> <i class="fas fa-plus fa-1x mt-1 mr-2"></i>Add Stock</button>
                         <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.show',$medicine->id)}}'">BACK</button>           
                     </div>
                 </div>

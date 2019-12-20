@@ -19,12 +19,12 @@
                                         </div>
                                 </div>  
                          </div>
+                        
                 </div>
                 <div class="col-sm-8">
                                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                                             <span class="HeaderBannerText">Details</span>
-                                            <button type="submit" class="btn btn-success btn-sm HeaderBannerText" style="margin-left:480px; background-color:#7BA098;" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i> Stock Management</button>
-                 
+                                           
                                     </div>
                                     <div class="flex HeaderBody">
                                            
@@ -79,12 +79,19 @@
                                                 </table>
                                             </div>
                                         </div>
-                        <div class="DivTemplate">
+                       <div class="DivTemplate">
                             <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                             <div class="hr mb-2"></div> 
-                            <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</button>
-                            <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
-                          {{-- <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i>Stock Management</button> --}}
+                            <div class="row">
+                            <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('pharmacyMedicine.show', $medicine->id)}}'"><i class="fas fa-plus"></i> Add Stock</button></div>
+                            <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"><i class="far fa-eye"></i> View History</button></div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6 mt-1">  <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'"><i class="fa fa-edit"></i> EDIT</button></div>
+                                <div class="col-sm-6 mt-1">   <button class="btn btn-outline-info waves-effect btn-sm btn-block" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button></div>
+                                </div>
+                            {{-- <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i>Stock Management</button> --}}
                         </div>
                     </div>    
                 </div>

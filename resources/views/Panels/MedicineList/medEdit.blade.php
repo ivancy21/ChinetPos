@@ -41,7 +41,7 @@
             
                    <div class="col-sm-8">
                                 <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                                        <span class="HeaderBannerText">Details</span>
+                                        <span class="HeaderBannerText">Edit Details</span>
                                 </div>
                                 <div class="flex HeaderBody">
                                     <div class="row  mb-2">

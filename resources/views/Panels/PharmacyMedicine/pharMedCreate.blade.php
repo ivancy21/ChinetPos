@@ -27,7 +27,7 @@
                                     <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                     @endif 
                                   </div>      
-                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->name))}}</b></b>({{$medicine->genericName}})</p>
+                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->name))}}</b></b> ({{$medicine->genericName}})</p>
                                                                            
                                 </div>
                         </form>

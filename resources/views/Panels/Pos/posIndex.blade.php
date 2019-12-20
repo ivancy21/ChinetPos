@@ -1,6 +1,77 @@
 @extends('Layouts.master')
 @section('content')
 
+
+{{-- Modal --}}
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        <div class="col-sm-6">
+          <div class="scrollit">
+        <table id='table2' class="table table-borderless" cellspacing="0" width="100%">
+          <thead>
+              <tr>
+               <th width="200px" class="posheadfnt">Medicine Name</th>
+                <th width="100px" class="posheadfnt">Quantity</th>
+                <th width="100px" class="posheadfnt text-center ">Price</th>
+              </tr>
+            </thead>
+        <tbody id="table2tbody">
+          <tr>
+            <td class="posfnt">Cetirizine</td>
+            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
+            <td class="text-center posfnt">&#8369; 20</td>
+          </tr>
+        <tr>
+            <td class="posfnt">Biogesic</td>
+            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
+            <td class="text-center posfnt">&#8369; 20</td>
+        </tr>
+        <tr>
+            <td class="posfnt">Neozep</td>
+            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
+            <td class="text-center posfnt">&#8369; 20</td>
+        </tr>
+       </tbody>   
+      </table>  
+    </div>
+      <div class="hr mb-2"></div> 
+      <p class="split-para"><b>Total:</b> <span id="total">&#8369; 0 </span></p>
+    
+    </div>
+    <div class="col-sm-6">
+    
+        <div class="col">
+            <label  class="fnt">Medicine Code</label>
+            <input type="text" required class="form-control" tabindex="14">
+        </div>
+
+        <div class="col">
+            <label  class="fnt">Medicine Name</label>
+            <input type="text" required class="form-control"  tabindex="14">
+        </div>
+    
+
+    </div>
+      </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div style="padding:2%;">
        <div class="row">
          <div class="col-sm-8">
@@ -13,7 +84,7 @@
 <div class="flex HeaderBody"> 
     <div class="table-responsive">
           
-      <table class="table table-image table-hover table1" id="TblSorter1" cellspacing="0" width="100%">
+      <table class="table table-hover table1" id="TblSorter1" cellspacing="0" width="100%">
         <thead class="thead-bg table-bordered">
           <tr class="text-center">
            <th class="th-sm tblheadfont1">Medicine Name</th>
@@ -49,6 +120,7 @@
 <div class="col-sm-4">
 <div class="posTemplate"> 
     <div class="table-responsive"> 
+      <div class="scrollit">
       <table id='table2' class="table table-borderless" cellspacing="0" width="100%">
           <thead>
               <tr>
@@ -75,7 +147,7 @@
         </tr> --}}
        </tbody>   
       </table>  
-      
+    </div>
       <div class="hr mb-2"></div> 
       <p class="split-para"><b>Total:</b> <span id="total">&#8369; 0 </span></p>
     
@@ -85,7 +157,7 @@
   <div class="DivTemplate">
       <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
       <div class="hr mb-2"></div> 
-      <button type="submit" class="btn btn-primary btn-sm float-right">PAYMENT</button>
+      <button type="submit" class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target=".bd-example-modal-lg" >PAYMENT</button>
       <button class="btn btn-outline-info waves-effect  btn-sm" type="button" onclick="window.location = '{{ route('pharmacyMedicine.index') }}'">EXIT POS</button>    
   </div>
 
@@ -109,9 +181,12 @@
 $(document).ready( function () {
       var table =  $('#TblSorter1').DataTable({
         scrollY: 500,
+        scrollX: 500,
     paging: false
       });
-    
+
+      $('#myModal').modal('toggle');
+
       // table.on('draw', function () {
       //   btnselect();
       // });
@@ -206,7 +281,5 @@ var count = -1;
          });
       });
    }
-
-
    </script>
 @endsection
