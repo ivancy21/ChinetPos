@@ -1,7 +1,7 @@
 @extends('Layouts.sidebar')
 @section('contents')
 
-      <div class="container">
+     
             <div class="d-flex flex-column">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                     <span class="HeaderBannerText">Medicine History</span>
@@ -49,7 +49,7 @@
           <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
       </div>   
       </div>
-    </div>
+    
 
 <script>
  

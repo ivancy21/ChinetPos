@@ -31,6 +31,11 @@
                                <i class="fa fa-capsules" aria-hidden="true"></i> Stocks History
                             </a>
                           </li>
+                          <li>
+                            <a  href="/formulation">
+                               <i class="fa fa-capsules" aria-hidden="true"></i> Add Formulation
+                            </a>
+                          </li>
                            {{-- <li>
                             <a href="{{route('pharmacyMedicine.index')}}">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Pharmacy Inventory
@@ -56,7 +61,7 @@
 
            
         </nav>
-
+    
         <!-- Page Content Holder -->
         <div id="content">
                 <button type="button" id="sidebarCollapse" class="navbar-btn">
@@ -68,7 +73,7 @@
             @yield('contents')
 
         </div> 
-          
+      </div>
 
 
 
