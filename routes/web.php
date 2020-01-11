@@ -23,6 +23,19 @@ Route::get('/formulation', function () {
     return view('LookupTable.LookupTableIndex.lookupIndex');
 });
 
+Route::get('/SideEffectIndex', function () {
+    return view('LookupTable.SideEffect.sideEffectIndex');
+});
+
+Route::get('/DiagnosisIndex', function () {
+    return view('LookupTable.Diagnosis.diagnosisIndex');
+});
+
+Route::get('/SupplierIndex', function () {
+    return view('LookupTable.Supplier.supplierIndex');
+});
+
+
 Route::get('/formulationCreate', function () {
     return view('LookupTable.Formulation.formulationCreate');
 });
@@ -31,8 +44,8 @@ Route::get('/sideEffectCreate', function () {
     return view('LookupTable.SideEffect.sideEffectCreate');
 });
 
-Route::get('/categoryCreate', function () {
-    return view('LookupTable.Category.categoryCreate');
+Route::get('/diagnosisCreate', function () {
+    return view('LookupTable.Diagnosis.diagnosisCreate');
 });
 
 Route::get('/supplierCreate', function () {

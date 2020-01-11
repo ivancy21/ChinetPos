@@ -28,14 +28,15 @@
                           </li>
                           <li>
                             <a  href="{{route('inventory.index')}}" class="@if (Session::get("inventoryTab") == 'stockHistory') active @endif">
-                               <i class="fa fa-capsules" aria-hidden="true"></i> Stocks History
+                              <i class="fas fa-history"></i> Stocks History
                             </a>
                           </li>
                           <li>
                             <a  href="/formulation">
-                               <i class="fa fa-capsules" aria-hidden="true"></i> Add Formulation
+                              <i class="fas fa-plus-square"></i>   Add Side Effect, Diagnosis, Supplier
                             </a>
                           </li>
+                          
                            {{-- <li>
                             <a href="{{route('pharmacyMedicine.index')}}">
                                <i class="fa fa-capsules" aria-hidden="true"></i> Pharmacy Inventory
