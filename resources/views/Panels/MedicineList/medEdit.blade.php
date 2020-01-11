@@ -1,6 +1,8 @@
 @extends('Layouts.sidebar')
 @include('Layouts.cropImageModal')
 @section('contents')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
 
 
@@ -41,7 +43,7 @@
             
                    <div class="col-sm-8">
                                 <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                                        <span class="HeaderBannerText">Edit Details</span>
+                                        <span class="HeaderBannerText">Details</span>
                                 </div>
                                 <div class="flex HeaderBody">
                                     <div class="row  mb-2">
@@ -57,8 +59,8 @@
                                 
                                         <div class="col">
                                             <label  class="fnt">Medicine Name</label>
-                                            <input type="text" required class="form-control input{{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{$medicine->name}}" name="name" tabindex="14">
-                                            @if ($errors->has('name'))
+                                            <input type="text" required class="form-control input{{ $errors->has('brandName') ? ' is-invalid' : '' }}"  value="{{$medicine->brandName}}" name="brandName" tabindex="14">
+                                            @if ($errors->has('brandName'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>The Medicine Name is already Existed!</strong>
                                             </span>
@@ -67,49 +69,38 @@
                                     </div>
                                     <div class="row  mb-2">
                                         <div class="col">
-                                                <label  class="fnt">Category</label>
-                                                <input type="text" id="category" class="form-control"  value="{{$medicine->category}}" name="category"  >
+                                                <label  class="fnt">Formulations</label>
+                                        <select type="text" id="formulationId" class="form-control" name="formulationId" >
+                                            @foreach($formulations as $formulation)
+                                            <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
+                                            @endforeach
+        
+                                        </select>
                                         </div>
                                         <div class="col">
-                                                <label  class="fnt">Medicine Type</label>
-                                        <select type="text" id="type" class="form-control" name="type" >
-                                                        <option>{{$medicine->type}}</option>
-                                                        <option>Tablets</option>
-                                                        <option>Bottles</option>
-                                                        <option>Drops</option>
-                                                        <option>Inhalers</option>
-                                                        <option>Injections</option>
-                                                        <option>Capsules</option>
-                                                </select>
-                                        </div>
+                                            <label  class="fnt">Generic Name</label>
+                                            <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
+                                    </div>
+                           
                                         </div>
                                     <div class="row  mb-2">
-                                        <div class="col">
-                                                <label  class="fnt">Generic Name</label>
-                                                <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
-                                        </div>
                                         <div class="col-sm-6">
                                                 <label  class="fnt">Side Effect</label>       
-                                                <select type="text" id="sideEffects" class="form-control" name="sideEffects">
-                                                        <option>Constipation</option>
-                                                        <option>Skin Rashes</option>
-                                                        <option>Diarrhea</option>
-                                                        <option>Dizziness</option>
-                                                        <option>Dry mouth</option>
-                                                        <option>Headache</option>
-                                                        <option>Insomnia</option>
-                                                        <option>Nausea</option>
-                                                        
-                                                </select>
-                                        </div> 
+                                        <select id="sideEffectsId" class="js-example-basic-multiple" multiple="multiple" name="sideEffectsId[]" rows='1' style='width: 200px'>
+                                            @foreach($sideEffects as $sideEffect)
+                                            @foreach ($sideEffect->medicineSideEffects as $item)
+                                            <option @if($item->medicineId == $medicine->id) {!! 
+                                                    'selected = "selected" ' !!} @endif 
+                                            @endforeach
+                                            value={{$sideEffect->id}}>{!!$sideEffect->sideEffect !!}</option>
+                                            @endforeach
+                                            
+                                            @foreach($sideEffects as $sideEffect)
+                                            <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
+                                            @endforeach
+                                        </select>
                                    </div>
-                                    <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                    <label  class="fnt">Selling Price</label>
-                                                    <input type="text" id="sellingPrice" class="form-control" name="price"   pattern="^\d*(\.\d{0,2})?$"  value="{{$medicine->price}}" title="Number only">
-                                                </div>
-                                            </div>
-                                    
+                                </div>
                                     <center>
                                     <div class="form-row">
                                         <div class="form-group col-sm-12">
@@ -211,5 +202,11 @@
               }
             }, 0);
           });
+
+            $(function()
+            {
+            $(".js-example-basic-multiple").select2();
+            });
+
           </script>
 @endsection

@@ -1,9 +1,10 @@
 @extends('Layouts.sidebar')
 @section('contents')
-
+<div class="container">
     <div class="d-flex flex-column mb-4">
         <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
              <span class="HeaderBannerText">Medicines</span>
+              
         </div>
         <div class="flex HeaderBody2">                                        
                 <a  style="float:right; color:#059DC0; margin-right:4px; cursor: pointer;"  onclick="window.location='{{route('medicine.create')}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-2x zoom"></i></a>                                           
@@ -25,7 +26,7 @@
 
     {{-- Active --}}
         <form action="{{route('medicine.index')}}" method="GET">
-          <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Active</button>
+          <input type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >
           <form action="{{route('medicine.index')}}" method="GET">
            <div class="dropdown-menu">
             <input type="submit" class="dropdown-item" name="activeAll" class="btn btn-sm btn-primary ml-1" value="All" />
@@ -52,7 +53,7 @@
 
     {{-- InActive --}}
       <form action="{{route('medicine.index')}}" method="GET">
-        <button type="submit" name="inactive" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Inactive</button>
+        <input type="submit" name="inactive" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Inactive" >
         <form action="{{route('medicine.index')}}" method="GET">
         <div class="dropdown-menu">
           <input type="submit" class="dropdown-item" name="inactiveAll" class="btn btn-sm btn-primary ml-1" value="All" />
@@ -106,7 +107,7 @@
          <div class="container">
            <div class="table-responsive">
            <center>
-           <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->name))}}</b></h6>
+           <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}}</b></h6>
                     <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                     @if($medicine->pharmacyMedicines->sum('quantity')>0)
                     @if($medicine->medicine_status==1)
@@ -127,7 +128,7 @@
                     @endif
                     @endif
           </center>
-                    <h6 style="color:rgba(5,157,192,1);margin-top:35px" class="fnt"><b><b>&#8369;{{ number_format($medicine->price,2)}}</b></b></h6>
+                    <h6 style="color:rgba(5,157,192,1);margin-top:50px" class="fnt"><b><b>&#8369;{{ number_format($medicine->price,2)}}</b></b></h6>
             
                         
           </div>
@@ -144,5 +145,10 @@
          
   </div>
       </div>
-   
+    </div>
+    <div class="container">
+    <div class="flex HeaderBody2 " style="float:top; margin-top:-20px"> 
+      <p>No more data available</p>    
+    </div>
+  </div>
 @endsection

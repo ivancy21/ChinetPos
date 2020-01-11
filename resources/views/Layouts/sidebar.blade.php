@@ -32,7 +32,7 @@
                             </a>
                           </li>
                           <li>
-                            <a  href="/formulation">
+                            <a   href="{{route('settings.index')}}">
                               <i class="fas fa-plus-square"></i>   Add Side Effect, Diagnosis, Supplier
                             </a>
                           </li>

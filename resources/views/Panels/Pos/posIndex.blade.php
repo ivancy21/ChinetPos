@@ -135,7 +135,7 @@
       </table>  
     </div>
       <div class="hr mb-2"></div> 
-      <p class="split-para"><b>Total:</b> <span id="total">&#8369; 0 </span></p>
+      <p class="split-para"><b>Total:</b> <span id="total">&#8369;0 </span></p>
     
     </div> 
   </div>

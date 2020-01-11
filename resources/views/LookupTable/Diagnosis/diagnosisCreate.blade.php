@@ -2,7 +2,9 @@
 @section('contents')
        
 <div class="container">
-  
+    <form class="form-horizontal" method="POST" action="{{route('diagnosis.store')}}">
+        @csrf
+       
     
             <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                 <span class="HeaderBannerText">Details</span>
@@ -10,11 +12,17 @@
         <div class="flex HeaderBody">
            <div class="form-row">
                <div class="form-group col-sm-12">
-                    <label>CATEGORY</label> 
-                    <input name='NAME' type='text' class="form-control" placeholder="Category" required >  
+                    <label>DIAGNOSIS</label> 
+                    <input name='diagnosis' type='text' class="form-control"  required >  
                         <span class="invalid-feedback" role="alert">
                         </span>
                </div>
+               <div class="form-group col-sm-12">
+                <label>ICD CODE</label> 
+                <input name='icdCode' type='text' class="form-control"  required >  
+                    <span class="invalid-feedback" role="alert">
+                    </span>
+           </div>
            </div>
     </div>
     

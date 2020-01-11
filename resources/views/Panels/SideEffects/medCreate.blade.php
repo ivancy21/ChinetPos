@@ -1,6 +1,9 @@
 @extends('Layouts.sidebar')
 @section('contents')
 
+<form class="form-horizontal" method="POST" action="{{route('sideEffects.store')}}">
+    @csrf
+    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
         <div class="container">         
             <div class="row">
@@ -35,7 +38,7 @@
                                                         
                                                         <tr class="fnt">
                                                             <td class>Medicine Name</td>
-                                                            <td>{{ucfirst(trans($medicine->brandName))}}</td>
+                                                            <td>{{ucfirst(trans($medicine->name))}}</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
@@ -49,11 +52,15 @@
                                                         </tr>
                                                             
                                                         <tr class="fnt">
-                                                            <td>Side Effects</td>
-                                                            <td>@foreach($medicine->medicineSideEffects as $sideEffect)
-                                                            {{$sideEffect->sideEffect->sideEffect}},
-                                                            @endforeach</td>
+                                                            <td>Category</td>
+                                                            <td>{{$medicine->category}}</td>
                                                         </tr>
+                                                        
+                                                        <tr class="fnt">
+                                                            <td>Selling Price</td>
+                                                            <td>&#8369;{{ number_format($medicine->price,2)}}</td>
+                                                        </tr>
+                                                        
                                                         
                                                         <tr class="fnt">
                                                                 <td>Quantity</td>
@@ -67,21 +74,31 @@
                                                             <td>Inactive</td>
                                                             @endif
                                                         </tr>
+                                                        <label  class="fnt" >Side Effect</label>       
+                                                        <input type="hidden" id="medicineId" class="form-control" value="{{$medicine->id}}" name="medicineId">
+                                               
+                                                        <select id="sideEffectsId" class="form-control"  name="sideEffectsId">
+                                                        @foreach($sideEffects as $sideEffect)
+                                                        <option value="{{$sideEffect->id}}">{{$sideEffect->sideEffects}}</option>
+                                                                @endforeach
+                                                    
+                                                        </select>
+                                                    
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                        <div class="DivTemplate">
-                            <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
-                            <div class="hr mb-2"></div> 
-                            <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('medicine.edit',$medicine->id)}}'">EDIT</button>
-                            <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
-                          {{-- <button type="submit" class="btn btn-info btn-sm" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i>Stock Management</button> --}}
-                        </div>
-                    </div>    
+                                        <div class="DivTemplate">
+                                            <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
+                                            <div class="hr mb-2"></div> 
+                                            <button type="submit" class="btn btn-primary" >SAVE</button>
+                                            <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location='{{route('medicine.index')}}'" value="BACK">    
+                                        </div>
+                                            </div>    
                 </div>
-                          
+                           
         </div>
+        
 
 
 @endsection
