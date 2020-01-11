@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class PharmacyMedicine extends Migration
+class SideEffects extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class PharmacyMedicine extends Migration
      */
     public function up()
     {
-        Schema::create('PharmacyMedicine', function (Blueprint $table) {
+        Schema::create('SideEffects', function (Blueprint $table) {
             $table->increments('id');
-            $table->Unsignedinteger('medicineId');
-            $table->Unsignedinteger('pharmacyId');
-            $table->float('sellingPrice')->nullable();
+            $table->string('sideEffect');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class PharmacyMedicine extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('PharmacyMedicine');
+        Schema::dropIfExists('SideEffects');
     }
 }

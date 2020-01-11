@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Pos extends Migration
+class Diagnosis extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Pos extends Migration
      */
     public function up()
     {
-        Schema::create('Pos', function (Blueprint $table) {
+        Schema::create('Diagnosis', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('pharmacyMedicineId');
-            $table->integer('quantity');
+            $table->string('icdCode');
+            $table->string('diagnosis');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class Pos extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Pos');
+        Schema::dropIfExists('Diagnosis');
     }
 }

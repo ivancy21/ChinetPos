@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Medicine;
+use App\Diagnosis;
 use Illuminate\Http\Request;
-use App\PharmacyMedicine;
-use Session;
-class InventoryController extends Controller
+
+class DiagnosisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +14,10 @@ class InventoryController extends Controller
     public function index()
     {
         //
-         //
-         Session::put('inventoryTab', 'stockHistory');
-         $pharmacyMedicines=PharmacyMedicine::latest()->get();
-         return view('Panels.Inventory.viewAllHistory',compact("pharmacyMedicines")); 
+        $diagnosiss= Diagnosis::latest()->get();
+        return view('LookupTable.Diagnosis.diagnosisIndex',compact("diagnosiss"));
+     
+     
     }
 
     /**
@@ -29,8 +28,8 @@ class InventoryController extends Controller
     public function create()
     {
         //
-        $medicine = Medicine::latest()->first();
-        return view('Panels.SideEffects.medCreate',compact('medicine'));
+        return view('LookupTable.Diagnosis.diagnosisCreate');
+    
     }
 
     /**
@@ -42,8 +41,9 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         //
-        
-        
+        $diagnosis = Diagnosis::create($request->all());
+        return redirect()->route("diagnosis.index");
+    
     }
 
     /**
@@ -54,12 +54,7 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-         //
-         
-         $pharmacyMedicines=PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
-         $medicine=Medicine::where('id','=',$id)->latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicines"));
-        
+        //
     }
 
     /**
@@ -71,6 +66,8 @@ class InventoryController extends Controller
     public function edit($id)
     {
         //
+        $diagnosis = Diagnosis::find($id);
+        return view('LookupTable.Diagnosis.diagnosisEdit',compact("diagnosis"));
     }
 
     /**
@@ -80,9 +77,12 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         //
+        $diagnosis=Diagnosis::find($id);
+        $diagnosis->update($request->all());
+        return redirect()->route("diagnosis.index");
     }
 
     /**
@@ -91,8 +91,11 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Diagnosis $diagnosis,$id)
     {
         //
+        $diagnosis = Diagnosis::find($id);
+        $diagnosis->delete();
+        return redirect()->route('diagnosis.index');
     }
 }

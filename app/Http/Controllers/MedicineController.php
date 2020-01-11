@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Medicine;
 use Illuminate\Http\Request;
 use App\PharmacyMedicine;
+use App\MedicineSideEffects;
+use App\SideEffects;
+use App\Formulation;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Redirect;
 use DB;
@@ -24,7 +27,6 @@ class MedicineController extends Controller
     public function index(Request $request   )
     {
         //
-        Session::put('inventoryTab', 'medicineList');
         $pharmacyMedicine=PharmacyMedicine::latest()->get();
         $medicines=Medicine::paginate(24);
         if($request->has('search')){
@@ -100,11 +102,13 @@ class MedicineController extends Controller
         return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
-        
-        
-          
+        else{
             return view('Panels.MedicineList.medIndex',compact("medicines","pharmacyMedicine"))->with('success','no data');
      
+        }
+        
+        
+            
         
  
     }
@@ -116,14 +120,15 @@ class MedicineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Medicine $medicine)
     {
         //
-        $medicine = Medicine::latest()->first();
-        return view('Panels.MedicineList.medCreate',compact('medicine'));
+        $formulation = Formulation::latest()->get();
+        $sideEffect = SideEffects::latest()->get();
+        return view('Panels.MedicineList.medCreate',compact('medicine','sideEffect','formulation'));
     }
 
-    /**
+    /** 
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -132,88 +137,14 @@ class MedicineController extends Controller
     public function store(Request $request)
     {
         //
+        
         $request->validate([
             'productCode' => 'required|string|max:20|unique:medicine',
-            'name' => 'required|string|max:20|unique:medicine',
+            'brandName' => 'required|string|max:20|unique:medicine',
             
         ],
         );
-
-        $medicine=Medicine::create($request->except('medicinePic','medicinePhoto'));
-         if ($request->hasFile('medicinePic')){
-            $this->validate($request, [
-                'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
-            ]);
-        //     $filename = time().'.'.$request->medicinePic->getClientOriginalExtension();
-        //     $resizedImage = Image::make($request->file('medicinePic')->getRealPath());
-        //     $resizedImage->resize(100, 100);
-        //     $medicine->medicinePic = $filename;
-        //     $resizedImage->save(public_path().'/images/medicinePhotos/' .  $filename);
-        //     $medicine->save(); 
-        //     $alert = $filename;
-        } 
-       
-        if ($request->input('medicinePhoto') != NULL){
-            $screen = $request->input('medicinePhoto');
-            $filterd_data = substr($screen, strpos($screen, ",")+1);
-            //Decode the string
-            $unencoded_data=base64_decode($filterd_data);
-            $name = time().'.png';
-            $medicinePhoto = Image::make($unencoded_data);
-            $medicinePhoto->save(public_path().'/images/medicinePhotos/' .  $name);
-            $medicine->medicinePhoto = $name;
-            $medicine->save();
-        }               
-
-        return redirect()->route('medicine.show',$medicine->id)->with('success','Successfully Added');
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Medicine  $Medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-        $pharmacyMedicine = PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
-        $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineList.medShow',compact("medicine","pharmacyMedicine"));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Medicine  $Medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-        $medicine = Medicine::find($id);
-        return view('Panels.MedicineList.medEdit',compact("medicine"));
-    
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Medicine  $Medicine
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-            $request->validate([
-                
-                'productCode' => 'required|unique:medicine,productCode,'.$id,
-                'name' => 'required|unique:medicine,name,'.$id,
-            ],
-            );
-    
-        $medicine = Medicine::find($id);
-        $medicine->update($request->except('medicinePic','medicinePhoto'));
+        $medicine=Medicine::create($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId'));
         if ($request->hasFile('medicinePic')){
             $this->validate($request, [
                 'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -237,11 +168,129 @@ class MedicineController extends Controller
             $medicinePhoto->save(public_path().'/images/medicinePhotos/' .  $name);
             $medicine->medicinePhoto = $name;
             $medicine->save();
-        }               
+        
+        }
+        
+        
+       foreach($request->input('sideEffectsId') as $sideEffectsId) {
+           MedicineSideEffects::create([
+               'medicineId' => $medicine->id,
+               'sideEffectsId' => $sideEffectsId
+           ]
+           );
+       }
+    
+       
+        
+                       
+
+        return redirect()->route('medicine.show',$medicine->id)->with('success','Successfully Added');
+    }
+    /** 
+     * Display the specified resource.
+     *
+     * @param  \App\Medicine  $Medicine
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        // $sideEffects = SideEffects::where('id','=',$id)->latest()->get();
+        $pharmacyMedicine = PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
+        $medicine = Medicine::where('id','=',$id)->latest()->first();
+        return view('Panels.MedicineList.medShow',compact("medicine","pharmacyMedicine"));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Medicine  $Medicine
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //  
+        $medicineSideEffects = MedicineSideEffects::latest()->get();
+        $sideEffects = SideEffects::latest()->get();
+        $formulations = Formulation::latest()->get();
+        $medicine = Medicine::find($id);
+        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects"));
+    
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Medicine  $Medicine
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+            $request->validate([
+                
+                'productCode' => 'required|unique:medicine,productCode,'.$id,
+                'brandName' => 'required|unique:medicine,brandName,'.$id,
+            ],
+            );
+    
+        $medicine = Medicine::find($id);
+        $medicineSideEffects = MedicineSideEffects::latest()->get();
+        $medicine->update($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId'));
+        if ($request->hasFile('medicinePic')){
+            $this->validate($request, [
+                'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
+            ]);
+        //     $filename = time().'.'.$request->medicinePic->getClientOriginalExtension();
+        //     $resizedImage = Image::make($request->file('medicinePic')->getRealPath());
+        //     $resizedImage->resize(100, 100);
+        //     $medicine->medicinePic = $filename;
+        //     $resizedImage->save(public_path().'/images/medicinePhotos/' .  $filename);
+        //     $medicine->save(); 
+        //     $alert = $filename;
+        } 
+       
+        if ($request->input('medicinePhoto') != NULL){
+            $screen = $request->input('medicinePhoto');
+            $filterd_data = substr($screen, strpos($screen, ",")+1);
+            //Decode the string
+            $unencoded_data=base64_decode($filterd_data);
+            $name = time().'.png';
+            $medicinePhoto = Image::make($unencoded_data);
+            $medicinePhoto->save(public_path().'/images/medicinePhotos/' .  $name);
+            $medicine->medicinePhoto = $name;
+            $medicine->save();
+        }   
+        
+        if($request->input('sideEffectsId')!=null)
+        {
+            $sideEffectsId = $request->input('sideEffectsId');
+            $sideEffectsId = implode(',',$sideEffectsId);
+        
+
+                    foreach($request->input('sideEffectsId') as $sideEffectsId) {
+                        MedicineSideEffects::where('medicineId','=',$id)->delete();
+                        foreach($request->input('sideEffectsId') as $sideEffectsId) {
+                            MedicineSideEffects::where('medicineId','=',$id)->create([
+                            'medicineId' => $medicine->id,
+                            'sideEffectsId' => $sideEffectsId
+                        ]
+                        );
+                    }
+                        
+                        
+                }
+                
+         }
+        
         return redirect()->route('medicine.show',$medicine->id)->with('success','Medicine has been Updated');
        
     }
 
+
+
+  
     /**
      * Remove the specified resource from storage.
      *

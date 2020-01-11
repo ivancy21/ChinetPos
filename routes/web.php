@@ -17,15 +17,16 @@ Route::resource('medicine','MedicineController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 Route::resource('pos','PosController');
 Route::resource('home','HomeController');
-
+Route::resource('settings','SettingsController');
+Route::resource('formulation','FormulationController');
+Route::resource('suppliers','SuppliersController');
+Route::resource('sideEffects','SideEffectsController');
+Route::resource('diagnosis','DiagnosisController');
 
 Route::get('/formulation', function () {
     return view('LookupTable.LookupTableIndex.lookupIndex');
 });
 
-Route::get('/SideEffectIndex', function () {
-    return view('LookupTable.SideEffect.sideEffectIndex');
-});
 
 Route::get('/DiagnosisIndex', function () {
     return view('LookupTable.Diagnosis.diagnosisIndex');

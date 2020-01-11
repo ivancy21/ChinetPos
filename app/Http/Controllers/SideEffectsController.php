@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Medicine;
+use App\SideEffects;
+use App\MedicineSideEffects;
 use Illuminate\Http\Request;
-use App\PharmacyMedicine;
-use Session;
-class InventoryController extends Controller
+
+class SideEffectsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class InventoryController extends Controller
     public function index()
     {
         //
-         //
-         Session::put('inventoryTab', 'stockHistory');
-         $pharmacyMedicines=PharmacyMedicine::latest()->get();
-         return view('Panels.Inventory.viewAllHistory',compact("pharmacyMedicines")); 
+        $sideEffects= SideEffects::latest()->get();
+        return view('LookupTable.SideEffects.sideEffectsIndex',compact("sideEffects"));
+     
+     
     }
 
     /**
@@ -29,8 +29,8 @@ class InventoryController extends Controller
     public function create()
     {
         //
-        $medicine = Medicine::latest()->first();
-        return view('Panels.SideEffects.medCreate',compact('medicine'));
+        return view('LookupTable.SideEffects.sideEffectsCreate');
+    
     }
 
     /**
@@ -42,8 +42,9 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         //
-        
-        
+        $sideEffects = SideEffects::create($request->all());
+        return redirect()->route("sideEffects.index");
+    
     }
 
     /**
@@ -54,12 +55,7 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-         //
-         
-         $pharmacyMedicines=PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
-         $medicine=Medicine::where('id','=',$id)->latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicines"));
-        
+        //
     }
 
     /**
@@ -71,6 +67,8 @@ class InventoryController extends Controller
     public function edit($id)
     {
         //
+        $sideEffect = SideEffects::find($id);
+        return view('LookupTable.SideEffects.sideEffectsEdit',compact("sideEffect"));
     }
 
     /**
@@ -80,9 +78,12 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         //
+        $sideEffects=SideEffects::find($id);
+        $sideEffects->update($request->all());
+        return redirect()->route("sideEffects.index");
     }
 
     /**
@@ -91,8 +92,13 @@ class InventoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SideEffects $sideEffects,$id)
     {
         //
+        $sideEffects = SideEffects::find($id);
+        $medicineSideEffects = MedicineSideEffects::find($id);
+        $sideEffects->delete();
+        $medicineSideEffects->delete();
+        return redirect()->route('sideEffects.index');
     }
 }

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Medicine;
+use App\Formulation;
+use App\Suppliers;
+use App\SideEffects;
+use App\Diagnosis;
 use Illuminate\Http\Request;
-use App\PharmacyMedicine;
-use Session;
-class InventoryController extends Controller
+
+
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +18,12 @@ class InventoryController extends Controller
     public function index()
     {
         //
-         //
-         Session::put('inventoryTab', 'stockHistory');
-         $pharmacyMedicines=PharmacyMedicine::latest()->get();
-         return view('Panels.Inventory.viewAllHistory',compact("pharmacyMedicines")); 
+        $sideEffects= SideEffects::latest()->get();
+        $suppliers= Suppliers::latest()->get();
+        $diagnosis= Diagnosis::latest()->get();
+        $formulations= Formulation::latest()->get();
+        return view('LookupTable.LookupTableIndex.lookupIndex',compact("formulations","sideEffects","diagnosis","suppliers"));
+     
     }
 
     /**
@@ -29,8 +34,6 @@ class InventoryController extends Controller
     public function create()
     {
         //
-        $medicine = Medicine::latest()->first();
-        return view('Panels.SideEffects.medCreate',compact('medicine'));
     }
 
     /**
@@ -42,8 +45,6 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         //
-        
-        
     }
 
     /**
@@ -54,12 +55,7 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-         //
-         
-         $pharmacyMedicines=PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
-         $medicine=Medicine::where('id','=',$id)->latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicines"));
-        
+        //
     }
 
     /**
