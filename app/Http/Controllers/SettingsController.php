@@ -6,6 +6,7 @@ use App\Suppliers;
 use App\SideEffects;
 use App\Diagnosis;
 use Illuminate\Http\Request;
+use Session;
 
 
 class SettingsController extends Controller
@@ -17,12 +18,14 @@ class SettingsController extends Controller
      */
     public function index()
     {
+        Session::put('inventoryTab', 'customSetting');
+
         //
         $sideEffects= SideEffects::latest()->get();
         $suppliers= Suppliers::latest()->get();
         $diagnosis= Diagnosis::latest()->get();
         $formulations= Formulation::latest()->get();
-        return view('LookupTable.LookupTableIndex.lookupIndex',compact("formulations","sideEffects","diagnosis","suppliers"));
+        return view('LookupTable.SideEffects.sideEffectsIndex',compact("formulations","sideEffects","diagnosis","suppliers"));
      
     }
 

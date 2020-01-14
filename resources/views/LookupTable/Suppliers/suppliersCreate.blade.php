@@ -31,7 +31,8 @@
         <p class="DivHeaderText">ACTIONS</p>
         <div class="hr mb-2"></div>
         <button type="submit" class="btn btn-primary" >SAVE</button>
-        <input type="button" class="back-button float-right" onclick="window.location='{{route('suppliers.index')}}'" value="BACK">
+        <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location='{{route('suppliers.index')}}'" value="BACK">
+      
     </div>
     </form>
     

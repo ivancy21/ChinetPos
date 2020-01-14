@@ -32,7 +32,7 @@
                             </a>
                           </li>
                           <li>
-                            <a   href="{{route('settings.index')}}">
+                            <a   href="{{route('settings.index')}}" class="@if (Session::get("inventoryTab") == 'customSetting') active @endif">
                               <i class="fas fa-plus-square"></i>   Add Side Effect, Diagnosis, Supplier
                             </a>
                           </li>

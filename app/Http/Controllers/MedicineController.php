@@ -27,6 +27,9 @@ class MedicineController extends Controller
      */
     public function index(Request $request   )
     {
+
+        Session::put('inventoryTab', 'medicineList');
+
         //
         $pharmacyMedicine=PharmacyMedicine::latest()->get();
         $medicines=Medicine::paginate(24);

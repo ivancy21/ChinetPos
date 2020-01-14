@@ -7,8 +7,6 @@
     <form class="form-horizontal" method="POST" action="{{route('medicine.store')}}">
         @csrf
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-           
-
             <div class="container">
                 <div class="row">
                         <div class="col-sm-4">
@@ -64,34 +62,28 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            
-                                        </div>
-                                        <div class="row mb-2">
                                             <div class="col-sm-6">
                                                     <label  class="fnt">Generic Name</label>
                                                     <input type="text" id="genericName" class="form-control" name="genericName" required >
                                             </div>
                                             <div class="col-sm-6">
-                                                    <label  class="fnt" >Side Effect</label>       
-                                                    <select id="sideEffectsId" class="js-example-basic-multiple" multiple="multiple"  name="sideEffectsId[]" rows='1'>
-                                            @foreach($sideEffect as $sideEffects)
-                                            <option value={{$sideEffects->id}}>{{$sideEffects->sideEffect}}</option>
-                                            @endforeach
-                                            
-                                            </select>
-                                                </div> 
+                                                <label  class="fnt" >Formulation</label>       
+                                                <select id="forumlationId" class="form-control"  name="formulationId"   >
+                                                    @foreach($formulation as $formulations)
+                                                    <option value={{$formulations->id}}>{{$formulations->formulation}}</option>
+                                                    @endforeach
+                                                </select>
+                                             </div> 
                                         </div>
                                         
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
-                                                    <label  class="fnt" >Formulation</label>       
-                                                    <select id="forumlationId" class="form-control"  name="formulationId"   >
-                                            @foreach($formulation as $formulations)
-                                            <option value={{$formulations->id}}>{{$formulations->formulation}}</option>
-                                            @endforeach
-
-                                                
-                                                    </select>
+                                                <label  class="fnt" >Side Effect</label>       
+                                                <select id="sideEffectsId" class="js-example-basic-multiple form-control" multiple="multiple" name="sideEffectsId[]" rows='1'>
+                                                    @foreach($sideEffect as $sideEffects)
+                                                    <option value={{$sideEffects->id}}>{{$sideEffects->sideEffect}}</option>
+                                                    @endforeach       
+                                                </select>
                                             </div> 
                                         </div>
                                 </div>    

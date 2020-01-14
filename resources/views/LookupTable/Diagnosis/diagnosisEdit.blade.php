@@ -30,8 +30,8 @@
     <div class="DivTemplate" id="div_Actions">
         <p class="DivHeaderText">ACTIONS</p>
         <div class="hr mb-2"></div>
-        <input type="submit" class="multipurpose-button" value="SAVE"/>
-        <input type="button" class="back-button float-right"  value="BACK">
+        <input type="submit" class="btn btn-primary" value="SAVE"/>
+        <input  class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location='{{route('diagnosis.index')}}'" value="BACK">
     </div>
     </form>
     

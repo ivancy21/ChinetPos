@@ -9,9 +9,9 @@
    </div>
    <div class="flex HeaderBody2">   
     <div class="tab tabsc pb-2">
-        <button class="tablinks active" onclick="window.location='{{route('sideEffects.index')}}'">Side Effect</button>
-        <button class="tablinks" onclick="window.location='{{route('suppliers.index')}}'">Supplier</button>
-        <button class="tablinks" onclick="window.location='{{route('diagnosis.index')}}'">Diagnosis</button>
+        <button  class="@if (Session::get("CustomSettingTab") == 'SideEffects') active @endif " onclick="window.location='{{route('sideEffects.index')}}'">Side Effect</button>
+        <button  class="@if (Session::get("CustomSettingTab") == 'Supplier') active @endif " onclick="window.location='{{route('suppliers.index')}}'">Supplier</button>
+        <button  class="@if (Session::get("CustomSettingTab") == 'Diagnosis') active @endif " onclick="window.location='{{route('diagnosis.index')}}'">Diagnosis</button>
      </div>                                     
    </div>       
 </div>

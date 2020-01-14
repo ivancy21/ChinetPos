@@ -4,8 +4,6 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-
-
 <form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
@@ -27,8 +25,7 @@
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                     <div class="btn btn-mdb-color btn-rounded float-left">
-                                                        <span>Choose file</span>
-                                                            
+                                                        <span>Choose file</span>         
                                                         <input type="file" id='medicinePhoto'
                                                         class="form-con{{ $errors->has('medicinePhoto') ? ' is-invalid' : '' }}"
                                                         name='medicinePic' style="border: none" />
@@ -85,37 +82,43 @@
                                         </div>
                                     <div class="row  mb-2">
                                         <div class="col-sm-6">
-                                                <label  class="fnt">Side Effect</label>       
-                                        <select id="sideEffectsId" class="js-example-basic-multiple" multiple="multiple" name="sideEffectsId[]" rows='1' style='width: 200px'>
-                                            @foreach($sideEffects as $sideEffect)
-                                            @foreach ($sideEffect->medicineSideEffects as $item)
-                                            <option @if($item->medicineId == $medicine->id) {!! 
-                                                    'selected = "selected" ' !!} @endif 
-                                            @endforeach
-                                            value={{$sideEffect->id}}>{!!$sideEffect->sideEffect !!}</option>
-                                            @endforeach
-                                            
-                                            @foreach($sideEffects as $sideEffect)
-                                            <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
-                                            @endforeach
-                                        </select>
-                                   </div>
-                                </div>
-                                    <center>
-                                    <div class="form-row">
-                                        <div class="form-group col-sm-12">
-                                            <label class="input-label">STATUS</label><br>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1' @if ($medicine->medicine_status == 1) checked @endif>
-                                                <label class="form-check-label" for="emptyStatusActive">Active</label>
-                                            </div>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0' @if ($medicine->medicine_status == 0) checked @endif>
-                                                <label class="form-check-label" for="statusInactive">Inactive</label> 
-                                            </div>
+                                            <label  class="fnt">Side Effect</label>       
+                                            <select id="sideEffectsId" class="js-example-basic-multiple form-control" multiple="multiple" name="sideEffectsId[]" rows='1'>
+                                                    @foreach($sideEffects as $sideEffect)
+                                                    @foreach ($sideEffect->medicineSideEffects as $item)
+                                                    <option @if($item->medicineId == $medicine->id) {!! 
+                                                            'selected = "selected" ' !!} @endif 
+                                                    @endforeach
+                                                    value={{$sideEffect->id}}>{!!$sideEffect->sideEffect !!}</option>
+                                                    @endforeach
+                                                    
+                                                    @foreach($sideEffects as $sideEffect)
+                                                    <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
+                                                    @endforeach
+                                                </select>
                                         </div>
+
+                                            <div class="col-sm-6">
+                                                <div class="form-row">
+                                                    <div class="form-group ml-5 mt-3">
+                                                        <center>
+                                                        <label class="input-label">STATUS</label><br>
+                                                        <div class="form-check form-check-inline ml-4">
+                                                            <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1' @if ($medicine->medicine_status == 1) checked @endif>
+                                                            <label class="form-check-label" for="emptyStatusActive">Active</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline ml-4">
+                                                            <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0' @if ($medicine->medicine_status == 0) checked @endif>
+                                                            <label class="form-check-label" for="statusInactive">Inactive</label> 
+                                                        </div>
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </div>
                                     </div>
-                                    </center>
+                                  
+                                   
+                                   
                             </div>
                         
                                 <div class="DivTemplate">
