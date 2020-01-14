@@ -20,8 +20,9 @@ class MedicineSuppliersController extends Controller
         //
          //
          Session::put('inventoryTab', 'stockHistory');
-         $pharmacyMedicines=PharmacyMedicine::latest()->get();
-         return view('Panels.MedicineSuppliers.viewAllHistory',compact("pharmacyMedicines")); 
+         $medicineSuppliers = MedicineSuppliers::latest()->get();
+         $medicine = Medicine::latest()->get();
+         return view('Panels.MedicineSuppliers.viewAllHistory',compact("medicine","medicineSuppliers")); 
     }
 
     /**

@@ -76,8 +76,8 @@
                                 <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                 <div class="hr mb-2"></div> 
                                 <div class="row">
-                                <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('medicineSuppliers.show', $medicine->id)}}'"><i class="fas fa-plus"></i> Add Stock</button></div>
-                                <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" ><i class="far fa-eye"></i> View History</button></div>
+                                <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('suppliers.show', $medicine->id)}}'"><i class="fas fa-plus"></i> Add Stock</button></div>
+                                <div class="col-sm-6 mt-1"> <button type="submit" class="btn btn-info btn-sm btn-block" onclick="window.location='{{route('medicineSuppliers.show', $medicine->id)}}'"><i class="far fa-eye"></i> View History</button></div>
                                 </div>
     
                                 <div class="row">
