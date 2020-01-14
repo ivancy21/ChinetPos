@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Suppliers;
 use App\MedicineSuppliers;
 use App\Medicine;
+use Session;
 
 class SuppliersController extends Controller
 {
@@ -16,6 +17,7 @@ class SuppliersController extends Controller
      */
     public function index()
     {
+        Session::put('CustomSettingTab', 'Supplier');
         //
         $suppliers= Suppliers::latest()->get();
         return view('LookupTable.Suppliers.suppliersIndex',compact("suppliers"));

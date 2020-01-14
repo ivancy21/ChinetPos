@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Diagnosis;
 use Illuminate\Http\Request;
+use Session;
 
 class DiagnosisController extends Controller
 {
@@ -13,6 +14,7 @@ class DiagnosisController extends Controller
      */
     public function index()
     {
+        Session::put('CustomSettingTab', 'Diagnosis');
         //
         $diagnosiss= Diagnosis::latest()->get();
         return view('LookupTable.Diagnosis.diagnosisIndex',compact("diagnosiss"));

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\SideEffects;
 use App\MedicineSideEffects;
 use Illuminate\Http\Request;
+use Session;
 
 class SideEffectsController extends Controller
 {
@@ -14,6 +15,9 @@ class SideEffectsController extends Controller
      */
     public function index()
     {
+
+        Session::put('CustomSettingTab', 'SideEffects');
+
         //
         $sideEffects= SideEffects::latest()->get();
         return view('LookupTable.SideEffects.sideEffectsIndex',compact("sideEffects"));
