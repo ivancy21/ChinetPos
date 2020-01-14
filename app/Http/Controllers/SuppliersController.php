@@ -86,7 +86,8 @@ class SuppliersController extends Controller
     {
         //
         $suppliers=Suppliers::find($id);
-        $suppliers->update($request->all());
+        MedicineSuppliers::where('medicineId','=',$id)->delete();
+        $suppliers->create($request->all());
         return redirect()->route("suppliers.index");
     }
 
@@ -100,6 +101,7 @@ class SuppliersController extends Controller
     {
         //
         $suppliers = Suppliers::find($id);
+        MedicineSuppliers::where('medicineId','=',$id)->delete();
         $suppliers->delete();
         return redirect()->route('suppliers.index');    }
 }
