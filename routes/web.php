@@ -12,7 +12,7 @@
 */
 
 Route::resource('pos','PosController');
-Route::resource('inventory','InventoryController');
+Route::resource('medicineSuppliers','MedicineSuppliersController');
 Route::resource('medicine','MedicineController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 Route::resource('pos','PosController');

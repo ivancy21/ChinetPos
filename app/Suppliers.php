@@ -14,7 +14,7 @@ class Suppliers extends Model
     
     public function medicineSuppliers()
     {
-        return $this->hasMany(MedicineSuppliers::class, 'suppliersId');
+        return $this->hasMany(MedicineSuppliers::class, 'supplierId');
     }
 
     

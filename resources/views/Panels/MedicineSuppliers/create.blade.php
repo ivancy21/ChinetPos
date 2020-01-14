@@ -4,7 +4,7 @@
 
 
 
-      <form class="form-horizontal" method="POST" action="{{route('pharmacyMedicine.store')}}">
+      <form class="form-horizontal" method="POST" action="{{route('medicineSuppliers.store')}}">
             @csrf
            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
            
@@ -12,7 +12,7 @@
 <div class="container">
      <div class="row">
             <div class="col-sm-4">
-                <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
+                <div class="Header  Banner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                         <span class="HeaderBannerText">Picture</span>
                 </div>
 
@@ -27,7 +27,7 @@
                                     <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                     @endif 
                                   </div>      
-                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->name))}}</b></b> ({{$medicine->genericName}})</p>
+                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->brandName))}}</b></b> ({{$medicine->genericName}})</p>
                                                                            
                                 </div>
                         </form>
@@ -57,7 +57,11 @@
                                                 <label  class="fnt">Supplier </label> 
                                         </div>
                                                 <div class="col-sm-5">
-                                                        <input type='text'   class="form-control" name="supplier" required>
+                                                    <select id="supplierId" class="form-control"  name="supplierId">
+                                                        @foreach($suppliers as $supplier)
+                                                    <option value={{$supplier->id}}>{{$supplier->suppliersName}}</option>
+                                                    @endforeach
+                                                </select>
                                                 </div>
                                             </div>
                                 
@@ -151,7 +155,7 @@
                           <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                           <div class="hr mb-2"></div> 
                           <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
-                          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location = '{{ route('inventory.show',$medicine->id) }}'">BACK</button>    
+                          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location = '{{ route('medicineSuppliers.show',$medicine->id) }}'">BACK</button>    
                       </div>
 
                     </div>

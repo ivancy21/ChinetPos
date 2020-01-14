@@ -19,7 +19,7 @@ class MedicineSuppliers extends Model
 
     public function supplier()
     {
-        return $this->belongsTo(Suppliers::class, 'suppliersId');
+        return $this->belongsTo(Suppliers::class, 'supplierId');
     }
 
 }
