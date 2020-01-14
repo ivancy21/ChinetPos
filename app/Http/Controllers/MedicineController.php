@@ -6,6 +6,7 @@ use App\Medicine;
 use Illuminate\Http\Request;
 use App\PharmacyMedicine;
 use App\MedicineSideEffects;
+use App\MedicineSuppliers;
 use App\SideEffects;
 use App\Formulation;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -196,9 +197,10 @@ class MedicineController extends Controller
     {
         //
         // $sideEffects = SideEffects::where('id','=',$id)->latest()->get();
-        $pharmacyMedicine = PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
+       
+        $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineList.medShow',compact("medicine","pharmacyMedicine"));
+        return view('Panels.MedicineList.medShow',compact("medicine","medicineSuppliers"));
     }
 
     /**

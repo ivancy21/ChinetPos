@@ -20,12 +20,14 @@ class MedicineSuppliers extends Migration
             $table->string('receivedMonth');
             $table->string('receivedDay');
             $table->string('receivedYear');
+            $table->float('purchasedPrice');
             $table->string('manufacturedMonth');
             $table->string('manufacturedDay');
             $table->string('manufacturedYear');
             $table->string('expirationMonth');
             $table->string('expirationDay');
             $table->string('expirationYear');
+            $table->integer('quantity');
             $table->timestamps();
         });
     }

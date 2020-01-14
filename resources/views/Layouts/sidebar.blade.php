@@ -27,7 +27,7 @@
                             </a>
                           </li>
                           <li>
-                            <a  href="{{route('inventory.index')}}" class="@if (Session::get("inventoryTab") == 'stockHistory') active @endif">
+                            <a  href="{{route('medicineSuppliers.index')}}" class="@if (Session::get("inventoryTab") == 'stockHistory') active @endif">
                               <i class="fas fa-history"></i> Stocks History
                             </a>
                           </li>

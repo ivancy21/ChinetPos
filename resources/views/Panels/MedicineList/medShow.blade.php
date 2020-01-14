@@ -23,7 +23,7 @@
                 <div class="col-sm-8">
                                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                                             <span class="HeaderBannerText">Details</span>
-                                            <button type="submit" class="btn btn-success btn-sm HeaderBannerText" style="margin-left:480px; background-color:#7BA098;" onclick="window.location='{{route('inventory.show', $medicine->id)}}'"> <i class="fa fa-edit"></i> Stock Management</button>
+                                            <button type="submit" class="btn btn-success btn-sm HeaderBannerText" style="margin-left:480px; background-color:#7BA098;" onclick="window.location='{{route('medicineSuppliers.show', $medicine->id)}}'"> <i class="fa fa-edit"></i> Stock Management</button>
                  
                                     </div>
                                     <div class="flex HeaderBody">
@@ -54,10 +54,13 @@
                                                             {{$sideEffect->sideEffect->sideEffect}},
                                                             @endforeach</td>
                                                         </tr>
-                                                        
+                                                        <tr class="fnt">
+                                                            <td>Formulation</td>
+                                                        <td>{{$medicine->formulation->formulation}}</td>
+                                                        </tr>
                                                         <tr class="fnt">
                                                                 <td>Quantity</td>
-                                                        <td>{{$medicine->pharmacyMedicines->sum('quantity')}} {{$medicine->type}}</td>
+                                                        <td>{{$medicine->medicineSuppliers->sum('quantity')}}</td>
                                                         </tr>
                                                         <tr class="fnt">
                                                             <td>Status</td>
