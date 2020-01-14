@@ -101,26 +101,26 @@
                             <center>
                                         <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}}</b></h6>
                                         <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
-                                      @if($medicine->pharmacyMedicines->sum('quantity')>0)
+                                      @if($medicine->medicineSuppliers->sum('quantity')>0)
                                       @if($medicine->medicine_status==1)
-                                        <h6 style="color:green;" class="fnt">Avail: {{$medicine->pharmacyMedicines->sum('quantity')}} {{$medicine->type}} left   </h6>
+                                        <h6 style="color:green;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} {{$medicine->type}} left   </h6>
                                         <h6 style="color:green;margin-top:-80px;margin-left:90px;font-size:35px" class="fnt"><b>&#8226;</b></h6>
                                       @elseif($medicine->medicine_status==0)
-                                        <h6 style="color:green;" class="fnt">Avail: {{$medicine->pharmacyMedicines->sum('quantity')}} {{$medicine->type}} left   </h6>
+                                        <h6 style="color:green;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} {{$medicine->type}} left   </h6>
                                         <h6 style="color:red;margin-top:-80px;margin-left:90px;font-size:35px" class="fnt"><b>&#8226;</b></h6>
                                       @endif
                                       @endif
-                                      @if($medicine->pharmacyMedicines->sum('quantity')<=0)
+                                      @if($medicine->medicineSuppliers->sum('quantity')<=0)
                                       @if($medicine->medicine_status==1)
-                                        <h6 style="color:red;" class="fnt">Avail: {{$medicine->pharmacyMedicines->sum('quantity')}} </h6>
+                                        <h6 style="color:red;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} </h6>
                                         <h6 style="color:green;margin-top:-80px;margin-left:90px;font-size:35px" class="fnt"><b>&#8226;</b></h6>
                                       @elseif($medicine->medicine_status==0)
-                                        <h6 style="color:red;" class="fnt">Avail: {{$medicine->pharmacyMedicines->sum('quantity')}} </h6>
+                                        <h6 style="color:red;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} </h6>
                                         <h6 style="color:red;margin-top:-80px;margin-left:90px;font-size:35px" class="fnt"><b>&#8226;</b></h6>
                                       @endif
                                       @endif
                             </center>
-                                      <h6 style="color:rgba(5,157,192,1);margin-top:40px" class="fnt"><b><b>&#8369; {{ number_format($medicine->price,2)}}</b></b></h6>                                  
+                                      <h6 style="color:rgba(5,157,192,1);margin-top:40px" class="fnt"></h6>                                  
                        </div>
                   </div>
               </div>

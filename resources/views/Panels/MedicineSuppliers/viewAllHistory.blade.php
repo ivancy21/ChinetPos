@@ -5,6 +5,8 @@
             <div class="d-flex flex-column">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                     <span class="HeaderBannerText">Medicine History</span>
+                    <a  style="float:right;"   data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+     
                     </div>
        <div class="flex HeaderBody"> 
             <div class="table-responsive">
@@ -13,7 +15,6 @@
                 <thead class="thead-bg table-bordered">
                   <tr class="text-center">
                    <th class="th-sm tblheadfont1">Medicine Name</th>
-                    <th class="th-sm tblheadfont1">Code</th>
                     <th class="th-sm tblheadfont1">Supplier </th>
                     <th class="th-sm tblheadfont1">Purchased Price</th>
                     <th class="th-sm tblheadfont1">Received Date</th>
@@ -25,18 +26,19 @@
                 <tbody>
                   
                
-                 @foreach($pharmacyMedicines as $pharmacyMedicine)
                  <tr class="text-center highlight">
-                    <td>{{$pharmacyMedicine->medicine->name}}</td>
-                    <td>{{$pharmacyMedicine->medicine->productCode}}</td>
-                    <td>{{$pharmacyMedicine->supplier}}</td>
-                    <td>&#8369;{{ number_format($pharmacyMedicine->purchasedPrice,2)}}</td>
-                    <td>{{$pharmacyMedicine->manufacturedMonth}}-{{$pharmacyMedicine->manufacturedDay}}-{{$pharmacyMedicine->manufacturedYear}}<td>
-                    {{$pharmacyMedicine->expirationMonth}}-{{$pharmacyMedicine->expirationDay}}-{{$pharmacyMedicine->expirationYear}}</td>
-                    <td>{{$pharmacyMedicine->receivedMonth}}-{{$pharmacyMedicine->receivedDay}}-{{$pharmacyMedicine->receivedYear}}</td>
-                    <td>{{$pharmacyMedicine->quantity}}</td>
-                 </tr>
-                @endforeach
+                  @foreach($medicineSuppliers as $medicineSupplier)
+                  <tr class="text-center highlight">                                 
+                    <td class="cnterAlgn">{{$medicineSupplier->medicine->brandName}}</td>
+                    <td class="cnterAlgn">{{$medicineSupplier->supplier->suppliersName}}</td>
+                  <td class="cnterAlgn">&#8369;{{ number_format($medicineSupplier->purchasedPrice,2)}}</td>
+                  <td class="cnterAlgn">{{$medicineSupplier->receivedMonth}}-{{$medicineSupplier->receivedDay}}-{{$medicineSupplier->receivedYear}}</td>
+                  <td class="cnterAlgn">{{$medicineSupplier->manufacturedMonth}}-{{$medicineSupplier->manufacturedDay}}-{{$medicineSupplier->manufacturedYear}}</td>
+                  <td class="cnterAlgn">{{$medicineSupplier->expirationMonth}}-{{$medicineSupplier->expirationDay}}-{{$medicineSupplier->expirationYear}}</td>
+                      <td class="cnterAlgn">{{$medicineSupplier->quantity}}</td>
+                  </tr>
+                 @endforeach
+                
                 
                
                 </tbody>

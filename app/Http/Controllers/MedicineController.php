@@ -35,7 +35,7 @@ class MedicineController extends Controller
         $medicines=Medicine::paginate(24);
         if($request->has('search')){
             $query = $request->get('search');
-            $medicines = Medicine::where("name", 'LIKE', '%'.$query.'%')->orWhere("genericName", 'LIKE', '%'.$query.'%')
+            $medicines = Medicine::where("brandName", 'LIKE', '%'.$query.'%')->orWhere("genericName", 'LIKE', '%'.$query.'%')
                     ->paginate(24);
         }             
         
@@ -49,65 +49,65 @@ class MedicineController extends Controller
         
         // Active
         if($request->has('activeAll')){
-            $medicines=Medicine::where('medicine_status','1')->orderBy('name','asc')->paginate(24);
+            $medicines=Medicine::where('medicine_status','1')->orderBy('brandName','asc')->paginate(24);
         }
         
         if($request->has('activeTablets')){
-        $medicines=Medicine::where('medicine_status','1')->where('type','Tablets')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','1')->where('formulation','1')->orderBy('name','desc')->paginate(24);    
         }
         if($request->has('activeDrops')){
-            $medicines=Medicine::where('medicine_status','1')->where('type','Drops')->orderBy('name','desc')->paginate(24);    
+            $formulations=Formulation::where('medicine_status','1')->where('formulation','2')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('activeBottles')){
-        $medicines=Medicine::where('medicine_status','1')->where('type','Bottles')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','1')->where('formulation','3')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('activeInhalers')){
-        $medicines=Medicine::where('medicine_status','1')->where('type','Inhalers')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','1')->where('formulation','4')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('activeInjections')){
-        $medicines=Medicine::where('medicine_status','1')->where('type','Injections')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','1')->where('formulation','5')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('activeCapsules')){
-        $medicines=Medicine::where('medicine_status','1')->where('type','Capsules')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','1')->where('formulation','6')->orderBy('name','desc')->paginate(24);    
         }
         
 
 
         // Inactive
         if($request->has('inactiveAll')){
-            $medicines=Medicine::where('medicine_status','0')->orderBy('name','asc')->paginate(24);
+            $medicines=Medicine::where('medicine_status','0')->orderBy('brandName','asc')->paginate(24);
         }
         
         if($request->has('inactiveTablets')){
-        $medicines=Medicine::where('medicine_status','0')->where('type','Tablets')->orderBy('name','desc')->paginate(24);    
+        $medicines=Medicine::where('medicine_status','0')->where('formulation','1')->orderBy('name','desc')->paginate(24);    
         }
         if($request->has('inactiveDrops')){
-            $medicines=Medicine::where('medicine_status','0')->where('type','Drops')->orderBy('name','desc')->paginate(24);    
+            $formulations=Formulation::where('medicine_status','0')->where('formulation','2')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('inactiveBottles')){
-        $medicines=Medicine::where('medicine_status','0')->where('type','Bottles')->orderBy('name','desc')->paginate(24);    
+        $formualtions=Formulation::where('medicine_status','0')->where('formulation','3')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('inactiveInhalers')){
-        $medicines=Medicine::where('medicine_status','0')->where('type','Inhalers')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','0')->where('formulation','4')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('inactiveInjections')){
-        $medicines=Medicine::where('medicine_status','0')->where('type','Injections')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','0')->where('formulation','5')->orderBy('name','desc')->paginate(24);    
         }
         
         if($request->has('inactiveCapsules')){
-        $medicines=Medicine::where('medicine_status','0')->where('type','Capsules')->orderBy('name','desc')->paginate(24);    
+        $formulations=Formulation::where('medicine_status','0')->where('formulation','6')->orderBy('name','desc')->paginate(24);    
         return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
         else{
-            return view('Panels.MedicineList.medIndex',compact("medicines","pharmacyMedicine"))->with('success','no data');
+            return view('Panels.MedicineList.medIndex',compact("medicines"))->with('success','no data');
      
         }
         
