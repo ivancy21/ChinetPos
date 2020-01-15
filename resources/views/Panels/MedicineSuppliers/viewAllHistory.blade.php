@@ -4,8 +4,8 @@
      
          
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                        <span class="HeaderBannerText">Medicine History</span>
-                        <a  style="float:right;"   data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+                    <span class="HeaderBannerText">Medicine History</span>
+                    <a  style="float:right;"   data-toggle="tooltip" title="Add Medicine" onclick="window.location='{{route('medicineSuppliers.create')}}'"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
      
                     </div>
        <div class="flex HeaderBody"> 

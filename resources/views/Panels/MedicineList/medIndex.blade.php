@@ -106,20 +106,25 @@
                 <div class="container" >
                       <div class="table-responsive" >
                         <center>
-                            <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
-                                        <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                                       @if($medicine->medicineSuppliers->sum('quantity')>0)
                                       @if($medicine->medicine_status==1)
-                                        <h6 style="color:green;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} {{$medicine->formulation->formulation}} left   </h6>
-                                        <h6 style="color:green;margin-top:-80px;margin-left:90px;font-size:35px" class="fnt"><b>&#8226;</b></h6>
+                                      <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
+                                      <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
+                                      <h6 style="color:green;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} {{$medicine->formulation->formulation}} left   </h6>
                                       @elseif($medicine->medicine_status==0)
+                                      <h6 style="color:red;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
+                                      <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                                         <h6 style="color:green;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} {{$medicine->formulation->formulation}} left   </h6>      
                                       @endif
                                       @endif
                                       @if($medicine->medicineSuppliers->sum('quantity')<=0)
                                       @if($medicine->medicine_status==1)
+                                      <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
+                                      <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                                         <h6 style="color:red;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} </h6>
                                       @elseif($medicine->medicine_status==0)
+                                      <h6 style="color:red;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
+                                      <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                                         <h6 style="color:red;" class="fnt">Avail: {{$medicine->medicineSuppliers->sum('quantity')}} </h6>
                                       @endif
                                       @endif   

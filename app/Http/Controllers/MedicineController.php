@@ -149,6 +149,7 @@ class MedicineController extends Controller
         
         $request->validate([
             'productCode' => 'required|string|max:20|unique:medicine',
+            'brandName','dosage' => 'required|string|max:20|unique:medicine',
             
         ],
         );

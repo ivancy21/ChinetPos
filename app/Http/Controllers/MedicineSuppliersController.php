@@ -33,6 +33,9 @@ class MedicineSuppliersController extends Controller
     public function create()
     {
         //
+        $suppliers = Suppliers::latest()->get();
+        $medicine = Medicine::latest()->get();
+        return view('Panels.MedicineSuppliers.create',compact("suppliers","medicine"));
        
     }
 
