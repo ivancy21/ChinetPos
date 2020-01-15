@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="flex HeaderBody">
                                         <div class="row mb-2">
-                                            <div class="col">
+                                            <div class="col-sm-6">
                                                 <label  class="fnt">Medicine Code</label>
                                                 <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"  name="productCode" tabindex="14">
                                                 @if ($errors->has('productCode'))
@@ -51,15 +51,21 @@
                                                 @endif
                                             </div>
                                     
-                                            <div class="col-6">
+                                            <div class="col-sm-6">
                                                 <label  class="fnt">Medicine Name</label>
                                                 <input type="text" id="brandName" required class="form-control" name="brandName">
                                             </div>
-                                            <div class="col">
-                                                <label  class="fnt">Dosage</label>
-                                                <input type="text" id="dosage" required class="form-control"  name="dosage">
-                                            </div>
                                         </div>
+                                        <div class="row mb-2">
+                                                <div class="col-sm-6">
+                                                    <label  class="fnt">Dosage</label>
+                                                    <input type="text" id="dosage" required class="form-control"  name="dosage">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label  class="fnt" >Retail Price</label>       
+                                                    <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="retailPrice" required>
+                                                </div> 
+                                          </div>
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                     <label  class="fnt">Generic Name</label>
@@ -94,12 +100,7 @@
                                             </div> 
                                         </div>
                                        
-                                        <div class="row mb-2">
-                                            <div class="col-sm-3">
-                                                <label  class="fnt" >Retail Price</label>       
-                                                <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="retailPrice" required>
-                                            </div> 
-                                        </div>
+                                       
                                        
                                 </div>    
                              

@@ -12,7 +12,7 @@
 <div class="container">
      <div class="row">
             <div class="col-sm-4">
-                <div class="Header  Banner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
+                <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                         <span class="HeaderBannerText">Picture</span>
                 </div>
 
@@ -42,48 +42,48 @@
 
                             <div class="flex HeaderBody">
                                              
-                                <div class="row mb-3">
+                                <div class="row mb-2">
                                         <div class="col-sm-3">
                                                 <label  class="fnt">Quantity</label>
-                                        </div>
-                                        <div class="col-sm-1">              
+                                         </div>
+                                        <div class="col-sm-5">              
                                                 <input type="hidden" id="medicineId" class="form-control" value="{{$medicine->id}}" name="medicineId">
-                                                <input type="number" list="quantity" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+                                                <input type="number" list="quantity"  class="form-control" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
                                         </div>
-                                    </div>
+                                </div>
                                 
-                                    <div class="row mb-3">
+                                <div class="row mb-2">
                                         <div class="col-sm-3">
                                                 <label  class="fnt">Lot Number</label>
                                         </div>
                                         <div class="col-sm-5">              
-                                                <input type="text"  class = "form-control" id="notNumber" name="lotNumber"   required>
+                                                <input type="text"  class="form-control" id="notNumber" name="lotNumber"   required>
                                         </div>
-                                    </div>
+                                </div>
                                 
-                                    <div class="row mb-3">
+                                <div class="row mb-2">
                                         <div class="col-sm-3 ">
                                                 <label  class="fnt">Supplier </label> 
                                         </div>
-                                                <div class="col-sm-5">
-                                                    <select id="supplierId" class="form-control"  name="supplierId">
-                                                        @foreach($suppliers as $supplier)
-                                                        @if($supplier->supplier_status == 1)
-                                                    <option value={{$supplier->id}}>{{$supplier->suppliersName}}</option>
-                                                        @endif
-.                                                    @endforeach
-                                                </select>
-                                                </div>
-                                            </div>
-                                
-                            <div class="row mb-3">
-                                <div class="col-sm-3 ">
-                                        <label  class="fnt">Purchased Price </label> 
-                                </div>
                                         <div class="col-sm-5">
-                                                <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="purchasedPrice" required>
+                                            <select id="supplierId" class="form-control"  name="supplierId">
+                                                    @foreach($suppliers as $supplier)
+                                                    @if($supplier->supplier_status == 1)
+                                                      <option value={{$supplier->id}}>{{$supplier->suppliersName}}</option>
+                                                    @endif
+    .                                               @endforeach
+                                            </select>
                                         </div>
+                                </div>
+                                
+                                <div class="row mb-2">
+                                    <div class="col-sm-3 ">
+                                            <label  class="fnt">Purchased Price </label> 
                                     </div>
+                                    <div class="col-sm-5">
+                                            <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="purchasedPrice" required>
+                                    </div>
+                                </div>
    
                                 <div class="form-row">
                                         <div class="form-group col-sm-3 ">

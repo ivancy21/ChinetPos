@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="flex HeaderBody">
                                     <div class="row  mb-2">
-                                        <div class="col">
+                                        <div class="col-sm-6">
                                             <label  class="fnt">Medicine Code</label>
                                             <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"value="{{$medicine->productCode}}" name="productCode" tabindex="14">
                                             @if ($errors->has('productCode'))
@@ -53,40 +53,42 @@
                                             </span>
                                             @endif
                                         </div>
-                                
-                                        <div class="col-6">
+                                        <div class="col-sm-6">
                                             <label  class="fnt">Medicine Name</label>
                                             <input type="text" required class="form-control"  value="{{$medicine->brandName}}" name="brandName" >
-                                         
-                                        </div>
-                                        <div class="col">
-                                            <label  class="fnt">Dosage</label>
-                                        <input type="text" id="dosage" required class="form-control"  name="dosage" value="{{$medicine->dosage}}">
-                                        </div>
+                                        </div> 
                                     </div>
                                     <div class="row  mb-2">
-                                        <div class="col">
-                                                <label  class="fnt">Formulations</label>
-                                        <select type="text" id="formulationId" class="form-control" name="formulationId" >
-                                            @foreach($formulations as $formulation)
-                                                    @foreach ($formulation->medicines as $item)
-                                                    <option @if($item->id == $medicine->id) {!! 
-                                                            'selected = "selected" ' !!} @endif 
-                                                    @endforeach
-                                                    value={{$formulation->id}}>{!!$formulation->formulation !!}</option>
-                                                    @endforeach
-                                                    @foreach($formulations as $formulation)
-                                                    <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
-                                            @endforeach
-        
-                                        </select>
+                                        <div class="col-sm-6">
+                                            <label  class="fnt">Dosage</label>
+                                            <input type="text" id="dosage" required class="form-control"  name="dosage" value="{{$medicine->dosage}}">
                                         </div>
-                                        <div class="col">
+                                        <div class="col-sm-6">
+                                            <label  class="fnt" >Retail Price</label>       
+                                            <input type='text' id="retailPrice" required class="form-control"  name="retailPrice" value="{{$medicine->retailPrice}}">
+                                        </div> 
+                                    </div>    
+                                    <div class="row  mb-2">
+                                        <div class="col-sm-6">
+                                                <label  class="fnt">Formulations</label>
+                                                        <select type="text" id="formulationId" class="form-control" name="formulationId" >
+                                                            @foreach($formulations as $formulation)
+                                                                    @foreach ($formulation->medicines as $item)
+                                                                    <option @if($item->id == $medicine->id) {!! 
+                                                                            'selected = "selected" ' !!} @endif 
+                                                                    @endforeach
+                                                                    value={{$formulation->id}}>{!!$formulation->formulation !!}</option>
+                                                                    @endforeach
+                                                                    @foreach($formulations as $formulation)
+                                                                    <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
+                                                            @endforeach
+                                                         </select>
+                                        </div>
+                                        <div class="col-sm-6">
                                             <label  class="fnt">Generic Name</label>
                                             <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
-                                    </div>
-                           
                                         </div>
+                                    </div>
                                     <div class="row  mb-2">
                                         <div class="col-sm-6">
                                             <label  class="fnt">Side Effect</label>       
@@ -103,11 +105,10 @@
                                                     <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
                                                     @endforeach
                                                 </select>
-                                        </div>
-                                        <div class="row  mb-2">
+                                            </div>
                                             <div class="col-sm-6">
                                                 <label  class="fnt" >Diagnosis</label>       
-                                                <select id="diagnosisId" class="form-control"  name="diagnosisId"  style="width:350px"required>
+                                                <select id="diagnosisId" class="form-control"  name="diagnosisId" required>
                                                 @foreach($diagnosiss as $diagnosis)
                                                     @foreach ($diagnosis->medicineUses as $item)
                                                     <option @if($item->id == $medicine->id) {!! 
@@ -121,7 +122,7 @@
                                                 </select>
                                             </div>
                                         </div>     
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-6 offset-sm-6">
                                                 <div class="form-row">
                                                     <div class="form-group ml-5 mt-3">
                                                         <center>
@@ -140,21 +141,18 @@
                                             </div>
                                     </div>
                                   
-                                   
-                                   
-                            </div>
-                        
                                 <div class="DivTemplate">
                                     <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                     <div class="hr mb-2"></div> 
                                     <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
                                     <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location='{{route('medicine.show',$medicine->id)}}'">BACK</button>    
                                 </div>
+                            </div> 
 
                     </div>
                 </div>              
-         </div>
-      </div>
+         
+      
 
       <script>
             $(document).ready(function () {
