@@ -3,15 +3,15 @@
 
 
       
-<div class="container">
+
         <div class="row">
-               <div class="col-sm-4">
+               <div class="col-sm-3">
                    <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                            <span class="HeaderBannerText">Picture</span>
                    </div>
-                   <div class="flex HeaderBody"> 
+                   <div class="flex HeaderBody "> 
                            <form class="md-form">
-                                   <div class="file-field">
+                                   <div class="file-field ml-2">
                                         <div class="z-depth-1-half mb-1">
                                                 @if ($medicine->medicinePhoto != null)
                                                 <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
@@ -19,14 +19,16 @@
                                                 <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
                                                 @endif 
                                             </div>
-                                     <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->brandName))}}</b> ({{$medicine->genericName}})</b></p>
-                                   </div>
+                                            <div class="table-responsive">
+                                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->brandName))}}</b> ({{$medicine->genericName}})</b></p>
+                                            </div>
+                                    </div>
                            </form>
                        </div>
                </div>
     
 
-    <div class="col-sm-8">
+    <div class="col-sm-9">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                             <span class="HeaderBannerText">History</span>
                             <a  style="float:right;" onclick="window.location='{{route('suppliers.show', $medicine->id)}}'" class="zoom" data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg "></i> Add Stocks</a>                                           
@@ -69,7 +71,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+      
     
 
 <script>
