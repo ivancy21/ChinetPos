@@ -55,34 +55,27 @@ class MedicineController extends Controller
         }
         
         if($request->has('activeTablets')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandName','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','1')->orderBy('brandName','desc')->paginate(24);    
-            }
-        if($request->has('activeDrops')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandName','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','2')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','1')->orderby('brandName','desc')->paginate(24);
         }
         
+        
         if($request->has('activeBottles')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandName','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','3')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','2')->orderby('brandName','desc')->paginate(24);
+        }
+        if($request->has('activeDrops')){
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','3')->orderby('brandName','desc')->paginate(24);
         }
         
         if($request->has('activeInhalers')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandNamee','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','4')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','4')->orderby('brandName','desc')->paginate(24);
         }
         
         if($request->has('activeInjections')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandName','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','5')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','5')->orderby('brandName','desc')->paginate(24);
         }
         
         if($request->has('activeCapsules')){
-            $medicines=Medicine::where('medicine_status','1')->orderby('brandName','desc')->paginate(24);
-            $formulations=Formulation::where('formulation','6')->orderBy('brandName','desc')->paginate(24); 
-
-            
+            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','6')->orderby('brandName','desc')->paginate(24);
         }
         
 
@@ -90,35 +83,30 @@ class MedicineController extends Controller
         // Inactive
         if($request->has('inactiveAll')){
             $medicines=Medicine::where('medicine_status','0')->orderBy('brandName','asc')->paginate(24);
-        }
+        }   
         
         if($request->has('inactiveTablets')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24);
-        $formulations=Formulation::where('formulation','1')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','1')->orderby('brandName','desc')->paginate(24);
         }
+        
         if($request->has('inactiveDrops')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24);
-        $formulations=Formulation::where('formulation','2')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','2')->orderby('brandName','desc')->paginate(24);
             }
         
         if($request->has('inactiveBottles')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24);
-        $formulations=Formulation::where('formulation','3')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','3')->orderby('brandName','desc')->paginate(24);
             }
         
         if($request->has('inactiveInhalers')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24)->
-        $formulations=Formulation::where('formulation','4')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','4')->orderby('brandName','desc')->paginate(24);
             }
         
         if($request->has('inactiveInjections')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24);
-        $formulations=Formulation::where('formulation','5')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','5')->orderby('brandName','desc')->paginate(24);
             }
         
         if($request->has('inactiveCapsules')){
-        $medicines=Medicine::where('medicine_status','0')->orderby('brandName','desc')->paginate(24);
-        $formulations=Formulation::where('formulation','6')->orderBy('brandName','desc')->paginate(24);    
+            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','6')->orderby('brandName','desc')->paginate(24);
                 return view('Panels.MedicineList.medIndex',compact("medicines"));
         
         }
