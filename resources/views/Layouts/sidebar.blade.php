@@ -33,7 +33,7 @@
                           </li>
                           <li>
                             <a   href="{{route('settings.index')}}" class="@if (Session::get("inventoryTab") == 'customSetting') active @endif">
-                              <i class="fas fa-plus-square"></i>   Add Side Effect, Diagnosis, Supplier
+                              <i class="fas fa-plus-square"></i> Side Effect, Diagnosis, Supplier
                             </a>
                           </li>
                           
@@ -44,7 +44,7 @@
                           </li> --}}
                           <li>
                             <a href="{{route('pos.index')}}">
-                                <i class="fa fa-align-justify" aria-hidden="true"></i> Pos
+                              <i class="fas fa-shopping-cart"></i> Pos
                             </a>
                         </li>
                           <li class="headers">Another Menu</li>

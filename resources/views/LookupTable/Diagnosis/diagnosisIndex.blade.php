@@ -12,19 +12,19 @@
          
             <thead class="thead-bg table-bordered">
                 <tr class="text-center">
+                <th class="th-sm tblheadfont1" width="400px">ICD CODE</th>
                 <th class="th-sm tblheadfont1">DIAGNOSIS</th>
-                <th class="th-sm tblheadfont1">ICD CODE</th>
                 <th class="th-sm tblheadfont1" width="230px">Action</th>
                 </tr>
             </thead>
 
             <tbody>
-                <tr class="highlight">
+                <tr>
                     @foreach($diagnosiss as $diagnosis)
-                
-                <td class="text-center">{{$diagnosis->diagnosis}}</td>
-                <td class="text-center">{{$diagnosis->icdCode}}</td>
-                <td>
+
+                <td class="highlight">{{$diagnosis->icdCode}}</td>
+                <td class="highlight">{{$diagnosis->diagnosis}}</td>
+                <td class="highlight">
                     <div class="form-inline d-flex justify-content-center">
                         <input type="submit" class="update-button ml-1 btn-sm" value="EDIT" onclick="window.location='{{route('diagnosis.edit',$diagnosis->id)}}'">
                                   
