@@ -53,7 +53,7 @@
                                     
                                             <div class="col-6">
                                                 <label  class="fnt">Medicine Name</label>
-                                                <input type="text" required class="form-control" name="brandName">
+                                                <input type="text" id="brandName" required class="form-control" name="brandName">
                                             </div>
                                             <div class="col">
                                                 <label  class="fnt">Dosage</label>

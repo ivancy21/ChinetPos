@@ -17,6 +17,7 @@ class Suppliers extends Migration
             $table->increments('id');
             $table->string('suppliersName');
             $table->string('address');
+            $table->tinyInteger('supplier_status')->default(1);
             $table->timestamps();
         });
     }

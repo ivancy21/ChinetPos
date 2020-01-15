@@ -57,9 +57,8 @@ class SuppliersController extends Controller
     {
         //
         $suppliers = Suppliers::latest()->get();
-        $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineSuppliers.create',compact('medicine',"medicineSuppliers","suppliers"));
+        return view('Panels.MedicineSuppliers.add',compact('medicine',"suppliers"));
     }
 
     /**
@@ -86,8 +85,7 @@ class SuppliersController extends Controller
     {
         //
         $suppliers=Suppliers::find($id);
-        MedicineSuppliers::where('medicineId','=',$id)->delete();
-        $suppliers->create($request->all());
+        $suppliers->update($request->all());
         return redirect()->route("suppliers.index");
     }
 
@@ -100,8 +98,5 @@ class SuppliersController extends Controller
     public function destroy($id)
     {
         //
-        $suppliers = Suppliers::find($id);
-        MedicineSuppliers::where('medicineId','=',$id)->delete();
-        $suppliers->delete();
-        return redirect()->route('suppliers.index');    }
+    }
 }
