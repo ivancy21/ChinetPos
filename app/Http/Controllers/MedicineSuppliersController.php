@@ -45,10 +45,10 @@ class MedicineSuppliersController extends Controller
     public function store(Request $request)
     {
         //
-        
+    
         $medicine = medicine::latest()->first();
         $medicineSuppliers = MedicineSuppliers::create($request->all());
-        return redirect()->route('medicineSuppliers.show',$medicine->id);
+        return redirect()->route('medicineSuppliers.show',$medicineSuppliers->medicine->id);
         
     }
 

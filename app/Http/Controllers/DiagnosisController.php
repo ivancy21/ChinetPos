@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Diagnosis;
 use Illuminate\Http\Request;
+use App\MedicineUse;
 use Session;
 
 class DiagnosisController extends Controller
@@ -97,6 +98,7 @@ class DiagnosisController extends Controller
     {
         //
         $diagnosis = Diagnosis::find($id);
+        MedicineUse::where('diagnosisId','=',$id)->delete();
         $diagnosis->delete();
         return redirect()->route('diagnosis.index');
     }

@@ -17,6 +17,7 @@ class MedicineSuppliers extends Migration
             $table->increments('id');
             $table->unsignedInteger('medicineId');
             $table->unsignedInteger('supplierId');
+            $table->string('lotNumber');
             $table->string('receivedMonth');
             $table->string('receivedDay');
             $table->string('receivedYear');

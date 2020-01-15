@@ -17,7 +17,6 @@ class MedicineUse extends Migration
             $table->increments('id');
             $table->unsignedInteger('medicineId');
             $table->unsignedInteger('diagnosisId');
-            $table->string('use');
             $table->timestamps();
         });
     }

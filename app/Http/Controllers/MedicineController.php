@@ -9,6 +9,8 @@ use App\MedicineSideEffects;
 use App\MedicineSuppliers;
 use App\SideEffects;
 use App\Formulation;
+use App\Diagnosis;
+use App\MedicineUse;
 use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Redirect;
 use DB;
@@ -141,9 +143,10 @@ class MedicineController extends Controller
     public function create(Medicine $medicine)
     {
         //
-        $formulation = Formulation::latest()->get();
-        $sideEffect = SideEffects::latest()->get();
-        return view('Panels.MedicineList.medCreate',compact('medicine','sideEffect','formulation'));
+        $diagnosiss = Diagnosis::latest()->get();
+        $formulations = Formulation::latest()->get();
+        $sideEffects = SideEffects::latest()->get();
+        return view('Panels.MedicineList.medCreate',compact("sideEffects","formulations","diagnosiss"));
     }
 
     /** 
@@ -158,11 +161,10 @@ class MedicineController extends Controller
         
         $request->validate([
             'productCode' => 'required|string|max:20|unique:medicine',
-            'brandName' => 'required|string|max:20|unique:medicine',
             
         ],
         );
-        $medicine=Medicine::create($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId'));
+        $medicine=Medicine::create($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId','diagnosisId'));
         if ($request->hasFile('medicinePic')){
             $this->validate($request, [
                 'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -197,8 +199,15 @@ class MedicineController extends Controller
            ]
            );
        }
-    
        
+       if ($request->input('diagnosisId')!=null){
+        $diagnosisId = $request->input('diagnosisId');
+        MedicineUse::create([
+        'medicineId' => $medicine->id,
+        'diagnosisId' => $diagnosisId
+        ]
+        );
+    }
         
                        
 
@@ -214,10 +223,10 @@ class MedicineController extends Controller
     {
         //
         // $sideEffects = SideEffects::where('id','=',$id)->latest()->get();
-       
+        $medicineUse = MedicineUse::where('medicineId','=',$id)->latest()->get();
         $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineList.medShow',compact("medicine","medicineSuppliers"));
+        return view('Panels.MedicineList.medShow',compact("medicine","medicineSuppliers","medicineUse"));
     }
 
     /**
@@ -228,12 +237,13 @@ class MedicineController extends Controller
      */
     public function edit($id)
     {
-        //  
+        // 
+        $diagnosiss = Diagnosis::latest()->get(); 
         $medicineSideEffects = MedicineSideEffects::latest()->get();
         $sideEffects = SideEffects::latest()->get();
         $formulations = Formulation::latest()->get();
         $medicine = Medicine::find($id);
-        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects"));
+        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects","diagnosiss"));
     
     }
 
@@ -250,13 +260,12 @@ class MedicineController extends Controller
             $request->validate([
                 
                 'productCode' => 'required|unique:medicine,productCode,'.$id,
-                'brandName' => 'required|unique:medicine,brandName,'.$id,
             ],
             );
     
         $medicine = Medicine::find($id);
         $medicineSideEffects = MedicineSideEffects::latest()->get();
-        $medicine->update($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId'));
+        $medicine->update($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId','diagnosisId'));
         if ($request->hasFile('medicinePic')){
             $this->validate($request, [
                 'medicinePic' => 'required|image|mimes:jpeg,png,jpg,gif',
@@ -302,6 +311,16 @@ class MedicineController extends Controller
                 }
                 
          }
+
+         if ($request->input('diagnosisId')!=null){
+            $diagnosisId = $request->input('diagnosisId');
+            MedicineUse::where('medicineId','=',$id)->delete();
+            MedicineUse::create([
+            'medicineId' => $medicine->id,
+            'diagnosisId' => $diagnosisId
+            ]
+            );
+        }
         
         return redirect()->route('medicine.show',$medicine->id)->with('success','Medicine has been Updated');
        

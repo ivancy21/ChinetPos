@@ -38,6 +38,7 @@
                                         <thead  class="thead-bg table-bordered">
                                             <tr class="text-center">
                                                     <th class="th-sm tblheadfont1"> Supplier </th>
+                                                    <th class="th-sm tblheadfont1">Lot Number </th>
                                                     <th class="th-sm tblheadfont1">Purchased Price </th>
                                                     <th class="th-sm tblheadfont1"> Received Date </th>
                                                     <th class="th-sm tblheadfont1">Manufactured Date </th>
@@ -49,6 +50,7 @@
                                                 @foreach($medicineSuppliers as $medicineSupplier)
                                                 <tr class="text-center highlight">                                 
                                                 <td class="cnterAlgn">{{$medicineSupplier->supplier->suppliersName}}</td>
+                                                <td class="cnterAlgn">{{$medicineSupplier->lotNumber}}</td>
                                                 <td class="cnterAlgn">&#8369;{{ number_format($medicineSupplier->purchasedPrice,2)}}</td>
                                                 <td class="cnterAlgn">{{$medicineSupplier->receivedMonth}}-{{$medicineSupplier->receivedDay}}-{{$medicineSupplier->receivedYear}}</td>
                                                 <td class="cnterAlgn">{{$medicineSupplier->manufacturedMonth}}-{{$medicineSupplier->manufacturedDay}}-{{$medicineSupplier->manufacturedYear}}</td>
