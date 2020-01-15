@@ -54,14 +54,14 @@
                                             @endif
                                         </div>
                                 
-                                        <div class="col">
+                                        <div class="col-6">
                                             <label  class="fnt">Medicine Name</label>
-                                            <input type="text" required class="form-control input{{ $errors->has('brandName') ? ' is-invalid' : '' }}"  value="{{$medicine->brandName}}" name="brandName" tabindex="14">
-                                            @if ($errors->has('brandName'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>The Medicine Name is already Existed!</strong>
-                                            </span>
-                                            @endif
+                                            <input type="text" required class="form-control"  value="{{$medicine->brandName}}" name="brandName" >
+                                         
+                                        </div>
+                                        <div class="col">
+                                            <label  class="fnt">Dosage</label>
+                                        <input type="text" id="dosage" required class="form-control"  name="dosage" value="{{$medicine->dosage}}">
                                         </div>
                                     </div>
                                     <div class="row  mb-2">
@@ -69,7 +69,14 @@
                                                 <label  class="fnt">Formulations</label>
                                         <select type="text" id="formulationId" class="form-control" name="formulationId" >
                                             @foreach($formulations as $formulation)
-                                            <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
+                                                    @foreach ($formulation->medicines as $item)
+                                                    <option @if($item->id == $medicine->id) {!! 
+                                                            'selected = "selected" ' !!} @endif 
+                                                    @endforeach
+                                                    value={{$formulation->id}}>{!!$formulation->formulation !!}</option>
+                                                    @endforeach
+                                                    @foreach($formulations as $formulation)
+                                                    <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
                                             @endforeach
         
                                         </select>
@@ -97,7 +104,23 @@
                                                     @endforeach
                                                 </select>
                                         </div>
-
+                                        <div class="row  mb-2">
+                                            <div class="col-sm-6">
+                                                <label  class="fnt" >Diagnosis</label>       
+                                                <select id="diagnosisId" class="form-control"  name="diagnosisId"  style="width:350px"required>
+                                                @foreach($diagnosiss as $diagnosis)
+                                                    @foreach ($diagnosis->medicineUses as $item)
+                                                    <option @if($item->id == $medicine->id) {!! 
+                                                             'selected = "selected" ' !!} @endif 
+                                                    @endforeach
+                                                    value={{$diagnosis->id}}>{!!$diagnosis->diagnosis !!}</option>
+                                                    @endforeach
+                                                    @foreach($diagnosiss as $diagnosis)
+                                                    <option value={{$diagnosis->id}}>{{$diagnosis->diagnosis}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </div>     
                                             <div class="col-sm-6">
                                                 <div class="form-row">
                                                     <div class="form-group ml-5 mt-3">

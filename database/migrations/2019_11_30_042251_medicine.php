@@ -16,9 +16,11 @@ class Medicine extends Migration
         Schema::create('Medicine', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('formulationId');
-            $table->string('brandName')->unique();  
+            $table->string('brandName');  
             $table->string('productCode')->unique();
-            $table->string('genericName');  
+            $table->string('dosage');  
+            $table->string('genericName');
+            $table->float('retailPrice');
             $table->string('medicinePhoto')->nullable();
             $table->tinyInteger('medicine_status')->default(1);
             $table->timestamps();

@@ -99,7 +99,7 @@
                 <div class="container">
                       <div class="table-responsive">
                             <center>
-                                        <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}}</b></h6>
+                            <h6 style="color:black;" class="fnt mt-2"><b> {{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</b></h6>
                                         <h6 style="color:black;" class="fnt"> {{ucfirst(trans($medicine->genericName))}}</h6>
                                       @if($medicine->medicineSuppliers->sum('quantity')>0)
                                       @if($medicine->medicine_status==1)

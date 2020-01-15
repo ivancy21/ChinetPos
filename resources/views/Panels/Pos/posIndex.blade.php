@@ -83,12 +83,12 @@
         <tbody>       
             @foreach($medicines as $medicine)
             @if($medicine->medicine_status==1)
-            @if($medicine->pharmacyMedicines->sum('quantity')>0)
+            @if($medicine->medicineSuppliers->sum('quantity')>0)
           <tr class="text-center highlight">
-           <td id="name{{$medicine->count}}">{{$medicine->name}}</td>
+          <td id="name{{$medicine->count}}">{{$medicine->brandName}} ({{$medicine->dosage}})</td>
             <td>{{$medicine->productCode}}</td>
-          <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->price,2)}}</td>
-            <td>{{$medicine->pharmacyMedicines->sum('quantity')}}</td>
+          <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->retailPrice,2)}}</td>
+            <td>{{$medicine->medicineSuppliers->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
             @endif
             @endif
@@ -144,7 +144,7 @@
       <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
       <div class="hr mb-2"></div> 
       <button type="submit" class="btn btn-primary btn-sm float-right" id="paymentbtn" data-toggle="modal" data-target=".bd-example-modal-lg" >PAYMENT</button>
-      <button class="btn btn-outline-info waves-effect  btn-sm" type="button" onclick="window.location = '{{ route('pharmacyMedicine.index') }}'">EXIT POS</button>    
+      <button class="btn btn-outline-info waves-effect  btn-sm" type="button" onclick="window.location = '{{ route('medicine.index') }}'">EXIT POS</button>    
   </div>
 
 

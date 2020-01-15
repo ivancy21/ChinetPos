@@ -53,6 +53,15 @@
                                     </div>
                                 
                                     <div class="row mb-3">
+                                        <div class="col-sm-3">
+                                                <label  class="fnt">Lot Number</label>
+                                        </div>
+                                        <div class="col-sm-5">              
+                                                <input type="text"  class = "form-control" id="notNumber" name="lotNumber"   required>
+                                        </div>
+                                    </div>
+                                
+                                    <div class="row mb-3">
                                         <div class="col-sm-3 ">
                                                 <label  class="fnt">Supplier </label> 
                                         </div>
@@ -65,7 +74,7 @@
                                                 </div>
                                             </div>
                                 
-                                    <div class="row mb-3">
+                            <div class="row mb-3">
                                 <div class="col-sm-3 ">
                                         <label  class="fnt">Purchased Price </label> 
                                 </div>
@@ -73,10 +82,7 @@
                                                 <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="purchasedPrice" required>
                                         </div>
                                     </div>
-
-
-
-                               
+   
                                 <div class="form-row">
                                         <div class="form-group col-sm-3 ">
                                         <label  class="fnt">Received Date</label>

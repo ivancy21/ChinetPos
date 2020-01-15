@@ -33,7 +33,7 @@
                                                         
                                                         <tr class="fnt">
                                                             <td class>Medicine Name</td>
-                                                            <td>{{ucfirst(trans($medicine->brandName))}}</td>
+                                                        <td>{{ucfirst(trans($medicine->brandName))}} ({{$medicine->dosage}})</td>
                                                         </tr>
                                                         
                                                         <tr class="fnt">
@@ -45,7 +45,12 @@
                                                             <td>Generic Name</td>
                                                             <td>{{ucfirst(trans($medicine->genericName))}}</td>
                                                         </tr>
-                                                            
+                                                        
+                                                        <tr class="fnt">
+                                                            <td>Retail Price</td>
+                                                        <td>&#8369;{{ number_format($medicine->retailPrice,2)}}</td>
+                                                        </tr>
+                                                        
                                                         <tr class="fnt">
                                                             <td>Side Effects</td>
                                                             <td>@foreach($medicine->medicineSideEffects as $sideEffect)
@@ -55,6 +60,11 @@
                                                         <tr class="fnt">
                                                             <td>Formulation</td>
                                                         <td>{{$medicine->formulation->formulation}}</td>
+                                                        </tr>
+                                                        </tr>
+                                                        <tr class="fnt">
+                                                            <td>Diagnosis</td>@foreach($medicineUse as $medicineUses)
+                                                        <td>{{$medicineUses->diagnosis->diagnosis}}@endforeach</td>
                                                         </tr>
                                                         <tr class="fnt">
                                                                 <td>Quantity</td>
