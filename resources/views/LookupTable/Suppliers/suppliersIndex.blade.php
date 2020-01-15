@@ -11,19 +11,19 @@
              
                 <thead class="thead-bg table-bordered">
                     <tr class="text-center">
-                    <th class="th-sm tblheadfont1">SUPPLIER</th>
+                    <th class="th-sm tblheadfont1"  width="400px">SUPPLIER</th>
                     <th class="th-sm tblheadfont1">ADDRESS</th>
                     <th class="th-sm tblheadfont1" width="230px">Action</th>
                     </tr>
                 </thead>
     
                 <tbody>
-                    <tr class="highlight">
+                    <tr>
                         @foreach($suppliers as $supplier)
                     
-                    <td class="text-center">{{$supplier->suppliersName}}</td>
-                    <td class="text-center">{{$supplier->address}}</td>
-                    <td>
+                    <td class="highlight">{{$supplier->suppliersName}}</td>
+                    <td class="highlight">{{$supplier->address}}</td>
+                    <td class="highlight">
                         <div class="form-inline d-flex justify-content-center">
                             <input type="submit" class="update-button ml-1 btn-sm" value="EDIT" onclick="window.location='{{route('suppliers.edit',$supplier->id)}}'">
                                       

@@ -29,12 +29,12 @@
     <div class="col-sm-8">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
                             <span class="HeaderBannerText">History</span>
-                            <a  style="float:right;" onclick="window.location='{{route('suppliers.show', $medicine->id)}}'"  data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+                            <a  style="float:right;" onclick="window.location='{{route('suppliers.show', $medicine->id)}}'" class="zoom" data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg "></i> Add Stocks</a>                                           
      
                     </div>
                     <div class="flex HeaderBody"> 
                             <div class="table-responsive">
-                                    <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
+                                    <table class="table table-hover" id="TblSorter1" cellspacing="0" width="100%">
                                         <thead  class="thead-bg table-bordered">
                                             <tr class="text-center">
                                                     <th class="th-sm tblheadfont1"> Supplier </th>

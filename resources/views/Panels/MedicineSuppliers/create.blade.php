@@ -10,29 +10,26 @@
            
 
 <div class="container">
-     <div class="row">
-            <div class="col-sm-4">
-                <div class="Header  Banner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                        <span class="HeaderBannerText">Picture</span>
-                </div>
-
-                <div class="flex HeaderBody"> 
-                        <form class="md-form">
-                                <div class="file-field">
-                                  <div class="z-depth-1-half mb-1">
-                                    {{-- Photo Insertion --}}
-                                    @if ($medicine->medicinePhoto != null)
-                                    <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
-                                    @else
-                                    <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
-                                    @endif 
-                                  </div>      
-                                <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->brandName))}}</b></b> ({{$medicine->genericName}})</p>
-                                                                           
-                                </div>
-                        </form>
-                    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
+                    <span class="HeaderBannerText">Picture</span>
             </div>
+            <div class="flex HeaderBody"> 
+                    <form class="md-form">
+                            <div class="file-field">
+                                 <div class="z-depth-1-half mb-1">
+                                         @if ($medicine->medicinePhoto != null)
+                                         <img src="{{ asset('images/medicinePhotos/'.$medicine->medicinePhoto) }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="">
+                                         @else
+                                         <img src="{{ asset('images/medicineicon.png') }}" size="250px"  class="img-fluid img-sizes img-shadow" alt="" >
+                                         @endif 
+                                     </div>
+                              <p style="margin-top:5px; color:black;" class="text-center"><b><b> {{ucfirst(trans($medicine->brandName))}}</b> ({{$medicine->genericName}})</b></p>
+                            </div>
+                    </form>
+                </div>
+        </div>
     
   <div class="col-sm-8">
                             <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
@@ -46,9 +43,9 @@
                                         <div class="col-sm-3">
                                                 <label  class="fnt">Quantity</label>
                                         </div>
-                                        <div class="col-sm-1">              
+                                        <div class="col-sm-5">              
                                                 <input type="hidden" id="medicineId" class="form-control" value="{{$medicine->id}}" name="medicineId">
-                                                <input type="number" list="quantity" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
+                                                <input type="number" list="quantity" class="form-control" name="quantity"  min='0'  onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57" required>
                                         </div>
                                     </div>
                                 

@@ -2,16 +2,15 @@
 @section('contents')
 
      
-            <div class="d-flex flex-column">
+         
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                    <span class="HeaderBannerText">Medicine History</span>
-                    <a  style="float:right;"   data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
+                        <span class="HeaderBannerText">Medicine History</span>
+                        <a  style="float:right;"   data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg zoom"></i></a>                                           
      
                     </div>
        <div class="flex HeaderBody"> 
-            <div class="table-responsive">
-                  
-              <table class="table table-image table-hover" id="TblSorter1" cellspacing="0" width="100%">
+            <div class="table-responsive">   
+              <table class="table table-hover" id="TblSorter1" cellspacing="0" width="100%">
                 <thead class="thead-bg table-bordered">
                   <tr class="text-center">
                     <th class="th-sm tblheadfont1"> Medicine Name </th>
@@ -26,8 +25,6 @@
                 </thead>
                 <tbody>
                   
-               
-                 <tr class="text-center highlight">
                   @foreach($medicineSuppliers as $medicineSupplier)
                   <tr class="text-center highlight">                                 
                   <td class="cnterAlgn">{{$medicineSupplier->medicine->brandName}}</td>
@@ -52,16 +49,16 @@
           <div class="hr mb-2"></div> 
           <button class="btn btn-outline-info waves-effect float-right btn-sm" type="submit" onclick="window.location='{{route('medicine.index')}}'">BACK</button>           
       </div>   
-      </div>
+     
     
 
-<script>
- 
- $(document).ready( function () {
-    $('#TblSorter1').DataTable();
- });
+      <script>
 
-</script>
+        $(document).ready( function () {
+        $('#TblSorter1').DataTable();
+        });
+    
+    </script>
 
 
 

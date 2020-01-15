@@ -18,11 +18,11 @@
                     </thead>
         
                     <tbody>
-                    <tr class="highlight">
+                    <tr >
                         @foreach($sideEffects as $sideEffect)
                     
-                    <td class="text-center">{{$sideEffect->sideEffect}}</td>
-                    <td>
+                    <td class="highlight">{{$sideEffect->sideEffect}}</td>
+                    <td class="highlight">
                         <div class="form-inline d-flex justify-content-center">
                             <input type="submit" class="update-button ml-1 btn-sm" value="EDIT" onclick="window.location='{{route('sideEffects.edit',$sideEffect->id)}}'">
                                       

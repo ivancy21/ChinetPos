@@ -63,7 +63,7 @@ class MedicineSuppliersController extends Controller
          //
         $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-         return view('Panels.MedicineSuppliers.viewHistory',compact("medicine","medicineSuppliers"));
+        return view('Panels.MedicineSuppliers.viewHistory',compact("medicine","medicineSuppliers"));
         
     }
 
