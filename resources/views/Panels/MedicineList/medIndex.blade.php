@@ -24,7 +24,7 @@
     
                                     {{-- Active --}}
                                             <form action="{{route('medicine.index')}}" method="GET">
-                                                  <input type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >
+                                                  <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Active</button>
                                                 <div class="dropdown-menu">
                                                     <form action="{{route('medicine.index')}}" method="GET">
                                                        <input type="submit" class="dropdown-item" name="activeAll" class="btn btn-sm btn-primary ml-1" value="All" />
@@ -52,7 +52,7 @@
                              
                                               {{-- InActive --}}
                                               <form action="{{route('medicine.index')}}" method="GET">
-                                                     <input type="submit" name="inactive" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Inactive" >
+                                                <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Inactive</button>
                                                  <div class="dropdown-menu">
                                                     <form action="{{route('medicine.index')}}" method="GET">
                                                         <input type="submit" class="dropdown-item" name="inactiveAll" class="btn btn-sm btn-primary ml-1" value="All" />
