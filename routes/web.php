@@ -52,3 +52,19 @@ Route::get('/diagnosisCreate', function () {
 Route::get('/supplierCreate', function () {
     return view('LookupTable.Supplier.supplierCreate');
 });
+
+Route::get('/pharmacy/list', function () {
+    return view('Panels.Pharmacy.pharmacyList');
+});
+
+Route::get('/pharmacy/create', function () {
+    return view('Panels.Pharmacy.pharmacyCreate');
+});
+
+Route::get('/pharmacy/edit', function () {
+    return view('Panels.Pharmacy.pharmacyEdit');
+});
+
+Route::get('/pharmacy', function () {
+    return view('Panels.Pharmacy.pharmacyIndex');
+});
