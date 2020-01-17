@@ -58,6 +58,11 @@
                               <i class="fa fa-info-circle" aria-hidden="true"></i> Information
                             </a>
                           </li>
+                          <li>
+                            <a href="/pharmacy">
+                              <i class="fa fa-info-circle" aria-hidden="true"></i> Pharmacy
+                            </a>
+                          </li>
             </ul>
 
            
