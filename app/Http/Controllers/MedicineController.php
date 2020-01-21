@@ -33,8 +33,9 @@ class MedicineController extends Controller
     {
 
         Session::put('inventoryTab', 'medicineList');
-        //
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        //
+    
         $pharmacyMedicine = PharmacyMedicine::where('pharmacyId', Session::get('pharmacy')->id)->latest()->get();
         $medicine = $pharmacyMedicine->where('pharmacyId', Session::get('pharmacy')->id);
         $medicines = Medicine::latest()->paginate();
