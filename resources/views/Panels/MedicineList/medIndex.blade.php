@@ -22,7 +22,7 @@
     
                                     {{-- Active --}}
                                             <form action="{{route('medicine.index')}}" method="GET">
-                                                  <button type="submit" name="Active" class="btn btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Active</button>
+                                                  <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Active</button>
                                                 <div class="dropdown-menu">
                                                     <form action="{{route('medicine.index')}}" method="GET">
                                                        <input type="submit" class="dropdown-item" name="activeAll" class="btn btn-sm btn-primary ml-1" value="All" />
