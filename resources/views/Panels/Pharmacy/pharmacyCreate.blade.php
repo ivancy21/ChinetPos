@@ -2,6 +2,8 @@
 @include('Layouts.cropImageModal')
 @section('content')
 
+<form class="form-horizontal" method="POST" action="{{route('pharmacy.store')}}">
+    @csrf
 <div class="container">
     <div class="row">
             <div class="col-sm-4">
@@ -19,10 +21,10 @@
                                     <div class="btn btn-mdb-color btn-rounded float-left" style="margin-top:-15px;">
                                     <span>Choose file</span>
                                         
-                                    <input type="file" id='medicinePhoto'
-                                    class="form-control{{ $errors->has('medicinePhoto') ? ' is-invalid' : '' }}"
-                                    name='medicinePic' style="border: none" />
-                                    <input type="hidden" id="medicinePhotos" name="medicinePhoto">
+                                    <input type="file" id='pharmacyPhoto'
+                                    class="form-control{{ $errors->has('pharmacyPhoto') ? ' is-invalid' : '' }}"
+                                    name='pharmacyPic' style="border: none" />
+                                    <input type="hidden" id="pharmacyPhotos" name="pharmacyPhoto">
                                 </div>
                                 </div>
                                 </div>
@@ -38,7 +40,7 @@
                         <div class="row mb-2">
                             <div class="col">
                                         <label  class="fnt">PHARMACY</label>
-                                        <input type="text" required class="form-control input"  name="pharmacy" tabindex="14">
+                                        <input type="text" required class="form-control input"  name="pharmacyName" tabindex="14">
                                     </div>
                                 </div>
 
@@ -57,7 +59,7 @@
 
                                     <div class="col">
                                         <label  class="fnt">STATE/PROVINCE</label>
-                                            <select name='state' class="form-control input" required tabindex="4">
+                                            <select name='stateProvince' class="form-control input" required tabindex="4">
                                                 <option value="Ilocos Region (REGION I)"                         >Ilocos Region (REGION I)</option>    
                                                 <option value="Cagayan Valley (REGION II)"                         >Cagayan Valley (REGION II)</option>    
                                                 <option value="Central Luzon (REGION III)"                         >Central Luzon (REGION III)</option>    
@@ -108,28 +110,14 @@
                                     </div>
                                 </div>
 
-                                
-                                <div class="row">
-                                    <div class="form-group col-sm-12">
-                                        <label class="input-label">STATUS</label><br>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1'>
-                                                <label class="form-check-label" for="emptyStatusActive">Active</label>
-                                            </div>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0'>
-                                                <label class="form-check-label" for="statusInactive">Inactive</label> 
-                                            </div>
-                                    </div>
-                                </div>
-                            
+                              
                             </div>
 
                             <div class="DivTemplate">
                                 <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                 <div class="hr mb-2"></div> 
                                 <button type="submit" class="btn btn-primary" >SAVE</button>
-                                <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location='http://inventory.local/pharmacy'" value="BACK">    
+                                <input class="btn btn-outline-info waves-effect float-right" type="button" onclick="window.location='{{route('pharmacy.index')}}'" value="BACK">    
                             </div>
                         </div>  
                     </div> 
@@ -154,7 +142,7 @@
                     }
                 });
                         
-                $('#medicinePhoto').on('change', function(){
+                $('#pharmacyPhoto').on('change', function(){
                     var reader = new FileReader();
                     reader.onload = function (event) {
                     $image_crop.croppie('bind', {
@@ -173,7 +161,7 @@
                     size: 'viewport'
                     }).then(function(response){
                     $('#Photo').attr('src', response);
-                    $("#medicinePhotos").val(response);
+                    $("#pharmacyPhotos").val(response);
                     $('#uploadimageModal').modal('hide');
                     })
                 });
@@ -181,7 +169,7 @@
         });
       
         $(function () {
-              $("#medicinePhoto").change(function () {
+              $("#pharmacyPhoto").change(function () {
                   readURL(this);
               });
           });

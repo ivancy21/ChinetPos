@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\PharmacyMedicine;
-use Illuminate\Http\Request;
-use App\Medicine;
+use App\Formulation;
 use App\Suppliers;
+use App\SideEffects;
+use App\Diagnosis;
+use App\Pharmacy;
+use Illuminate\Http\Request;
+use Session;
 
-class PharmacyMedicineController extends Controller
+
+class PharmacyMedicineCreateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,21 +19,20 @@ class PharmacyMedicineController extends Controller
      */
     public function index()
     {
+        Session::put('inventoryTab', 'customSetting');
+
         //
-        $medicines=Medicine::latest()->get();
-        return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicines"));
+       
     }
 
-    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Medicine $medicine)
+    public function create()
     {
         //
-        
     }
 
     /**
@@ -42,33 +44,31 @@ class PharmacyMedicineController extends Controller
     public function store(Request $request)
     {
         //
-        $pharmacyMedicine=PharmacyMedicine::create($request->all());
-        return redirect()->route('medicineSuppliers.show',$pharmacyMedicine->medicine->id)->with('success','Stock has been added');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\PharmacyMedicine  $PharmacyMedicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        
-        $suppliers=Suppliers::latest()->get();
-        $medicine=Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineSuppliers.create',compact("medicine","suppliers"));
-            
-        
+        //
+        $pharmacy = Pharmacy::latest()->first();
+        $diagnosiss = Diagnosis::latest()->get();
+        $formulations = Formulation::latest()->get();
+        $sideEffects = SideEffects::latest()->get();
+        return view('Panels.MedicineList.medCreate',compact("sideEffects","formulations","diagnosiss","pharmacy"));
     }
 
-    /** 
+    /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\PharmacyMedicine  $PharmacyMedicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(PharmacyMedicine $PharmacyMedicine)
+    public function edit($id)
     {
         //
     }
@@ -77,10 +77,10 @@ class PharmacyMedicineController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\PharmacyMedicine  $PharmacyMedicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, PharmacyMedicine $PharmacyMedicine)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -88,10 +88,10 @@ class PharmacyMedicineController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\PharmacyMedicine  $PharmacyMedicine
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PharmacyMedicine $PharmacyMedicine)
+    public function destroy($id)
     {
         //
     }

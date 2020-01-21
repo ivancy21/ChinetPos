@@ -5,15 +5,20 @@
         <!-- Sidebar Holder -->
         <nav id="sidebar">
             <div class="sidebar-header" style=" position: relative;">
-                    <div class="z-depth-1-half cntr">
-                      <img src="{{ asset('images/chinet.png/')}}" class="img-fluid side-icon mt-2" alt="">
+              <div class="z-depth-1-half cntr">
+                      @if ($pharmacy->pharmacyPhoto != null)  
+                      <img src="{{ asset('images/pharmacyPhotos/'.$pharmacy->pharmacyPhoto) }}" class="img-fluid side-icon mt-2" alt="">
+                      @else
+                      <img src="{{ asset('images/chinet.png') }}" class="img-fluid side-icon mt-2" alt="">
+                      @endif
+                    
+                     
                     </div>
                 <div style="  position: absolute; bottom: 0;" class="ml-3 mb-2">
-                <h6>Rex Ivan Cy</h6>
-                <h6 style="font-size:10px;">Admin</h6>
+                <h6>{{$pharmacy->pharmacyName}}</h6>
+                <h6 style="font-size:10px;">Pharmacy</h6>
                 </div>
             </div>
-
             <ul class="sidebar-navigation list-unstyled components">
                     <li class="header">Navigation</li>
                     <li >
@@ -59,7 +64,7 @@
                             </a>
                           </li>
                           <li>
-                            <a href="/pharmacy">
+                            <a href="{{route('pharmacy.index')}}">
                               <i class="fa fa-info-circle" aria-hidden="true"></i> Pharmacy
                             </a>
                           </li>

@@ -53,6 +53,7 @@
                                     
                                             <div class="col-sm-6">
                                                 <label  class="fnt">Medicine Name</label>
+                                            <input type="hidden" id="pharmacyId"  name="pharmacyId" value="{{ Session::get('pharmacy')->id }}" >
                                                 <input type="text" id="brandName" required class="form-control" name="brandName">
                                             </div>
                                         </div>

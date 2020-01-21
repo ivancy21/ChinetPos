@@ -86,7 +86,7 @@
             @if($medicine->medicineSuppliers->sum('quantity')>0)
           <tr class="text-center highlight">
           <td id="name{{$medicine->count}}">{{$medicine->brandName}} ({{$medicine->dosage}})</td>
-            <td>{{$medicine->productCode}}</td>
+            <td>{{$medicine->productCode}}</td> 
           <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->retailPrice,2)}}</td>
             <td>{{$medicine->medicineSuppliers->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
