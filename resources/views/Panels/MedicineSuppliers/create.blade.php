@@ -152,7 +152,7 @@
                           <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                           <div class="hr mb-2"></div> 
                           <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
-                          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button">BACK</button>    
+                          <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location='{{route('medicineSuppliers.index')}}'">BACK</button>    
                       </div>
 
                     </div>

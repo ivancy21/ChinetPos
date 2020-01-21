@@ -30,7 +30,7 @@
 
     <div class="col-sm-9">
                     <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
-                            <span class="HeaderBannerText">History</span>
+                            <span class="HeaderBannerText">Inventory</span>
                             <a  style="float:right;" onclick="window.location='{{route('suppliers.show', $medicine->id)}}'" class="zoom" data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-lg "></i> Add Stocks</a>                                           
      
                     </div>

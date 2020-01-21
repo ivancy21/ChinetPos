@@ -10,19 +10,22 @@
                 <span class="HeaderBannerText">Details</span>
         </div>
         <div class="flex HeaderBody">
-           <div class="form-row">
-               <div class="form-group col-sm-12">
-                    <label>SUPPLIER</label> 
-                    <input name='suppliersName' type='text' class="form-control" value="{{$supplier->suppliersName}}" required >  
-                        <span class="invalid-feedback" role="alert">
-                        </span>
-               </div>
-               <div class="form-group col-sm-12">
-                <label>SUPPLIER ADDRESS</label> 
-                <input name='address' type='text' class="form-control" value="{{$supplier->address}}" required >  
-                    <span class="invalid-feedback" role="alert">
-                    </span>
-           </div>           </div>
+            <div class="table-responsive">
+                <table class="table table-borderless dataDisplayer">
+                    <tbody>
+                        
+                        <tr class="fnt">
+                            <td class>Suppliers Name</td>
+                        <td>{{ucfirst(trans($supplier->suppliersName))}}</td>
+                        </tr>
+                        
+                        <tr class="fnt">
+                            <td width="130px">Address</td>
+                            <td>{{$supplier->address}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
     
     <div class="col-sm-6">
         <div class="form-row">
