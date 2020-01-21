@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\SideEffects;
 use App\MedicineSideEffects;
+use App\Pharmacy;
 use Illuminate\Http\Request;
 use Session;
 
@@ -19,8 +20,9 @@ class SideEffectsController extends Controller
         Session::put('CustomSettingTab', 'SideEffects');
 
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $sideEffects= SideEffects::latest()->get();
-        return view('LookupTable.SideEffects.sideEffectsIndex',compact("sideEffects"));
+        return view('LookupTable.SideEffects.sideEffectsIndex',compact("sideEffects",'pharmacy'));
      
      
     }
@@ -33,7 +35,8 @@ class SideEffectsController extends Controller
     public function create()
     {
         //
-        return view('LookupTable.SideEffects.sideEffectsCreate');
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        return view('LookupTable.SideEffects.sideEffectsCreate',compact('pharmacy'));
     
     }
 
@@ -71,8 +74,9 @@ class SideEffectsController extends Controller
     public function edit($id)
     {
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $sideEffect = SideEffects::find($id);
-        return view('LookupTable.SideEffects.sideEffectsEdit',compact("sideEffect"));
+        return view('LookupTable.SideEffects.sideEffectsEdit',compact("sideEffect","pharmacy"));
     }
 
     /**

@@ -18,7 +18,7 @@ class PharmacyMedicineController extends Controller
     {
         //
         $medicines=Medicine::latest()->get();
-        return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicines"));
+        return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicines","pharmacy"));
     }
 
     

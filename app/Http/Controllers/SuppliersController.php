@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Suppliers;
 use App\MedicineSuppliers;
 use App\Medicine;
+use App\Pharmacy;
 use Session;
 
 class SuppliersController extends Controller
@@ -18,9 +19,9 @@ class SuppliersController extends Controller
     public function index()
     {
         Session::put('CustomSettingTab', 'Supplier');
-        //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $suppliers= Suppliers::latest()->get();
-        return view('LookupTable.Suppliers.suppliersIndex',compact("suppliers"));
+        return view('LookupTable.Suppliers.suppliersIndex',compact("suppliers",'pharmacy'));
     }
 
     /**
@@ -31,7 +32,8 @@ class SuppliersController extends Controller
     public function create()
     {
         //
-        return view('LookupTable.Suppliers.suppliersCreate');
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        return view('LookupTable.Suppliers.suppliersCreate',compact('pharmacy'));
     }
 
     /**
@@ -56,9 +58,10 @@ class SuppliersController extends Controller
     public function show($id)
     {
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $suppliers = Suppliers::latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineSuppliers.add',compact('medicine',"suppliers"));
+        return view('Panels.MedicineSuppliers.add',compact('medicine',"suppliers","pharmacy"));
     }
 
     /**
@@ -70,8 +73,9 @@ class SuppliersController extends Controller
     public function edit($id)
     {
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $supplier = Suppliers::find($id);
-        return view('LookupTable.Suppliers.suppliersEdit',compact("supplier"));
+        return view('LookupTable.Suppliers.suppliersEdit',compact("supplier","pharmacy"));
     }
 
     /**
