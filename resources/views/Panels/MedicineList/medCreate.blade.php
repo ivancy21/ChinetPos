@@ -1,12 +1,12 @@
 @extends('Layouts.sidebar')
 @include('Layouts.cropImageModal')
 @section('contents')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
     <form class="form-horizontal" method="POST" action="{{route('medicine.store')}}">
         @csrf
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-           
-
             <div class="container">
                 <div class="row">
                         <div class="col-sm-4">
@@ -41,7 +41,7 @@
                                     </div>
                                     <div class="flex HeaderBody">
                                         <div class="row mb-2">
-                                            <div class="col">
+                                            <div class="col-sm-6">
                                                 <label  class="fnt">Medicine Code</label>
                                                 <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"  name="productCode" tabindex="14">
                                                 @if ($errors->has('productCode'))
@@ -51,62 +51,59 @@
                                                 @endif
                                             </div>
                                     
-                                            <div class="col">
+                                            <div class="col-sm-6">
                                                 <label  class="fnt">Medicine Name</label>
-                                                <input type="text" required class="form-control input{{ $errors->has('name') ? ' is-invalid' : '' }}"  name="name" tabindex="14">
-                                                @if ($errors->has('name'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>The Medicine Name is already Existed!</strong>
-                                                </span>
-                                                @endif
+                                            <input type="hidden" id="pharmacyId"  name="pharmacyId" value="{{ Session::get('pharmacy')->id }}" >
+                                                <input type="text" id="brandName" required class="form-control" name="brandName">
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col">
-                                                    <label  class="fnt">Category</label>
-                                                    <input type="text" id="category" class="form-control" name="category" >
-                                            </div>
-                                            <div class="col">
-                                                    <label  class="fnt">Medicine Type</label>
-                                                    <select type="text" id="type" class="form-control" name="type" required>
-                                                            <option>Tablets</option>
-                                                            <option>Bottles</option>
-                                                            <option>Drops</option>
-                                                            <option>Inhalers</option>
-                                                            <option>Injections</option>
-                                                            <option>Capsules</option>
-                                                    </select>
-                                            </div>
-                                        
-                                        </div>
+                                                <div class="col-sm-6">
+                                                    <label  class="fnt">Dosage</label>
+                                                    <input type="text" id="dosage" required class="form-control"  name="dosage">
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label  class="fnt" >Retail Price</label>       
+                                                    <input type='text'  pattern="^\d*(\.\d{0,2})?$"  title="Number only" class="form-control" name="retailPrice" required>
+                                                </div> 
+                                          </div>
                                         <div class="row mb-2">
                                             <div class="col-sm-6">
                                                     <label  class="fnt">Generic Name</label>
                                                     <input type="text" id="genericName" class="form-control" name="genericName" required >
                                             </div>
                                             <div class="col-sm-6">
-                                                    <label  class="fnt">Side Effect</label>       
-                                                    <select type="text" id="sideEffects" class="form-control" name="sideEffects">
-                                                            <option>Constipation</option>
-                                                            <option>Skin Rashes</option>
-                                                            <option>Diarrhea</option>
-                                                            <option>Dizziness</option>
-                                                            <option>Dry mouth</option>
-                                                            <option>Headache</option>
-                                                            <option>Insomnia</option>
-                                                            <option>Nausea</option>
-                                                            
-                                                    </select>
-                                            </div> 
+                                                <label  class="fnt" >Formulation</label>       
+                                                <select id="forumlationId" class="form-control"  name="formulationId" required >
+                                                    @foreach($formulations as $formulation)
+                                                    <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
+                                                    @endforeach
+                                                </select>
+                                             </div> 
                                         </div>
                                         
                                         <div class="row mb-2">
-                                        <div class="col-sm-6">
-                                                <label  class="fnt">Selling Price</label>
-                                                <input type="text" id="sellingPrice" class="form-control" name="price"   pattern="^\d*(\.\d{0,2})?$"  title="Number only">
+                                            <div class="col-sm-6">
+                                                <label  class="fnt" >Side Effect</label>       
+                                                <select id="sideEffectsId" class="js-example-basic-multiple form-control" multiple="multiple" name="sideEffectsId[]" rows='1' required>
+                                                    @foreach($sideEffects as $sideEffect)
+                                                    <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
+                                                    @endforeach       
+                                                </select>
                                             </div>
+                                            <div class="col-sm-6">
+                                                <label  class="fnt" >Diagnosis</label>       
+                                                <select id="diagnosisId" class="form-control"  name="diagnosisId"  required>
+                                                    @foreach($diagnosiss as $diagnosis)
+                                                    <option value={{$diagnosis->id}}>{{$diagnosis->diagnosis}}</option>
+                                                    @endforeach       
+                                                </select>
+                                            </div> 
                                         </div>
-                                </div>
+                                       
+                                       
+                                       
+                                </div>    
                              
                             <div class="DivTemplate">
                                 <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
@@ -195,7 +192,12 @@
     }
   }, 0);
 });
-</script>
 
+$(function()
+{
+  $(".js-example-basic-multiple").select2();
+});
+
+</script>
 
 @endsection

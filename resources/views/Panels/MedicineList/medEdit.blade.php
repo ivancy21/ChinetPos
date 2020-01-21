@@ -1,8 +1,8 @@
 @extends('Layouts.sidebar')
 @include('Layouts.cropImageModal')
 @section('contents')
-
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
 <form class="form-horizontal" method="POST" action="{{route('medicine.update',$medicine->id)}}" enctype="multipart/form-data">
     @csrf
@@ -25,8 +25,7 @@
                                             </div>
                                             <div class="d-flex justify-content-center">
                                                     <div class="btn btn-mdb-color btn-rounded float-left">
-                                                        <span>Choose file</span>
-                                                            
+                                                        <span>Choose file</span>         
                                                         <input type="file" id='medicinePhoto'
                                                         class="form-con{{ $errors->has('medicinePhoto') ? ' is-invalid' : '' }}"
                                                         name='medicinePic' style="border: none" />
@@ -45,7 +44,7 @@
                                 </div>
                                 <div class="flex HeaderBody">
                                     <div class="row  mb-2">
-                                        <div class="col">
+                                        <div class="col-sm-6">
                                             <label  class="fnt">Medicine Code</label>
                                             <input type="text" required class="form-control input{{ $errors->has('productCode') ? ' is-invalid' : '' }}"value="{{$medicine->productCode}}" name="productCode" tabindex="14">
                                             @if ($errors->has('productCode'))
@@ -54,90 +53,106 @@
                                             </span>
                                             @endif
                                         </div>
-                                
-                                        <div class="col">
+                                        <div class="col-sm-6">
                                             <label  class="fnt">Medicine Name</label>
-                                            <input type="text" required class="form-control input{{ $errors->has('name') ? ' is-invalid' : '' }}"  value="{{$medicine->name}}" name="name" tabindex="14">
-                                            @if ($errors->has('name'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>The Medicine Name is already Existed!</strong>
-                                            </span>
-                                            @endif
-                                        </div>
+                                            <input type="text" required class="form-control"  value="{{$medicine->brandName}}" name="brandName" >
+                                        </div> 
                                     </div>
                                     <div class="row  mb-2">
-                                        <div class="col">
-                                                <label  class="fnt">Category</label>
-                                                <input type="text" id="category" class="form-control"  value="{{$medicine->category}}" name="category"  >
-                                        </div>
-                                        <div class="col">
-                                                <label  class="fnt">Medicine Type</label>
-                                        <select type="text" id="type" class="form-control" name="type" >
-                                                        <option>{{$medicine->type}}</option>
-                                                        <option>Tablets</option>
-                                                        <option>Bottles</option>
-                                                        <option>Drops</option>
-                                                        <option>Inhalers</option>
-                                                        <option>Injections</option>
-                                                        <option>Capsules</option>
-                                                </select>
-                                        </div>
-                                        </div>
-                                    <div class="row  mb-2">
-                                        <div class="col">
-                                                <label  class="fnt">Generic Name</label>
-                                                <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
+                                        <div class="col-sm-6">
+                                            <label  class="fnt">Dosage</label>
+                                            <input type="text" id="dosage" required class="form-control"  name="dosage" value="{{$medicine->dosage}}">
                                         </div>
                                         <div class="col-sm-6">
-                                                <label  class="fnt">Side Effect</label>       
-                                                <select type="text" id="sideEffects" class="form-control" name="sideEffects">
-                                                        <option>Constipation</option>
-                                                        <option>Skin Rashes</option>
-                                                        <option>Diarrhea</option>
-                                                        <option>Dizziness</option>
-                                                        <option>Dry mouth</option>
-                                                        <option>Headache</option>
-                                                        <option>Insomnia</option>
-                                                        <option>Nausea</option>
-                                                        
-                                                </select>
+                                            <label  class="fnt" >Retail Price</label>       
+                                            <input type='text' id="retailPrice" required class="form-control"  name="retailPrice" value="{{$medicine->retailPrice}}">
                                         </div> 
-                                   </div>
-                                    <div class="row mb-2">
-                                            <div class="col-sm-6">
-                                                    <label  class="fnt">Selling Price</label>
-                                                    <input type="text" id="sellingPrice" class="form-control" name="price"   pattern="^\d*(\.\d{0,2})?$"  value="{{$medicine->price}}" title="Number only">
-                                                </div>
-                                            </div>
-                                    
-                                    <center>
-                                    <div class="form-row">
-                                        <div class="form-group col-sm-12">
-                                            <label class="input-label">STATUS</label><br>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1' @if ($medicine->medicine_status == 1) checked @endif>
-                                                <label class="form-check-label" for="emptyStatusActive">Active</label>
-                                            </div>
-                                            <div class="form-check form-check-inline ml-4">
-                                                <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0' @if ($medicine->medicine_status == 0) checked @endif>
-                                                <label class="form-check-label" for="statusInactive">Inactive</label> 
-                                            </div>
+                                    </div>    
+                                    <div class="row  mb-2">
+                                        <div class="col-sm-6">
+                                                <label  class="fnt">Formulations</label>
+                                                        <select type="text" id="formulationId" class="form-control" name="formulationId" >
+                                                            @foreach($formulations as $formulation)
+                                                                    @foreach ($formulation->medicines as $item)
+                                                                    <option @if($item->id == $medicine->id) {!! 
+                                                                            'selected = "selected" ' !!} @endif 
+                                                                    @endforeach
+                                                                    value={{$formulation->id}}>{!!$formulation->formulation !!}</option>
+                                                                    @endforeach
+                                                                    @foreach($formulations as $formulation)
+                                                                    <option value={{$formulation->id}}>{{$formulation->formulation}}</option>
+                                                            @endforeach
+                                                         </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label  class="fnt">Generic Name</label>
+                                            <input type="text" id="genericName" class="form-control" name="genericName"  value="{{$medicine->genericName}}"  >
                                         </div>
                                     </div>
-                                    </center>
-                            </div>
-                        
+                                    <div class="row  mb-2">
+                                        <div class="col-sm-6">
+                                            <label  class="fnt">Side Effect</label>       
+                                            <select id="sideEffectsId" class="js-example-basic-multiple form-control" multiple="multiple" name="sideEffectsId[]" rows='1'>
+                                                    @foreach($sideEffects as $sideEffect)
+                                                    @foreach ($sideEffect->medicineSideEffects as $item)
+                                                    <option @if($item->medicineId == $medicine->id) {!! 
+                                                            'selected = "selected" ' !!} @endif 
+                                                    @endforeach
+                                                    value={{$sideEffect->id}}>{!!$sideEffect->sideEffect !!}</option>
+                                                    @endforeach
+                                                    
+                                                    @foreach($sideEffects as $sideEffect)
+                                                    <option value={{$sideEffect->id}}>{{$sideEffect->sideEffect}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label  class="fnt" >Diagnosis</label>       
+                                                <select id="diagnosisId" class="form-control"  name="diagnosisId" required>
+                                                @foreach($diagnosiss as $diagnosis)
+                                                    @foreach ($diagnosis->medicineUses as $item)
+                                                    <option @if($item->id == $medicine->id) {!! 
+                                                             'selected = "selected" ' !!} @endif 
+                                                    @endforeach
+                                                    value={{$diagnosis->id}}>{!!$diagnosis->diagnosis !!}</option>
+                                                    @endforeach
+                                                    @foreach($diagnosiss as $diagnosis)
+                                                    <option value={{$diagnosis->id}}>{{$diagnosis->diagnosis}}</option>
+                                                @endforeach
+                                                </select>
+                                            </div>
+                                        </div>     
+                                            <div class="col-sm-6 offset-sm-6">
+                                                <div class="form-row">
+                                                    <div class="form-group ml-5 mt-3">
+                                                        <center>
+                                                        <label class="input-label">STATUS</label><br>
+                                                        <div class="form-check form-check-inline ml-4">
+                                                            <input type='radio' class="form-check-input" name='medicine_status' id="emptyStatusActive" value='1' @if ($medicine->medicine_status == 1) checked @endif>
+                                                            <label class="form-check-label" for="emptyStatusActive">Active</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline ml-4">
+                                                            <input type='radio' class="form-check-input" name='medicine_status' id="statusInactive" value='0' @if ($medicine->medicine_status == 0) checked @endif>
+                                                            <label class="form-check-label" for="statusInactive">Inactive</label> 
+                                                        </div>
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+                                  
                                 <div class="DivTemplate">
                                     <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
                                     <div class="hr mb-2"></div> 
                                     <button type="submit" class="btn btn-primary btn-sm">SAVE</button>
                                     <button class="btn btn-outline-info waves-effect float-right btn-sm" type="button" onclick="window.location='{{route('medicine.show',$medicine->id)}}'">BACK</button>    
                                 </div>
+                            </div> 
 
                     </div>
                 </div>              
-         </div>
-      </div>
+         
+      
 
       <script>
             $(document).ready(function () {
@@ -211,5 +226,11 @@
               }
             }, 0);
           });
+
+            $(function()
+            {
+            $(".js-example-basic-multiple").select2();
+            });
+
           </script>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PharmacyMedicine;
 use Illuminate\Http\Request;
 use App\Medicine;
+use App\Suppliers;
 
 class PharmacyMedicineController extends Controller
 {
@@ -16,7 +17,6 @@ class PharmacyMedicineController extends Controller
     public function index()
     {
         //
-       
         $medicines=Medicine::latest()->get();
         return view('Panels.PharmacyMedicine.pharMedIndex',compact("medicines"));
     }
@@ -30,6 +30,7 @@ class PharmacyMedicineController extends Controller
     public function create(Medicine $medicine)
     {
         //
+        
     }
 
     /**
@@ -42,7 +43,7 @@ class PharmacyMedicineController extends Controller
     {
         //
         $pharmacyMedicine=PharmacyMedicine::create($request->all());
-        return redirect()->route('inventory.show',$pharmacyMedicine->medicine->id)->with('success','Stock has been added');
+        return redirect()->route('medicineSuppliers.show',$pharmacyMedicine->medicine->id)->with('success','Stock has been added');
     }
 
     /**
@@ -51,13 +52,13 @@ class PharmacyMedicineController extends Controller
      * @param  \App\PharmacyMedicine  $PharmacyMedicine
      * @return \Illuminate\Http\Response
      */
-    public function show($PharmacyMedicine)
+    public function show($id)
     {
         
-        //
-        $pharmacyMedicine=PharmacyMedicine::where('medicineId','=',$PharmacyMedicine)->latest()->get();
-        $medicine=Medicine::where('id','=',$PharmacyMedicine)->latest()->first();
-        return view('Panels.PharmacyMedicine.pharMedCreate',compact("medicine","pharmacyMedicine"));
+        $suppliers=Suppliers::latest()->get();
+        $medicine=Medicine::where('id','=',$id)->latest()->first();
+        return view('Panels.MedicineSuppliers.create',compact("medicine","suppliers"));
+            
         
     }
 

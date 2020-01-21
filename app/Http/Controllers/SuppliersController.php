@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Medicine;
+
 use Illuminate\Http\Request;
-use App\PharmacyMedicine;
-class InventoryController extends Controller
+use App\Suppliers;
+use App\MedicineSuppliers;
+use App\Medicine;
+use Session;
+
+class SuppliersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,10 +17,10 @@ class InventoryController extends Controller
      */
     public function index()
     {
+        Session::put('CustomSettingTab', 'Supplier');
         //
-         //
-         $pharmacyMedicines=PharmacyMedicine::latest()->get();
-         return view('Panels.Inventory.viewAllHistory',compact("pharmacyMedicines")); 
+        $suppliers= Suppliers::latest()->get();
+        return view('LookupTable.Suppliers.suppliersIndex',compact("suppliers"));
     }
 
     /**
@@ -27,6 +31,7 @@ class InventoryController extends Controller
     public function create()
     {
         //
+        return view('LookupTable.Suppliers.suppliersCreate');
     }
 
     /**
@@ -38,8 +43,8 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         //
-        
-        
+        $suppliers = suppliers::create($request->all());
+        return redirect()->route("suppliers.index");
     }
 
     /**
@@ -50,12 +55,10 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-         //
-         
-         $pharmacyMedicines=PharmacyMedicine::where('medicineId','=',$id)->latest()->get();
-         $medicine=Medicine::where('id','=',$id)->latest()->first();
-         return view('Panels.Inventory.viewHistory',compact("medicine","pharmacyMedicines"));
-        
+        //
+        $suppliers = Suppliers::latest()->get();
+        $medicine = Medicine::where('id','=',$id)->latest()->first();
+        return view('Panels.MedicineSuppliers.add',compact('medicine',"suppliers"));
     }
 
     /**
@@ -67,6 +70,8 @@ class InventoryController extends Controller
     public function edit($id)
     {
         //
+        $supplier = Suppliers::find($id);
+        return view('LookupTable.Suppliers.suppliersEdit',compact("supplier"));
     }
 
     /**
@@ -79,6 +84,9 @@ class InventoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $suppliers=Suppliers::find($id);
+        $suppliers->update($request->all());
+        return redirect()->route("suppliers.index");
     }
 
     /**

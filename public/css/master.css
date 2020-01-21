@@ -5,10 +5,15 @@ body, html {
 body{
     color: #676767;
     background: linear-gradient(0deg, rgba(238,237,231,1) 51%, rgba(227,232,233,1) 100%);
+    /* background:#2b2a2a; */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
     .bg_2 {
-      background: linear-gradient(180deg, rgba(185,183,189,1) 51%, rgba(185,183,189,1) 100%);
+      /* background: linear-gradient(180deg, rgba(185,183,189,1) 51%, rgba(185,183,189,1) 100%); */
+      background-image: url("/images/sidebg.png");
+      background-size:cover;
       width: 100%;
       height: 40%;
       position: absolute;
@@ -75,8 +80,8 @@ a, a:hover, a:focus {
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transform-origin: bottom left;
     -webkit-box-shadow: 1px 0px 4px 0px rgba(109,120,119,1);
--moz-box-shadow: 1px 0px 4px 0px rgba(109,120,119,1);
-box-shadow: 1px 0px 4px 0px rgba(109,120,119,1);
+    -moz-box-shadow: 1px 0px 4px 0px rgba(109,120,119,1);
+     box-shadow: 1px 0px 4px 0px rgba(109,120,119,1); 
 }
 
 #sidebar.active {
@@ -125,9 +130,14 @@ box-shadow: 1px 0px 4px 0px rgba(109,120,119,1);
     background: rgb(111, 207, 231);
 }
 
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
+#sidebar ul li a.active  {
+     border: 2px solid #179e9c;
+    border-left: 8px solid #179c9a;
+    border-right: none;
+    color: #1e1e1e;
+    padding-left: 8px;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 
@@ -148,15 +158,6 @@ ul.CTAs a {
     margin-bottom: 5px;
 }
 
-a.download {
-    background: #fff;
-    color: #7386D5;
-}
-
-a.article, a.article:hover {
-    background: #6d7fcc !important;
-    color: #fff !important;
-}
 
 
 
@@ -207,6 +208,12 @@ a.article, a.article:hover {
 
 
 /*other Css*/
+.scrollit {
+    overflow-y: scroll;
+    height:500px;
+    margin-bottom:15px;
+}
+
 .zoom {
     transition: transform .2s;
   }
@@ -218,7 +225,7 @@ a.article, a.article:hover {
   }
 
 .schposi{
-    margin-left:480px;
+    float:right;
 }
 
 .get-right{
@@ -256,7 +263,7 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
 
 
 .img-sizes{
-    height:230px!important;
+    height:240px!important;
     width:350px!important; 
   }
 
@@ -329,6 +336,7 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
       /* max-width: 1024px; */
     width:100%;
     display:inline-block;
+    height:560px;
     margin-top: 10px;
     border-radius: 5px 5px 5px 5px;
     -moz-border-radius: 5px 5px 5px 5px;
@@ -360,6 +368,35 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
      margin-right:10px;
     }
 
+.DivHeaderText{
+        color: #0d8ab3;
+        font-weight:bolder;
+        font-size:13px;
+   }
+
+   .delete-button{
+    background: #de6600;
+    color: white ;
+    transition: 0.3s;
+    padding : 8px 10px;
+    min-width: 100px;
+    max-width: 680px;
+    border: none;
+}
+
+.update-button{
+    background: #8cbd01 ;
+    color: white ;
+    transition: 0.3s;
+    padding : 8px 10px;
+    min-width: 100px;
+    max-width: 680px;
+    border: none;
+}
+
+.tblheadfont1{
+    font-size:12px;
+}
 
 
 /*card css*/
@@ -370,7 +407,7 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
     width:160px;
      height:200px;
       display:inline-block;
-      margin-left: 15px;
+      margin-left: 16px;
       margin-top: 5px;
       border-radius: 5px 5px 5px 5px;
       -moz-border-radius: 5px 5px 5px 5px;
@@ -420,15 +457,15 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
 ----------------------------------------------------- */
 @media (max-width: 768px) {
     .schposi2{
-        margin-left:30px;
+        margin-left:8px;
     }
     .schposi{
-        margin-left:30px;
+        margin-left:40px;
         margin-top:10px;
     }
     #sidebar {
         margin-left: -220px;
-        transform: rotateY(90deg);
+        transform: rotateY(90deg);     
     }
     #sidebarCollapse{
         display:block;
@@ -459,9 +496,9 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
     .cards {
         /* max-width: 1024px; */
         width:120px;
-         height:200px;
+         height:210px;
           display:inline-block;
-          margin-left: 9px;
+          margin-left: 20px;
           margin-top: 5px;
           border-radius: 5px 5px 5px 5px;
           -moz-border-radius: 5px 5px 5px 5px;
@@ -478,3 +515,124 @@ box-shadow: 0px 0px 3px 0px rgba(88,87,92,1);
       }
 
 }
+
+
+/*Tabs CSS*/
+
+.tab {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 5px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    width: 20px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136, 0.3);
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #0996c1; 
+  }
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 7px 7px 7px 6px;
+    transition: 0.3s;
+    font-size: 14px;
+    color: #0996c1;
+    font-weight: 500;
+    min-width: 110px;
+    max-width: 150px;
+    display: inline-block;
+    margin-left: -5px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    border-right: 1px solid #ebebeb;
+  }
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  /* Create an active/current tablink class */
+  .tab button.active {
+    background-color: #0fceca;
+    color: white;
+  }
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+  }
+  .my-btn {
+       border: 1px solid #dddddd;
+       display: inline-block;
+       padding: 5px;
+       position: relative;
+       text-align: center;
+       transition: background 600ms ease, color 600ms ease;
+       color: #676767;
+       font-weight: 400 !important;
+  }
+   input[type="radio"].toggle {
+       display: none;
+  }
+   input[type="radio"].toggle + label {
+       cursor: pointer;
+       min-width: 60px;
+  }
+   input[type="radio"].toggle + label:hover {
+       background: #0fceca;
+       color: white;
+       border: 1px solid #0fceca;
+  }
+   input[type="radio"].toggle + label:after {
+       background: #0996c1;
+       content: "";
+       height: 100%;
+       position: absolute;
+       top: 0;
+       transition: left 200ms cubic-bezier(0.77, 0, 0.175, 1);
+       width: 100%;
+       z-index: -1;
+  }
+   input[type="radio"].toggle.toggle-left + label {
+       border-right: 0;
+  }
+   input[type="radio"].toggle.toggle-left + label:after {
+       left: 100%;
+  }
+   input[type="radio"].toggle.toggle-right + label {
+       margin-left: -4px;
+  }
+   input[type="radio"].toggle.toggle-right + label:after {
+       left: -100%;
+  }
+   input[type="radio"][value="true"].toggle:checked + label {
+       cursor: default;
+       color: #fff;
+       transition: color 200ms;
+       background: #de6600;
+       border: 1px solid #de6600;
+  }
+  input[type="radio"][value="false"].toggle:checked + label {
+       cursor: default;
+       color: #fff;
+       transition: color 200ms;
+       background: #8cbd01;
+       border: 1px solid #8cbd01;
+  }
+   input[type="radio"].toggle:checked + label:after {
+       left: 0;
+  }

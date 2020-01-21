@@ -11,13 +11,20 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Panels.home');
-});
-
+Route::get('pharmacySelect','PharmacyController@selectPharmacy')->name('selectPharmacy');
 Route::resource('pos','PosController');
-Route::resource('inventory','InventoryController');
+Route::resource('medicineSuppliers','MedicineSuppliersController');
 Route::resource('medicine','MedicineController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 Route::resource('pos','PosController');
+Route::resource('home','HomeController');
+Route::resource('settings','SettingsController');
+Route::resource('formulation','FormulationController');
+Route::resource('suppliers','SuppliersController');
+Route::resource('sideEffects','SideEffectsController');
+Route::resource('diagnosis','DiagnosisController');
+Route::resource('pharmacy','PharmacyController');
+Route::resource('pharMedCreate','PharmacyMedicineCreateController');
+
+
 
