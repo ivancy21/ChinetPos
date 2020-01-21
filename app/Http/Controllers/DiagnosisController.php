@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Diagnosis;
 use Illuminate\Http\Request;
 use App\MedicineUse;
+use App\Pharmacy;
 use Session;
 
 class DiagnosisController extends Controller
@@ -16,9 +17,9 @@ class DiagnosisController extends Controller
     public function index()
     {
         Session::put('CustomSettingTab', 'Diagnosis');
-        //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosiss= Diagnosis::latest()->get();
-        return view('LookupTable.Diagnosis.diagnosisIndex',compact("diagnosiss"));
+        return view('LookupTable.Diagnosis.diagnosisIndex',compact("diagnosiss",'pharmacy'));
      
      
     }
@@ -31,7 +32,8 @@ class DiagnosisController extends Controller
     public function create()
     {
         //
-        return view('LookupTable.Diagnosis.diagnosisCreate');
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        return view('LookupTable.Diagnosis.diagnosisCreate',compact('pharmacy'));
     
     }
 
@@ -69,8 +71,9 @@ class DiagnosisController extends Controller
     public function edit($id)
     {
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosis = Diagnosis::find($id);
-        return view('LookupTable.Diagnosis.diagnosisEdit',compact("diagnosis"));
+        return view('LookupTable.Diagnosis.diagnosisEdit',compact("diagnosis","pharmacy"));
     }
 
     /**

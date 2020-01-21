@@ -129,7 +129,7 @@ class MedicineController extends Controller
     public function create(Medicine $medicine)
     {
         //
-        $pharmacy = Pharmacy::latest()->first();
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosiss = Diagnosis::latest()->get();
         $formulations = Formulation::latest()->get();
         $sideEffects = SideEffects::latest()->get();
@@ -220,7 +220,7 @@ class MedicineController extends Controller
     {
         //
         // $sideEffects = SideEffects::where('id','=',$id)->latest()->get();
-        $pharmacy = Pharmacy::latest()->first();
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $medicineUse = MedicineUse::where('medicineId','=',$id)->latest()->get();
         $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
@@ -236,12 +236,13 @@ class MedicineController extends Controller
     public function edit($id)
     {
         // 
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosiss = Diagnosis::latest()->get(); 
         $medicineSideEffects = MedicineSideEffects::latest()->get();
         $sideEffects = SideEffects::latest()->get();
         $formulations = Formulation::latest()->get();
         $medicine = Medicine::find($id);
-        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects","diagnosiss"));
+        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects","diagnosiss","pharmacy"));
     
     }
 

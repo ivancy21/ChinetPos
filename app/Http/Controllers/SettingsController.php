@@ -5,6 +5,7 @@ use App\Formulation;
 use App\Suppliers;
 use App\SideEffects;
 use App\Diagnosis;
+use App\Pharmacy;
 use Illuminate\Http\Request;
 use Session;
 
@@ -21,11 +22,12 @@ class SettingsController extends Controller
         Session::put('inventoryTab', 'customSetting');
 
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $sideEffects= SideEffects::latest()->get();
         $suppliers= Suppliers::latest()->get();
         $diagnosis= Diagnosis::latest()->get();
         $formulations= Formulation::latest()->get();
-        return view('LookupTable.SideEffects.sideEffectsIndex',compact("formulations","sideEffects","diagnosis","suppliers"));
+        return view('LookupTable.SideEffects.sideEffectsIndex',compact("formulations","sideEffects","diagnosis","suppliers","pharmacy"));
      
     }
 
