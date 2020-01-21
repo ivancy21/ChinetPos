@@ -68,6 +68,11 @@
                               <i class="fa fa-info-circle" aria-hidden="true"></i> Pharmacy
                             </a>
                           </li>
+                          <li >
+                            <a  href="/medication" >
+                               <i class="fa fa-capsules" aria-hidden="true"></i> Inventory
+                            </a>
+                          </li>
             </ul>
 
            

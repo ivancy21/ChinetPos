@@ -4,8 +4,8 @@
 
 {{-- Modal --}}
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade PaymentModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLongTitle">Payment</h5>
@@ -14,41 +14,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="row">
-        <div class="col-sm-6">
-          <div class="scrollit">
-        <table id='table3' class="table table-borderless" cellspacing="0" width="100%">
-          <thead>
-              <tr>
-               <th width="200px" class="posheadfnt">Medicine Name</th>
-                <th width="100px" class="posheadfnt">Quantity</th>
-                <th width="100px" class="posheadfnt text-center ">Price</th>
-              </tr>
-            </thead>
-        <tbody id="table3tbody">
+        <label  class="fnt">Total:</label>
         
-       </tbody>   
-      </table>  
-    </div>
-      <div class="hr mb-2"></div> 
-      <p class="split-para"><b>Total:</b> <span id="totals">&#8369; 0 </span></p>
-    
-    </div>
-    <div class="col-sm-6">
-    
-        <div class="col">
-            <label  class="fnt">Medicine Code</label>
-            <input type="text" required class="form-control" tabindex="14">
-        </div>
-
-        <div class="col">
-            <label  class="fnt">Medicine Name</label>
-            <input type="text" required class="form-control"  tabindex="14">
-        </div>
-    
-
-    </div>
-      </div>
+        <h1  class="text-center" style="font-size:78px;"> &#8369; 0</h1>   
+     
+   
+   
+   
     </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -58,7 +30,11 @@
   </div>
 </div>
 
-<div style="padding:2%;">
+
+<button class="btn btn-outline-info waves-effect  btn-sm" type="button" onclick="window.location = '{{ route('medicine.index') }}'">EXIT POS</button>    
+
+ {{-- Start --}}
+<div style="padding:1%;">
        <div class="row">
          <div class="col-sm-8">
     <div class="d-flex flex-column">
@@ -104,60 +80,43 @@
 
 {{-- TABLE 2 --}}
 <div class="col-sm-4">
-<div class="posTemplate"> 
+<div class="DivTemplate"> 
     <div class="table-responsive"> 
       <div class="scrollit">
       <table id='table2' class="table table-borderless" cellspacing="0" width="100%">
           <thead>
               <tr>
-               <th width="200px" class="posheadfnt">Medicine Name</th>
+               <th class="posheadfnt">Medicine Name</th>
                 <th width="100px" class="posheadfnt">Quantity</th>
                 <th width="100px" class="posheadfnt text-center ">Price</th>
+                <th width="50px" class="posheadfnt text-center "></th>
               </tr>
             </thead>
         <tbody id="table2tbody">
-          {{-- <tr>
-            <td class="posfnt">Cetirizine</td>
-            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
-            <td class="text-center posfnt">&#8369; 20</td>
-          </tr> --}}
-        {{-- <tr>
-            <td class="posfnt">Biogesic</td>
-            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
-            <td class="text-center posfnt">&#8369; 20</td>
-        </tr>
-        <tr>
-            <td class="posfnt">Neozep</td>
-            <td> <input type="number" class="form-control posfnt form-control-sm" value="1" /></td>
-            <td class="text-center posfnt">&#8369; 20</td>
-        </tr> --}}
        </tbody>   
       </table>  
     </div>
-      <div class="hr mb-2"></div> 
-      <p class="split-para"><b>Total:</b> <span id="total">&#8369;0 </span></p>
-    
+     
+      
+  </div> 
     </div> 
+ 
+    <div class="DivTemplate"> 
+    <h1 class="split-para"><b>Total:</b> <span id="total">&#8369;0 </span></h1>
+      <h6 class="split-para"><b>Tax:</b> <span >&#8369;0 </span></h6>
+      <h6 class="split-para"><b>Discounts:</b> <span >&#8369;0 </span></h6>
+      <h6 class="split-para"><b>Items:</b> <span id="NoItems" >0</span></h6>
+      <label  class="fnt" >Amount tender</label>       
+      <input type='number'  class="form-control" >
+      <button type="submit" class="btn btn-warning form-control mt-2" id="paymentbtn" data-toggle="modal" data-target=".PaymentModal" >Discounts</button>
+      <button type="submit" class="btn btn-primary form-control mt-2" id="paymentbtn" data-toggle="modal" data-target=".PaymentModal" >PAYMENT</button>
   </div>
 
-  <div class="DivTemplate">
-      <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
-      <div class="hr mb-2"></div> 
-      <button type="submit" class="btn btn-primary btn-sm float-right" id="paymentbtn" data-toggle="modal" data-target=".bd-example-modal-lg" >PAYMENT</button>
-      <button class="btn btn-outline-info waves-effect  btn-sm" type="button" onclick="window.location = '{{ route('medicine.index') }}'">EXIT POS</button>    
-  </div>
-
-
 
 </div>
 
-
-
-
 </div>
 
-
-</div>
 </div>
 
 
@@ -166,26 +125,24 @@
  
 $(document).ready( function () {
       var table =  $('#TblSorter1').DataTable({
-        scrollY: 500,
-        scrollX: 500,
-    paging: false
-      });
+              scrollY: 500,
+              scrollX: 500,
+              paging: false
+          });
 
       $('#myModal').modal('toggle');
 
-      // table.on('draw', function () {
-      //   btnselect();
-      // });
-     
        btnselect();
      
 });
-
+var ItemVal = 0;
 var count = -1;
 // when button select or click
     function btnselect(){
         var select = $('.btn-info');
         var table2 = $('#table2tbody');
+        var noItem = $('#NoItems');
+       
        
          select.each( function(){
               $(this).click(function() {
@@ -194,6 +151,9 @@ var count = -1;
                       var price = $(this).closest('.highlight').find('td[id^=price]').html();
                       
            $(this).closest('tr').hide();
+
+                ItemVal++;
+                noItem.html(ItemVal);   
 
             clone(table2,name,price,count);
             Total();
@@ -209,7 +169,6 @@ var count = -1;
       }));
          removetable();
          Quantity();
-         payment();
     }
 
 // delete the data on table 2
@@ -218,7 +177,7 @@ var count = -1;
         var deleteList = $('button[id^=deletelist]');
         var difference = 0;
         var total = $('#total');
-
+      
         deleteList.each(function(){
           $(this).click(function(){
             var Name1 = $(this).closest('tr').find('.nameClass').html();
@@ -229,7 +188,7 @@ var count = -1;
                               $(this).closest('tr').show();
                             }
                       });
-               
+
             $(this).closest('tr').remove();
             Total();
            
@@ -270,30 +229,7 @@ var count = -1;
       });
    }
 
-
-   function payment(){
-
-   $('#paymentbtn').click(function() {
-
-    $(this).find('td').each (function() {
-  // do your cool stuff
-  alert('');
-});  
-
-//     // For each "selected" row of table1 ..
-//     var rowFromTable1 = $(this);
-
-//     // .. Take a clone/copy of it ..
-//     var clonedRowFromTable1 = rowFromTable1.clone();
-
-//     // .. And append the cloned row to the tbody of table2
-//     $('tbody', '#tabe3').append( clonedRowFromTable1 )
-//  });
-
- });
-}
-
-
+  
 
    </script>
 @endsection

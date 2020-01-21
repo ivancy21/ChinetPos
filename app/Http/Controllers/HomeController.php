@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pharmacy;
 use Session;
+
 class HomeController extends Controller
 {
     /**
@@ -14,7 +16,8 @@ class HomeController extends Controller
     public function index()
     {
         Session::put('inventoryTab', 'home');
-         return view('Panels.home'); 
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+         return view('Panels.home',compact('pharmacy')); 
     }
 
     /**
