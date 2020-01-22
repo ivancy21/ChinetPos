@@ -1,15 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\MedicineSuppliers;
-use App\Medicine;
-use App\Suppliers;
+use App\SideEffect;
+use App\MedicineSideEffect;
 use App\Pharmacy;
 use Illuminate\Http\Request;
-use App\PharmacyMedicine;
 use Session;
 
-class MedicineSuppliersController extends Controller
+class SideEffectController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,13 +16,15 @@ class MedicineSuppliersController extends Controller
      */
     public function index()
     {
+
+        Session::put('CustomSettingTab', 'SideEffects');
+
         //
-         //
-         Session::put('inventoryTab', 'stockHistory');
-         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-         $medicineSuppliers = MedicineSuppliers::latest()->get();
-         $medicine = Medicine::latest()->get();
-         return view('Panels.MedicineSuppliers.viewAllHistory',compact("medicine","medicineSuppliers",'pharmacy')); 
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        $sideEffects= SideEffect::latest()->get();
+        return view('LookupTable.SideEffects.sideEffectsIndex',compact("sideEffects",'pharmacy'));
+     
+     
     }
 
     /**
@@ -35,12 +35,9 @@ class MedicineSuppliersController extends Controller
     public function create()
     {
         //
-        
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $suppliers = Suppliers::latest()->get();
-        $medicine = Medicine::latest()->get();
-        return view('Panels.MedicineSuppliers.create',compact("suppliers","medicine","pharmacy"));
-       
+        return view('LookupTable.SideEffects.sideEffectsCreate',compact('pharmacy'));
+    
     }
 
     /**
@@ -52,11 +49,9 @@ class MedicineSuppliersController extends Controller
     public function store(Request $request)
     {
         //
+        $sideEffects = SideEffect::create($request->all());
+        return redirect()->route("sideEffects.index");
     
-        $medicine = medicine::latest()->first();
-        $medicineSuppliers = MedicineSuppliers::create($request->all());
-        return redirect()->route('medicineSuppliers.show',$medicineSuppliers->medicine->id);
-        
     }
 
     /**
@@ -67,12 +62,7 @@ class MedicineSuppliersController extends Controller
      */
     public function show($id)
     {
-         //
-        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
-        $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineSuppliers.viewHistory',compact("medicine","medicineSuppliers",'pharmacy'));
-        
+        //
     }
 
     /**
@@ -84,6 +74,9 @@ class MedicineSuppliersController extends Controller
     public function edit($id)
     {
         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        $sideEffect = SideEffect::find($id);
+        return view('LookupTable.SideEffects.sideEffectsEdit',compact("sideEffect","pharmacy"));
     }
 
     /**
@@ -93,9 +86,12 @@ class MedicineSuppliersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         //
+        $sideEffects=SideEffect::find($id);
+        $sideEffects->update($request->all());
+        return redirect()->route("sideEffects.index");
     }
 
     /**
@@ -104,8 +100,13 @@ class MedicineSuppliersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(SideEffect $sideEffect,$id)
     {
         //
+        $sideEffect = SideEffect::find($id);
+        $medicineSideEffects = MedicineSideEffect::find($id);
+        $sideEffect->delete();
+        $medicineSideEffects->delete();
+        return redirect()->route('sideEffects.index');
     }
 }

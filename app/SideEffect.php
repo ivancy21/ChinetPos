@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SideEffects extends Model
+class SideEffect extends Model
 {
     //
     protected $table = 'SideEffects';
@@ -13,7 +13,7 @@ class SideEffects extends Model
 
     public function medicineSideEffects()
     {
-        return $this->hasMany(MedicineSideEffects::class, 'sideEffectsId');
+        return $this->hasMany(MedicineSideEffect::class, 'sideEffectsId');
     }
 
     

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Medicine extends Model
 {
     //
-    protected $table = 'Medicine';
+    protected $table = 'Medicines';
     protected $guarded =['id','created_at','updated_at'
     ];
 
@@ -18,7 +18,7 @@ class Medicine extends Model
 
     public function medicineSuppliers()
     {
-        return $this->hasMany(MedicineSuppliers::class, 'medicineId');
+        return $this->hasMany(MedicineSupplier::class, 'medicineId');
     }
 
     public function medicineUses()
@@ -28,7 +28,7 @@ class Medicine extends Model
 
     public function medicineSideEffects()
     {
-        return $this->hasMany(MedicineSideEffects::class, 'medicineId');
+        return $this->hasMany(MedicineSideEffect::class, 'medicineId');
     }
 
     public function formulation()

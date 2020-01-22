@@ -22,22 +22,24 @@
             <ul class="sidebar-navigation list-unstyled components">
                     <li class="header">Navigation</li>
                     <li >
-                            <a href="{{route('home.index')}}" class="@if (Session::get("inventoryTab") == 'home') active @endif">
+                            <a href="{{route('home.index')}}" class="@if (Session::get("sideTab") == 'home') active @endif">
                               <i class="fa fa-home" aria-hidden="true"></i> Homepage
                             </a>
                      </li >
                           <li >
-                            <a  href="{{route('medicine.index')}}" class="@if (Session::get("inventoryTab") == 'medicineList') active @endif">
-                               <i class="fa fa-capsules" aria-hidden="true"></i> Medicine List
+                            <a  href="{{route('inventory.index')}}" class="@if (Session::get("sideTab") =='inventory') active @endif">
+                               <i class="fa fa-capsules" aria-hidden="true"></i> Inventory
                             </a>
                           </li>
                           <li>
-                            <a  href="{{route('medicineSuppliers.index')}}" class="@if (Session::get("inventoryTab") == 'stockHistory') active @endif">
-                              <i class="fas fa-history"></i> Stocks History
+                            <input type="hidden" name="pharmacyId" value="{{$pharmacy->id}}">
+                            <a  href="{{route('medicineSuppliers.index')}}" class="@if (Session::get("sideTab") == 'stockHistory') active @endif">
+                              <i class="fas fa-history"></i> Stocks Inventory
                             </a>
                           </li>
+                          
                           <li>
-                            <a   href="{{route('settings.index')}}" class="@if (Session::get("inventoryTab") == 'customSetting') active @endif">
+                            <a   href="{{route('settings.index')}}" class="@if (Session::get("sideTab") == 'customSetting') active @endif">
                               <i class="fas fa-plus-square"></i> Side Effect, Diagnosis, Supplier
                             </a>
                           </li>
@@ -68,11 +70,7 @@
                               <i class="fa fa-info-circle" aria-hidden="true"></i> Pharmacy
                             </a>
                           </li>
-                          <li >
-                            <a  href="/medication" >
-                               <i class="fa fa-capsules" aria-hidden="true"></i> Inventory
-                            </a>
-                          </li>
+                      
             </ul>
 
            

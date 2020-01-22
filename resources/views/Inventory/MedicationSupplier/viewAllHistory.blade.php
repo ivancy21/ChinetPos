@@ -27,7 +27,7 @@
                   
                   @foreach($medicineSuppliers as $medicineSupplier)
                   <tr class="text-center highlight">                                 
-                  <td class="cnterAlgn">{{$medicineSupplier->medicine->brandName}}</td>
+                  <td class="cnterAlgn">{{$medicineSupplier->medicine->brandName}} {{$medicineSupplier->medicine->dosage}}</td>
                   <td class="cnterAlgn">{{$medicineSupplier->supplier->suppliersName}}</td>
                   <td class="cnterAlgn">{{$medicineSupplier->lotNumber}}</td>
                   <td class="cnterAlgn">&#8369;{{ number_format($medicineSupplier->purchasedPrice,2)}}</td>
@@ -38,7 +38,18 @@
                   </tr>
                  @endforeach
                 
-                
+                 @foreach($nonMedicationSupplier as $nonMedicationSupplier)
+                 <tr class="text-center highlight">                                 
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->nonMedication->brandName}} </td>
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->supplier->suppliersName}}</td>
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->lotNumber}}</td>
+                 <td class="cnterAlgn">&#8369;{{ number_format($nonMedicationSupplier->purchasedPrice,2)}}</td>
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->receivedMonth}}-{{$nonMedicationSupplier->receivedDay}}-{{$nonMedicationSupplier->receivedYear}}</td>
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->manufacturedMonth}}-{{$nonMedicationSupplier->manufacturedDay}}-{{$nonMedicationSupplier->manufacturedYear}}</td>
+                 <td class="cnterAlgn">{{$nonMedicationSupplier->expirationMonth}}-{{$nonMedicationSupplier->expirationDay}}-{{$nonMedicationSupplier->expirationYear}}</td>
+                     <td class="cnterAlgn">{{$nonMedicationSupplier->quantity}}</td>
+                 </tr>
+                @endforeach
                
                 </tbody>
               </table>

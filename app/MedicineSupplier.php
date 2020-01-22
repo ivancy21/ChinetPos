@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MedicineSuppliers extends Model
+class MedicineSupplier extends Model
 {
     //
     protected $table = 'MedicineSuppliers';
@@ -17,9 +17,15 @@ class MedicineSuppliers extends Model
         return $this->belongsTo(Medicine::class, 'medicineId');
     }
 
+    public function nonMedication()
+    {
+        return $this->belongsTo(Medicine::class, 'medicineId');
+    }
+
+    
     public function supplier()
     {
-        return $this->belongsTo(Suppliers::class, 'supplierId');
+        return $this->belongsTo(Supplier::class, 'supplierId');
     }
 
 }

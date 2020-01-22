@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MedicineSideEffects extends Model
+class MedicineSideEffect extends Model
 {
     //
     protected $table = 'MedicineSideEffects';
@@ -18,7 +18,7 @@ class MedicineSideEffects extends Model
 
     public function sideEffect()
     {
-        return $this->belongsTo(SideEffects::class, 'sideEffectsId');
+        return $this->belongsTo(SideEffect::class, 'sideEffectsId');
     }
 
     public function medicine()

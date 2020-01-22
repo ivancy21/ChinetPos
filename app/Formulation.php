@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Formulation extends Model
 {
     //
-    protected $table = 'Formulation';
+    protected $table = 'Formulations';
     protected $guarded =['id','created_at','updated_at'
     ];
 

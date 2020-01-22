@@ -13,18 +13,21 @@
 
 Route::get('pharmacySelect','PharmacyController@selectPharmacy')->name('selectPharmacy');
 Route::resource('pos','PosController');
-Route::resource('medicineSuppliers','MedicineSuppliersController');
+Route::resource('medicineSuppliers','MedicineSupplierController');
+Route::resource('nonMedicationSuppliers','NonMedicationSupplierController');
 Route::resource('medicine','MedicineController');
+Route::resource('nonMedication','NonMedicationController');
 Route::resource('pharmacyMedicine','PharmacyMedicineController');
 Route::resource('pos','PosController');
 Route::resource('home','HomeController');
-Route::resource('settings','SettingsController');
+Route::resource('settings','SettingController');
 Route::resource('formulation','FormulationController');
-Route::resource('suppliers','SuppliersController');
-Route::resource('sideEffects','SideEffectsController');
+Route::resource('suppliers','SupplierController');
+Route::resource('sideEffects','SideEffectController');
 Route::resource('diagnosis','DiagnosisController');
 Route::resource('pharmacy','PharmacyController');
 Route::resource('pharMedCreate','PharmacyMedicineCreateController');
+Route::resource('inventory','InventoryController');
 
 
 
@@ -42,9 +45,7 @@ Route::get('/medicationShow', function () {
 });
 
 
-Route::get('/nonmedication', function () {
-    return view('Inventory.NonMedication.nonMedicationIndex');
-});
+
 
 Route::get('/nonmedicationCreate', function () {
     return view('Inventory.NonMedication.nonMedicationCreate');

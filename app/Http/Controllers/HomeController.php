@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        Session::put('inventoryTab', 'home');
+        Session::put('sideTab', 'home');
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
          return view('Panels.home',compact('pharmacy')); 
     }

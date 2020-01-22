@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Medicine;
-use App\NonMedication;
 use App\MedicineSupplier;
 use App\NonMedicationSupplier;
-use App\Pharmacy;
+use App\Medicine;
+use App\Supplier;
+use App\Pharmacy;       
+use Illuminate\Http\Request;
 use App\PharmacyMedicine;
 use Session;
-class PosController extends Controller
+
+class MedicineSupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,11 +20,12 @@ class PosController extends Controller
     public function index()
     {
         //
-        
-        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+         //
+         Session::put('sideTab', 'stockHistory');
+         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
          $medicineSuppliers = MedicineSupplier::where('supplierId', Session::get('pharmacy')->id)->latest()->get();
-         $nonMedicationSuppliers = NonMedicationSupplier::where('supplierId', Session::get('pharmacy')->id)->latest()->get();
-         return view('Panels.Pos.posIndex',compact("medicineSuppliers","nonMedicationSuppliers","pharmacy"));
+         $nonMedicationSupplier = NonMedicationSupplier::where('supplierId', Session::get('pharmacy')->id)->latest()->get();
+         return view('Inventory.MedicationSupplier.viewAllHistory',compact("nonMedicationSupplier","medicineSuppliers",'pharmacy')); 
     }
 
     /**
@@ -35,6 +36,12 @@ class PosController extends Controller
     public function create()
     {
         //
+        
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        $suppliers = Supplier::latest()->get();
+        $medicine = Medicine::latest()->get();
+        return view('Inventory.MedicationSupplier.create',compact("suppliers","medicine","pharmacy"));
+       
     }
 
     /**
@@ -46,6 +53,11 @@ class PosController extends Controller
     public function store(Request $request)
     {
         //
+    
+        $medicine = medicine::latest()->first();
+        $medicineSuppliers = MedicineSupplier::create($request->all());
+        return redirect()->route('medicineSuppliers.show',$medicineSuppliers->medicine->id);
+        
     }
 
     /**
@@ -56,7 +68,12 @@ class PosController extends Controller
      */
     public function show($id)
     {
-        //
+         //
+        $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
+        $medicineSuppliers = MedicineSupplier::where('medicineId','=',$id)->latest()->get();
+        $medicine = Medicine::where('id','=',$id)->latest()->first();
+        return view('Inventory.MedicationSupplier.viewHistory',compact("medicine","medicineSuppliers",'pharmacy'));
+        
     }
 
     /**
@@ -79,11 +96,7 @@ class PosController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $pharmcyMedicine = DB::table('PharmacyMedicine')
-        // ->whereColumn([
-        //     ['quantity', '=', 'quantity'],
-        //     ['updated_at', '>', 'created_at']
-        // ])->get();
+        //
     }
 
     /**

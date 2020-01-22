@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Suppliers extends Model
+class Supplier extends Model
 {
     //
     protected $table = 'Suppliers';
@@ -14,7 +14,7 @@ class Suppliers extends Model
     
     public function medicineSuppliers()
     {
-        return $this->hasMany(MedicineSuppliers::class, 'supplierId');
+        return $this->hasMany(MedicineSupplier::class, 'supplierId');
     }
 
     

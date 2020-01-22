@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\PharmacyMedicine;
 use Illuminate\Http\Request;
 use App\Medicine;
-use App\Suppliers;
+use App\Supplier;
 
 class PharmacyMedicineController extends Controller
 {
@@ -55,7 +55,7 @@ class PharmacyMedicineController extends Controller
     public function show($id)
     {
         
-        $suppliers=Suppliers::latest()->get();
+        $suppliers=Supplier::latest()->get();
         $medicine=Medicine::where('id','=',$id)->latest()->first();
         return view('Panels.MedicineSuppliers.create',compact("medicine","suppliers"));
             

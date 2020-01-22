@@ -1,105 +1,160 @@
+@extends('Layouts.sidebar')
+@include('Layouts.cropImageModal')
+@section('contents')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 
-@extends('Inventory.InventoryMaster.inventoryMaster')
-@section('Inventory')
-       
-<div class="CardDiv">
-    <div style="background-color:#C4DBE0; width:100%;height:50px; border-radius:5px; padding-top:6px;">
-    <div class="row">
-          <div class="col-sm-8 schposi2">
-            <div class="row ml-1">
-                            {{-- latest --}}
-                                <button type="submit" name="latest" class="btn btn-primary ml-1">Latest</button>
+<form class="form-horizontal" method="POST" action="{{route('nonMedication.update',$nonMedication->id)}}" enctype="multipart/form-data">
+    @csrf
+    @method('PUT')
 
-                            {{-- oldest --}}
-                                <button type="submit" name="oldest" class="btn btn-sm btn-primary ml-1">Oldest </button>
-
-                            {{-- Active --}}
-                                   
-                                          <button type="submit" name="Active" class="btn btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Active</button>
-                                        <div class="dropdown-menu">
-                                           
-                                               <input type="submit" class="dropdown-item" name="activeAll" class="btn btn-sm btn-primary ml-1" value="All" />
-                                          
-                                           
-                                                <input type="submit" class="dropdown-item" name="activeTablets" class="btn btn-sm btn-primary ml-1" value="Tablets" >
-                                          
-                                               <input type="submit" class="dropdown-item" name="activeBottles" class="btn btn-sm btn-primary ml-1" value="Bottles" >
-                                        
-                                                <input type="submit" class="dropdown-item" name="activeDrops" class="btn btn-sm btn-primary ml-1" value="Drops" />
-                                           
-                                                <input type="submit" class="dropdown-item" name="activeInhalers" class="btn btn-sm btn-primary ml-1" value="Inhalers" >
-                                          
-                                                <input type="submit" class="dropdown-item" name="activeInjections" class="btn btn-sm btn-primary ml-1" value="Injections" >
-                                        
-                                               <input type="submit" class="dropdown-item" name="activeCapsules" class="btn btn-sm btn-primary ml-1" value="Capsules" >
-                                        
-                                        </div>
-                                   
+<div class="container">
+  <div class="row">
+          <div class="col-sm-4">
+              <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
+                      <span class="HeaderBannerText">Insert Picture</span>
+              </div>
+              <div class="flex HeaderBody">
+                      <form class="md-form">
+                          <div class="file-field">
+                              <div class="z-depth-1-half mb-4">
+                                @if ($nonMedication->nonMedicationPhoto != null)
+                                <img src="{{ asset('images/medicinePhotos/'.$nonMedication->nonMedicationPhoto) }}" size="250px"  id="Photo" class="img-fluid img-sizes img-shadow" alt="">
+                                @else
+                                <img src="{{ asset('images/medicineicon.png') }}" size="250px" id="Photo" class="img-fluid img-sizes img-shadow" alt="" >
+                                @endif 
+                              </div>
+                              <div class="d-flex justify-content-center">
+                                  <div class="btn btn-mdb-color btn-rounded float-left" style="margin-top:-15px;">
+                                  <span>Choose file</span>
+                                      
+                                  <input type="file" id='nonMedicationPhoto'
+                                   name='nonMedicationPic' style="border: none" />
+                                  <input type="hidden" id="nonMedicationPhotos" name="nonMedicationPhoto">
+                              </div>
+                              </div>
+                              </div>
                      
-                                      {{-- InActive --}}
-                                    
-                                        <button type="submit" name="Active" class="btn btn-sm btn-primary ml-1 dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value="Active" >Inactive</button>
-                                         <div class="dropdown-menu">
-                                         
-                                                <input type="submit" class="dropdown-item" name="inactiveAll" class="btn btn-sm btn-primary ml-1" value="All" />
-                                        
-                                                <input type="submit" class="dropdown-item" name="inactiveTablets" class="btn btn-sm btn-primary ml-1" value="Tablets" >
-                                          
-                                                <input type="submit" class="dropdown-item" name="inactiveBottles" class="btn btn-sm btn-primary ml-1" value="Bottles" >
-                                          
-                                                <input type="submit" class="dropdown-item" name="inactiveDrops" class="btn btn-sm btn-primary ml-1" value="Drops" />
-                                          
-                                                <input type="submit" class="dropdown-item" name="inactiveInhalers" class="btn btn-sm btn-primary ml-1" value="Inhalers" >
-                                         
-                                                <input type="submit" class="dropdown-item" name="inactiveInjections" class="btn btn-sm btn-primary ml-1" value="Injections" >
-                                          
-                                                <input type="submit" class="dropdown-item" name="inactiveCapsules" class="btn btn-sm btn-primary ml-1" value="Capsules" >
-                                           
-                                          </div>  
-                                       
-                                      </div>
-           </div>
-                                          
-                                        
-           <div class="col-sm-4">       
-                  <div class="schposi">
-          <a  style="float:right; color:#059DC0; margin-right:5px;margin-top:3px; cursor: pointer;" href="/nonmedicationCreate" data-toggle="tooltip" title="Add Medicine"><i class="fas fa-plus fa-2x zoom"></i></a>                                           
-                    <input type="text" name="search" placeholder="Search.." >
-                        <button type="submit" class="sc"><i class="fa fa-search"></i></button>
-                             
-                </div>
-                 </div>
-                </div>    
-            </div>               
-          
-               
-
-<div style="width:100%;height:100%;" >
-
+                  </div>
+          </div>
   
-    <div class="cards zoom"  style="cursor: pointer;">
-          <div class="image">
-            
-           
-              <img src="{{ asset('images/medicineicon.png') }}" height="50px" width="90px" alt="" class="img-shadow card-img">
-            
-          </div>
-        <div class="container" >
-              <div class="table-responsive" >
-                <center>
-                            
-                              <h6 style="color:black;" class="fnt mt-2"><b> uiiui</b></h6>
-                              <h6 style="color:black;" class="fnt">uiyiui</h6>
-                              <h6 style="color:green;" class="fnt">Avail: uyiyu left   </h6>
-                           
-                </center>                                                   
-               </div>
-          </div>
-      </div>
-        <!--cards -->
-      
+        <div class="col-sm-8">
+                      <div class="HeaderBanner p-2 px-3" style="border-radius: .75rem .75rem 0rem 0rem; letter-spacing: 1px;">
+                              <span class="HeaderBannerText">Details</span>
+                      </div>
+                      <div class="flex HeaderBody">
+                          <div class="row mb-2">
+                              <div class="col-sm-6">
+                                  <label  class="fnt">Product Code</label>
+                                  <input type="text" required class="form-control"  name="productCode" value={{$nonMedication->productCode}} tabindex="1">                   
+                              </div>
+                      
+                              <div class="col-sm-6">
+                                  <label  class="fnt">Brand Name</label>
+                                  <input type="text" id="brandName" required class="form-control" name="brandName"value={{$nonMedication->brandName}} tabindex="2">
+                              </div>
+                          </div>
+                          <div class="row mb-2">
+                                  <div class="col-sm-6">
+                                      <label  class="fnt">Retail Price</label>
+                                      <input type="text" id="retailPrice" required class="form-control"  name="retailPrice" value={{$nonMedication->retailPrice}} tabindex="3">
+                                  </div>
+                          </div>
+                  </div>    
+               
+              <div class="DivTemplate">
+                  <p class='DivHeaderText' style="font-size:9px;">ACTIONS</p>
+                  <div class="hr mb-2"></div> 
+                  <button type="submit" class="btn btn-primary" tabindex="9" >SAVE</button>
+                  <input class="btn btn-outline-info waves-effect float-right" onclick="window.location='{{route('nonMedication.show',$nonMedication->id)}}'"type="button"  value="BACK">    
+              </div>
+        </div>
+   </div>
 </div>
- 
 </div>
+</form>
 
-@endSection
+
+
+
+<script>
+$(document).ready(function () {
+//Crop image
+$image_crop = $('#image_demo').croppie({
+enableExif: true,
+viewport: {
+width:200,
+height:200,
+type:'square' //circle
+},
+boundary:{
+width:300,
+height:300
+}
+});
+    
+$('#nonMedicationPhoto').on('change', function(){
+var reader = new FileReader();
+reader.onload = function (event) {
+$image_crop.croppie('bind', {
+    url: event.target.result
+}).then(function(){
+    console.log('jQuery bind complete');
+});
+}
+reader.readAsDataURL(this.files[0]);
+$('#uploadimageModal').modal('show');
+});
+
+$('.crop_image').click(function(event){
+$image_crop.croppie('result', {
+type: 'canvas',
+size: 'viewport'
+}).then(function(response){
+$('#Photo').attr('src', response);
+$("#nonMedicationPhotos").val(response);
+$('#uploadimageModal').modal('hide');
+})
+});
+
+});
+
+$(function () {
+$("#nonMedicationPhoto").change(function () {
+readURL(this);
+});
+});
+
+function readURL(input) {
+if (input.files && input.files[0]) {
+var reader = new FileReader();
+reader.onload = function (e) {
+  //alert(e.target.result);
+  $('#Photo').attr('src', e.target.result);
+};
+
+reader.readAsDataURL(input.files[0]);
+}
+}
+
+$(document).on('keydown', 'input[pattern]', function(e){
+var input = $(this);
+var oldVal = input.val();
+var regex = new RegExp(input.attr('pattern'), 'g');
+
+setTimeout(function(){
+var newVal = input.val();
+if(!regex.test(newVal)){
+input.val(oldVal); 
+}
+}, 0);
+});
+
+$(function()
+{
+$(".js-example-basic-multiple").select2();
+});
+
+</script>
+
+@endsection
