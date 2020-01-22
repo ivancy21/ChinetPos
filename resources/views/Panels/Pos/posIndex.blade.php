@@ -57,19 +57,33 @@
           </tr>
         </thead>
         <tbody>       
-            @foreach($medicines as $medicine)
-            @if($medicine->medicine_status==1)
-            @if($medicine->medicineSuppliers->sum('quantity')>0)
+          @foreach($medicineSuppliers as $medicine)
+            @if($medicine->medicine->medicine_status==1)
+            @if($medicine->medicine->medicineSuppliers->sum('quantity')>0)
           <tr class="text-center highlight">
-          <td id="name{{$medicine->count}}">{{$medicine->brandName}} ({{$medicine->dosage}})</td>
-            <td>{{$medicine->productCode}}</td> 
-          <td id="price{{$medicine->count}}">&#8369;{{ number_format($medicine->retailPrice,2)}}</td>
-            <td>{{$medicine->medicineSuppliers->sum('quantity')}}</td>
+          <td id="name{{$medicine->medicine->count}}">{{$medicine->medicine->brandName}} ({{$medicine->medicine->dosage}})</td>
+            <td>{{$medicine->medicine->productCode}}</td> 
+          <td id="price{{$medicine->medicine->count}}">&#8369;{{ number_format($medicine->medicine->retailPrice,2)}}</td>
+            <td>{{$medicine->medicine->medicineSuppliers->sum('quantity')}}</td>
             <td><button class="btn btn-sm btn-info">Select</button></td>
             @endif
             @endif
             @endforeach
-          </tr>
+
+            @foreach($nonMedicationSuppliers as $nonMedication)
+            @if($nonMedication->nonMedication->nonMedication_status==1)
+            @if($nonMedication->nonMedication->nonMedicationSuppliers->sum('quantity')>0)
+          <tr class="text-center highlight">
+          <td id="name{{$nonMedication->nonMedication->count}}">{{$nonMedication->nonMedication->brandName}} </td>
+            <td>{{$nonMedication->nonMedication->productCode}}</td> 
+          <td id="price{{$nonMedication->nonMedication->count}}">&#8369;{{ number_format($nonMedication->nonMedication->retailPrice,2)}}</td>
+            <td>{{$nonMedication->nonMedication->nonMedicationSuppliers->sum('quantity')}}</td>
+            <td><button class="btn btn-sm btn-info">Select</button></td>
+            @endif
+            @endif
+            @endforeach
+         
+            </tr>
         </tbody>
       </table> 
     </div>  

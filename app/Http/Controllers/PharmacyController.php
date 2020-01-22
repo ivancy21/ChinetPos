@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Pharmacy;
 use App\Formulation;
-use App\SideEffects;
-use App\Suppliers;
+use App\SideEffect;
+use App\Supplier;
 use App\Diagnosis;
 use App\Medicine;
 use Illuminate\Http\Request;

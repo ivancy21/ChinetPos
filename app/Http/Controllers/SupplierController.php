@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Suppliers;
-use App\MedicineSuppliers;
+use App\Supplier;
+use App\MedicineSupplier;
 use App\Medicine;
+use App\NonMedication;
 use App\Pharmacy;
-use Session;
+use Session;    
 
-class SuppliersController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +21,7 @@ class SuppliersController extends Controller
     {
         Session::put('CustomSettingTab', 'Supplier');
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $suppliers= Suppliers::latest()->get();
+        $suppliers= Supplier::latest()->get();
         return view('LookupTable.Suppliers.suppliersIndex',compact("suppliers",'pharmacy'));
     }
 
@@ -36,6 +37,7 @@ class SuppliersController extends Controller
         return view('LookupTable.Suppliers.suppliersCreate',compact('pharmacy'));
     }
 
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -45,24 +47,35 @@ class SuppliersController extends Controller
     public function store(Request $request)
     {
         //
-        $suppliers = suppliers::create($request->all());
+        $suppliers = supplier::create($request->all());
         return redirect()->route("suppliers.index");
     }
 
+    
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         //
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $suppliers = Suppliers::latest()->get();
+        $suppliers = Supplier::latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineSuppliers.add',compact('medicine',"suppliers","pharmacy"));
+        $nonMedication = NonMedication::where('id','=',$id)->latest()->first();
+        if(Session::get('medicationType') == 'medicine')
+        {
+            return view('Inventory.MedicationSupplier.add',compact('medicine',"suppliers","pharmacy"));
+        }
+        else if(Session::get('medicationType') == 'nonMedication')
+        {
+            return view('Inventory.NonMedicationSupplier.add',compact('nonMedication',"suppliers","pharmacy"));
+        }
+    
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -74,7 +87,7 @@ class SuppliersController extends Controller
     {
         //
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $supplier = Suppliers::find($id);
+        $supplier = Supplier::find($id);
         return view('LookupTable.Suppliers.suppliersEdit',compact("supplier","pharmacy"));
     }
 
@@ -88,7 +101,7 @@ class SuppliersController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $suppliers=Suppliers::find($id);
+        $suppliers=Supplier::find($id);
         $suppliers->update($request->all());
         return redirect()->route("suppliers.index");
     }

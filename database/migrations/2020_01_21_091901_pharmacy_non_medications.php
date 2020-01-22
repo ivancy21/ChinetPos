@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class MedicineUse extends Migration
+class PharmacyNonMedications extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class MedicineUse extends Migration
      */
     public function up()
     {
-        Schema::create('MedicineUse', function (Blueprint $table) {
+        Schema::create('PharmacyNonMedications', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('medicineId');
-            $table->unsignedInteger('diagnosisId');
+            $table->Unsignedinteger('nonMedicationId');
+            $table->Unsignedinteger('pharmacyId');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class MedicineUse extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('MedicineUse');
+        Schema::dropIfExists('PharmacyNonMedications');
     }
 }

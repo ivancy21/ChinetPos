@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Formulation extends Migration
+class MedicineUses extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Formulation extends Migration
      */
     public function up()
     {
-        Schema::create('Formulation', function (Blueprint $table) {
+        Schema::create('MedicineUses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('formulation');
+            $table->unsignedInteger('medicineId');
+            $table->unsignedInteger('diagnosisId');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class Formulation extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Forumalation');
+        Schema::dropIfExists('MedicineUses');
     }
 }

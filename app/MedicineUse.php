@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class MedicineUse extends Model
 {
     //
-    protected $table = 'MedicineUse';
+    protected $table = 'MedicineUses';
     protected $guarded =['id','created_at','updated_at'
     ];
 

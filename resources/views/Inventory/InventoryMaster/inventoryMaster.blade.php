@@ -9,9 +9,10 @@
    </div>
    <div class="flex HeaderBody2">   
     <div class="tab tabsc pb-2">
-        <button   onclick="window.location='/medication'">Medication</button>
-        <button   onclick="window.location='/nonmedication'">NonMedication</button>
-     </div>                                     
+        <button  class="@if (Session::get("inventoryTab") == 'medication') active @endif " onclick="window.location='{{route('medicine.index')}}'">Medication</button>
+        <button  class="@if (Session::get("inventoryTab") == 'NonMedication') active @endif " onclick="window.location='{{route('nonMedication.index')}}'">None Medication</button>
+        
+      </div>                                     
    </div>       
 </div>
 

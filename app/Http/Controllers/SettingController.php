@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 use App\Formulation;
-use App\Suppliers;
-use App\SideEffects;
+use App\Supplier;
+use App\SideEffect;
 use App\Diagnosis;
 use App\Pharmacy;
 use Illuminate\Http\Request;
 use Session;
 
 
-class SettingsController extends Controller
+class SettingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,12 +19,12 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        Session::put('inventoryTab', 'customSetting');
+        Session::put('sideTab', 'customSetting');
 
         //
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        $sideEffects= SideEffects::latest()->get();
-        $suppliers= Suppliers::latest()->get();
+        $sideEffects= SideEffect::latest()->get();
+        $suppliers= Supplier::latest()->get();
         $diagnosis= Diagnosis::latest()->get();
         $formulations= Formulation::latest()->get();
         return view('LookupTable.SideEffects.sideEffectsIndex',compact("formulations","sideEffects","diagnosis","suppliers","pharmacy"));

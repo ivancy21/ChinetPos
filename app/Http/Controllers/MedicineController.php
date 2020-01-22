@@ -6,9 +6,9 @@ use App\Medicine;
 use Illuminate\Http\Request;
 use App\Pharmacy;
 use App\PharmacyMedicine;
-use App\MedicineSideEffects;
-use App\MedicineSuppliers;
-use App\SideEffects;
+use App\MedicineSideEffect;
+use App\MedicineSupplier;
+use App\SideEffect;
 use App\Formulation;
 use App\Diagnosis;
 use App\MedicineUse;
@@ -31,91 +31,15 @@ class MedicineController extends Controller
      */
     public function index(Request $request   )
     {
+        
 
-        Session::put('inventoryTab', 'medicineList');
+        Session::put('sideTab', 'medication');
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
-        //
-    
         $pharmacyMedicine = PharmacyMedicine::where('pharmacyId', Session::get('pharmacy')->id)->latest()->get();
-        $medicine = $pharmacyMedicine->where('pharmacyId', Session::get('pharmacy')->id);
-        $medicines = Medicine::latest()->paginate();
-        if($request->has('search')){
-            $query = $request->get('search');
-            $medicines = Medicine::where("brandName", 'LIKE', '%'.$query.'%')->orWhere("genericName", 'LIKE', '%'.$query.'%')
-                    ->paginate(24);
-        }             
+        $medicines = Medicine::latest()->paginate(24);
         
-        if($request->has('latest')){
-            $medicines=Medicine::orderBy('created_at','desc')->paginate(24);
-        
-        }
-        if($request->has('oldest')){
-            $medicines=Medicine::orderBy('created_at','asc')->paginate(24);
-        }
-        
-        // Active
-        if($request->has('activeAll')){
-            $medicines=Medicine::where('medicine_status','1')->orderBy('brandName','asc')->paginate(24);
-        }
-        
-        if($request->has('activeTablets')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','1')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        
-        if($request->has('activeBottles')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','2')->orderby('brandName','desc')->paginate(24);
-        }
-        if($request->has('activeDrops')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','3')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        if($request->has('activeInhalers')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','4')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        if($request->has('activeInjections')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','5')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        if($request->has('activeCapsules')){
-            $medicines=Medicine::where('medicine_status','1')->Where('formulationId','6')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        // Inactive
-        if($request->has('inactiveAll')){
-            $medicines=Medicine::where('medicine_status','0')->orderBy('brandName','asc')->paginate(24);
-        }   
-        
-        if($request->has('inactiveTablets')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','1')->orderby('brandName','desc')->paginate(24);
-        }
-        
-        if($request->has('inactiveDrops')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','2')->orderby('brandName','desc')->paginate(24);
-            }
-        
-        if($request->has('inactiveBottles')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','3')->orderby('brandName','desc')->paginate(24);
-            }
-        
-        if($request->has('inactiveInhalers')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','4')->orderby('brandName','desc')->paginate(24);
-            }
-        
-        if($request->has('inactiveInjections')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','5')->orderby('brandName','desc')->paginate(24);
-            }
-        
-        if($request->has('inactiveCapsules')){
-            $medicines=Medicine::where('medicine_status','0')->Where('formulationId','6')->orderby('brandName','desc')->paginate(24);
-                return view('Panels.MedicineList.medIndex',compact("medicines"));
-        
-        }
-        else{
-            return view('Panels.MedicineList.medIndex',compact("medicines", 'pharmacyMedicine','pharmacy'))->with('success','no data');
+        return view('Inventory.Medication.medicationIndex',compact("medicines", 'pharmacyMedicine','pharmacy'))->with('success','no data');
      
-        }
         
  
     }
@@ -133,8 +57,8 @@ class MedicineController extends Controller
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosiss = Diagnosis::latest()->get();
         $formulations = Formulation::latest()->get();
-        $sideEffects = SideEffects::latest()->get();
-        return view('Panels.MedicineList.medCreate',compact("sideEffects","formulations","diagnosiss","pharmacy"));
+        $sideEffects = SideEffect::latest()->get();
+        return view('Inventory.Medication.medicationCreate',compact("sideEffects","formulations","diagnosiss","pharmacy"));
     }
 
     /** 
@@ -145,11 +69,11 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
         
         $request->validate([
             
-            'productCode' => 'required|string|max:20|unique:medicine',
+            'productCode' => 'required|string|max:20|unique:Medicines',
             
         ],
         );
@@ -182,7 +106,7 @@ class MedicineController extends Controller
         
         
        foreach($request->input('sideEffectsId') as $sideEffectsId) {
-           MedicineSideEffects::create([
+           MedicineSideEffect::create([
                'medicineId' => $medicine->id,
                'sideEffectsId' => $sideEffectsId
            ]
@@ -221,11 +145,12 @@ class MedicineController extends Controller
     {
         //
         // $sideEffects = SideEffects::where('id','=',$id)->latest()->get();
+        Session::put('medicationType','medicine');
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $medicineUse = MedicineUse::where('medicineId','=',$id)->latest()->get();
-        $medicineSuppliers = MedicineSuppliers::where('medicineId','=',$id)->latest()->get();
+        $medicineSuppliers = MedicineSupplier::where('medicineId','=',$id)->latest()->get();
         $medicine = Medicine::where('id','=',$id)->latest()->first();
-        return view('Panels.MedicineList.medShow',compact("medicine","medicineSuppliers","medicineUse","pharmacy"));
+        return view('Inventory.Medication.medicationShow',compact("medicine","medicineSuppliers","medicineUse","pharmacy"));
     }
 
     /**
@@ -239,11 +164,11 @@ class MedicineController extends Controller
         // 
         $pharmacy = Pharmacy::where('id', Session::get('pharmacy')->id)->latest()->first();
         $diagnosiss = Diagnosis::latest()->get(); 
-        $medicineSideEffects = MedicineSideEffects::latest()->get();
-        $sideEffects = SideEffects::latest()->get();
+        $medicineSideEffects = MedicineSideEffect::latest()->get();
+        $sideEffects = SideEffect::latest()->get();
         $formulations = Formulation::latest()->get();
         $medicine = Medicine::find($id);
-        return view('Panels.MedicineList.medEdit',compact("medicine","sideEffects","formulations","medicineSideEffects","diagnosiss","pharmacy"));
+        return view('Inventory.Medication.medicationEdit',compact("medicine","sideEffects","formulations","medicineSideEffects","diagnosiss","pharmacy"));
     
     }
 
@@ -259,12 +184,12 @@ class MedicineController extends Controller
         //
             $request->validate([
                 
-                'productCode' => 'required|unique:medicine,productCode,'.$id,
+                'productCode' => 'required|unique:Medicines,productCode,'.$id,
             ],
             );
     
         $medicine = Medicine::find($id);
-        $medicineSideEffects = MedicineSideEffects::latest()->get();
+        $medicineSideEffects = MedicineSideEffect::latest()->get();
         $medicine->update($request->except('medicinePic','medicinePhoto','sideEffectsId','medicineId','diagnosisId'));
         if ($request->hasFile('medicinePic')){
             $this->validate($request, [
@@ -298,9 +223,9 @@ class MedicineController extends Controller
         
 
                     foreach($request->input('sideEffectsId') as $sideEffectsId) {
-                        MedicineSideEffects::where('medicineId','=',$id)->delete();
+                        MedicineSideEffect::where('medicineId','=',$id)->delete();
                         foreach($request->input('sideEffectsId') as $sideEffectsId) {
-                            MedicineSideEffects::where('medicineId','=',$id)->create([
+                            MedicineSideEffect::where('medicineId','=',$id)->create([
                             'medicineId' => $medicine->id,
                             'sideEffectsId' => $sideEffectsId
                         ]
