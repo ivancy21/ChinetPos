@@ -14,17 +14,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <label  class="fnt">Total:</label>
-        
-        <h1  class="text-center" style="font-size:78px;"> &#8369; 0</h1>   
-     
-   
-   
-   
+       
+        <label  class="fnt">Change:</label>
+        <h1  class="text-center" style="font-size:78px;" > <span id="FinalPrice">&#8369;0 </span></h1>   
+ 
     </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary">Print Receipt</button>
+        <button type="button" class="btn btn-primary">Continue</button>
       </div>
     </div>
   </div>
@@ -117,13 +114,13 @@
  
     <div class="DivTemplate"> 
     <h1 class="split-para"><b>Total:</b> <span id="total">&#8369;0 </span></h1>
-      <h6 class="split-para"><b>Tax:</b> <span >&#8369;0 </span></h6>
-      <h6 class="split-para"><b>Discounts:</b> <span >&#8369;0 </span></h6>
+      <h6 class="split-para"><b>Tax:</b> <span id="totaltax" >&#8369;0 </span></h6>
+      <h6 class="split-para"><b>Discount:</b> <span >&#8369;0 </span></h6>
       <h6 class="split-para"><b>Items:</b> <span id="NoItems" >0</span></h6>
       <label  class="fnt" >Amount tender</label>       
-      <input type='number'  class="form-control" >
-      <button type="submit" class="btn btn-warning form-control mt-2" id="paymentbtn" data-toggle="modal" data-target=".PaymentModal" >Discounts</button>
-      <button type="submit" class="btn btn-primary form-control mt-2" id="paymentbtn" data-toggle="modal" data-target=".PaymentModal" >PAYMENT</button>
+      <input type='number'  class="form-control" id="MoneyTender" placeholder="0" >
+      <button type="submit" class="btn btn-success form-control mt-2" id="discountbtn">DISCOUNT</button>
+      <button type="submit" class="btn btn-primary form-control mt-2 pmentselect" id="paymentbtn" data-toggle="modal" data-target=".PaymentModal"  data-backdrop="static" data-keyboard="false">PAYMENT</button>
   </div>
 
 
@@ -144,11 +141,26 @@ $(document).ready( function () {
               paging: false
           });
 
-      $('#myModal').modal('toggle');
+      $('#myModal').modal({backdrop: 'static', keyboard: false});  
+      document.getElementById('paymentbtn').setAttribute("disabled", null);  
 
+
+       Change();
        btnselect();
-     
+
 });
+
+    document.getElementById("MoneyTender").addEventListener("keyup", function() {
+        var nameInput = document.getElementById('MoneyTender').value;
+        if (nameInput == "") {
+          document.getElementById('paymentbtn').setAttribute("disabled", null);   
+        } else {
+          document.getElementById('paymentbtn').removeAttribute("disabled");
+        }
+    });
+ 
+
+
 var ItemVal = 0;
 var count = -1;
 // when button select or click
@@ -166,11 +178,13 @@ var count = -1;
                       
            $(this).closest('tr').hide();
 
+              //item increment
                 ItemVal++;
                 noItem.html(ItemVal);   
 
             clone(table2,name,price,count);
             Total();
+            Totaltax();
               });
           }); 
      }
@@ -191,6 +205,8 @@ var count = -1;
         var deleteList = $('button[id^=deletelist]');
         var difference = 0;
         var total = $('#total');
+        var noItem = $('#NoItems');
+       
       
         deleteList.each(function(){
           $(this).click(function(){
@@ -200,11 +216,15 @@ var count = -1;
                             var Name2 = $(this).html();
                             if(Name1 == Name2){
                               $(this).closest('tr').show();
+                              //item decrement
+                              ItemVal--;
+                              noItem.html(ItemVal);
                             }
                       });
-
             $(this).closest('tr').remove();
             Total();
+            Totaltax()
+            minos();
            
           }); 
         });
@@ -215,14 +235,50 @@ var count = -1;
       var price = $('.priceClass');
       var total = $('#total');
       var sum = 0;
-
+     
       price.each(function(){
         var textPrice = $(this).html();
         sum += parseFloat(textPrice.replace(/[^\d.-]/g, ''));
       });
       total.html('&#8369; ' + sum);
+
+    }
+
+//for Change output
+    function Change(){
+      var select = $('.pmentselect');
+      var finalPrice = $('#FinalPrice');
+      var sum = 0;
+        
+      select.click(function() {
+          var moneyTender = document.getElementById("MoneyTender").value;
+          var total = $('#total').html();
+          var totalconvert = parseFloat(total.replace(/[^\d.-]/g, ''));
+       
+           sum = totalconvert - moneyTender;
+
+          finalPrice.html('&#8369; ' + sum);
+
+      });
+
+    }
+
+
+//total Tax output
+    function Totaltax(){
+      var total = $('#total').html();
+      var totaltax = $('#totaltax');
+      var vat = 0;
+
+         var totalconvert = parseFloat(total.replace(/[^\d.-]/g, ''));
+        vat = totalconvert * 0.12;
+        totaltax.html('&#8369; ' + vat.toFixed(2));
+       
+      
     }
    
+
+
 // Quantity total
    function Quantity(){
       var sum = 0;
@@ -239,6 +295,7 @@ var count = -1;
                        
                   price.html('&#8369; ' + sum);   
                   Total();
+                  Totaltax();
          });
       });
    }
