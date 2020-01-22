@@ -29,24 +29,10 @@ Route::resource('pharmacy','PharmacyController');
 Route::resource('pharMedCreate','PharmacyMedicineCreateController');
 Route::resource('inventory','InventoryController');
 
-
-
-Route::get('/medication', function () {
-    return view('Inventory.Medication.medicationIndex');
-});
-
-
-Route::get('/medicationCreate', function () {
-    return view('Inventory.Medication.medicationCreate');
-});
-
-Route::get('/medicationShow', function () {
-    return view('Inventory.Medication.medicationShow');
+Route::get('/', function () {
+    return redirect()->route(('pharmacy.index'));
 });
 
 
 
 
-Route::get('/nonmedicationCreate', function () {
-    return view('Inventory.NonMedication.nonMedicationCreate');
-});
